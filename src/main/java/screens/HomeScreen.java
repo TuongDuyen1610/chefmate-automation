@@ -2,7 +2,11 @@ package screens;
 
 import core.base.BaseScreen;
 import org.openqa.selenium.By;
-
+/**
+ * HomeScreen.java
+ *
+ * MỤC ĐÍCH: Màn hình Trang chủ - Chứa các nút trigger Login
+ */
 public class HomeScreen extends BaseScreen {
 
     private final By txtNauNgon = By.xpath("//android.widget.TextView[@text='Nấu ngon']");
