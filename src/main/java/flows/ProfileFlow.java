@@ -1,13 +1,26 @@
 package flows;
 
 import core.base.BaseFlow;
+import screens.HomeScreen;
 import screens.ProfileScreen;
 
 public class ProfileFlow extends BaseFlow {
-    private final ProfileScreen profileScreen = new ProfileScreen();
 
-    public String getUsername() {
-        return profileScreen.getUsername();
+    private final HomeScreen home = new HomeScreen();
+    private final ProfileScreen profile = new ProfileScreen();
+
+    public void openProfile() {
+        logStep("Từ Home mở Trang cá nhân");
+        // Sử dụng Bottom Navigation
+        // home.clickBottomNavProfile(); (sẽ bổ sung nếu cần)
+    }
+
+    public void logout() {
+        logStep("Đăng xuất từ Profile");
+        profile.logout();
+    }
+
+    public boolean isProfileDisplayed() {
+        return profile.isProfileDisplayed();
     }
 }
-
