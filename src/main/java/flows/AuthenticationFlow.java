@@ -35,7 +35,7 @@ public class AuthenticationFlow extends BaseFlow {
 //        } catch (InterruptedException e) {
 //            Thread.currentThread().interrupt();
 //        }
-        WaitingHelper.sleepSeconds(4);
+        WaitingHelper.sleepSeconds(5);
     }
 
     public void loginFailed(String phoneOrEmail, String wrongPassword) {
