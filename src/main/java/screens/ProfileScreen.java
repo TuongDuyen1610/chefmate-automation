@@ -22,4 +22,9 @@ public class ProfileScreen extends BaseScreen {
         logStep("Đăng xuất");
         click(btnLogout);
     }
+    public void clickLoginOnProfileGate() {
+        By btnDangNhapNgay = By.xpath("//android.widget.TextView[@text='Đăng nhập ngay']");
+        logStep("Click nút Đăng nhập ngay trên Trang cá nhân");
+        click(btnDangNhapNgay);
+    }
 }
