@@ -1,6 +1,8 @@
 package flows;
 
 import core.base.BaseFlow;
+import core.utils.WaitingHelper;
+import screens.HomeScreen;
 import screens.LoginScreen;
 import screens.SplashScreen;
 /**
@@ -11,6 +13,7 @@ import screens.SplashScreen;
 public class AuthenticationFlow extends BaseFlow {
 
     private final SplashScreen splash = new SplashScreen();
+    private final HomeScreen home = new HomeScreen();
     private final LoginScreen login = new LoginScreen();
 
     public void loginSuccessfully(String phoneOrEmail, String password) {
@@ -18,17 +21,21 @@ public class AuthenticationFlow extends BaseFlow {
 
         splash.waitUntilSplashDisappear();
 
+        // Trigger Login bằng nút Trò chuyện với Bepes (cách dễ và ổn định nhất)
+        home.openBepesAI();
+
         login.enterPhoneOrEmail(phoneOrEmail);
         login.enterPassword(password);
         login.clickLogin();
 
         logStep("Đã nhấn Đăng nhập - Chờ chuyển sang Home");
         // Tạm dừng để app chuyển màn (rất quan trọng)
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            Thread.currentThread().interrupt();
+//        }
+        WaitingHelper.sleepSeconds(4);
     }
 
     public void loginFailed(String phoneOrEmail, String wrongPassword) {
@@ -36,9 +43,12 @@ public class AuthenticationFlow extends BaseFlow {
 
         splash.waitUntilSplashDisappear();
 
+        home.openBepesAI();   // Trigger Login
+
         login.enterPhoneOrEmail(phoneOrEmail);
         login.enterPassword(wrongPassword);
         login.clickLogin();
+        logStep("Đã nhấn Đăng nhập với mật khẩu sai");
     }
 
     public boolean isLoginScreenStillDisplayed() {
