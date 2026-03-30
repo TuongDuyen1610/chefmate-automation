@@ -41,4 +41,15 @@ public class HomeScreen extends BaseScreen {
     public boolean isHomeDisplayed() {
         return isDisplayed(txtNauNgon);
     }
+
+    // ==================== THÊM ĐỂ TRIGGER LOGIN ====================
+    public void clickBottomNavFridge() {
+        logStep("Click tab Tủ lạnh trên Bottom Navigation");
+        click(bottomNavFridge);
+    }
+
+    public void clickBottomNavProfile() {
+        logStep("Click tab Tài khoản trên Bottom Navigation");
+        click(bottomNavProfile);
+    }
 }
