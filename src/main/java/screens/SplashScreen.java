@@ -30,8 +30,8 @@ public class SplashScreen extends BaseScreen {
     public void waitUntilSplashDisappear() {
         logStep("Waiting for Splash Screen to disappear");
         try {
-            // Chờ tối đa 5 giây cho Splash biến mất
-            Thread.sleep(3000); // Tạm thời dùng sleep vì Splash thường là animation
+            // Chờ tối đa 7 giây cho Splash biến mất
+            Thread.sleep(7000); // Tạm thời dùng sleep vì Splash thường là animation
             System.out.println("✅ Splash Screen completed");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
