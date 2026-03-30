@@ -10,7 +10,7 @@ public class BepesAIScreen extends BaseScreen {
     private final By aiResponse = By.xpath("//android.widget.TextView[contains(@text,'Bepes')]");
 
     public void sendQuestion(String question) {
-        logStep("Gửi câu hỏi: " + question);
+        logStep("Gửi câu hỏi cho Bepes: " + question);
         type(chatInput, question);
         click(btnSend);
     }
