@@ -11,8 +11,7 @@ public class ProfileFlow extends BaseFlow {
 
     public void openProfile() {
         logStep("Từ Home mở Trang cá nhân");
-        // Sử dụng Bottom Navigation
-        // home.clickBottomNavProfile(); (sẽ bổ sung nếu cần)
+        // Chưa có BottomNavigationComponent nên tạm dùng cách khác nếu cần
     }
 
     public void logout() {
