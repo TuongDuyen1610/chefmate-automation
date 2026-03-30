@@ -9,7 +9,7 @@ public class NavigationFlow extends BaseFlow {
 
     public void goToHome() {
         logStep("Chuyển sang tab Trang chủ");
-        // Click bottom nav home nếu cần
+        // Click bottom nav home nếu cần thêm locator
     }
 
     public void goToFridge() {

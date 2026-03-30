@@ -9,6 +9,6 @@ public class NotificationFlow extends BaseFlow {
 
     public void openNotification() {
         logStep("Mở chuông thông báo");
-        // Click icon chuông
+        // Click icon chuông nếu cần thêm locator
     }
 }
