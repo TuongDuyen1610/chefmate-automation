@@ -20,38 +20,40 @@ public class LoginScreen extends BaseScreen {
 
     // ==================== ACTIONS ====================
     public void enterPhoneOrEmail(String value) {
-        logStep("Nhập số điện thoại / email: " + value);
+        logStep("Nhap so dien thoai / email: " + value);
         type(phoneEmailField, value);
+        WaitingHelper.sleepSeconds(1);   // Đợi UI cập nhật
     }
 
     public void enterPassword(String password) {
-        logStep("Nhập mật khẩu");
+        logStep("Nhap mat khau: ");
         type(passwordField, password);
+        WaitingHelper.sleepSeconds(1);   // Đợi UI cập nhật
     }
 
     public void togglePasswordVisibility() {
-        logStep("Bật/tắt hiển thị mật khẩu");
+        logStep("Bat / Tat hien thi mat khau");
         click(togglePassword);
     }
 
     /**
      * Tên method đã chuẩn hóa thành clickLogin()
      */
-//    public void clickLogin() {
-//        logStep("Nhấn nút Đăng nhập");
-//        click(loginButton);
-//    }
     public void clickLogin() {
-        logStep("Nhấn nút Đăng nhập");
-        // Tăng wait và sleep để chắc chắn button clickable
+        logStep("Dang cho va nhan nut dang nhap");
+        // Cách 1: Wait clickable + scroll nếu cần
         WaitingHelper.waitForClickable(loginButton);
-        WaitingHelper.sleep(1500);   // Đợi UI ổn định sau khi nhập text
-        click(loginButton);
-        logStep("Đã click nút Đăng nhập");
-    }
-    public void clickRegisterLink() {
-        logStep("Nhấn nút Đăng ký ngay");
-        click(registerLink);
+        WaitingHelper.sleepSeconds(2);     // Quan trọng: Đợi nút active sau khi nhập đủ thông tin
+
+        // Cách 2: Thử click nhiều lần nếu cần
+        try {
+            click(loginButton);
+            logStep("Đã click nút Đăng nhập");
+        } catch (Exception e) {
+            logStep("Click lần 1 thất bại, thử lần 2...");
+            WaitingHelper.sleepSeconds(1);
+            click(loginButton);   // Thử lại
+        }
     }
 
     public boolean isLoginScreenDisplayed() {
