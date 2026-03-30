@@ -4,10 +4,19 @@ import core.base.BaseFlow;
 import screens.HomeScreen;
 
 public class HomeFlow extends BaseFlow {
-    private final HomeScreen homeScreen = new HomeScreen();
 
-    public void validateHomePage() throws InterruptedException {
-        logStep("Validating Home Page");
-        homeScreen.validateRecipeListVisible();
+    private final HomeScreen home = new HomeScreen();
+
+    public void openAppAndGoToHome() {
+        logStep("Mở app và vào Home");
+        home.isHomeDisplayed();
+    }
+
+    public void goToBepesAI() {
+        home.openBepesAI();
+    }
+
+    public void goToSearch() {
+        home.clickSearch();
     }
 }
