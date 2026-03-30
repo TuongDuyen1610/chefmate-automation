@@ -20,4 +20,9 @@ public class FridgeScreen extends BaseScreen {
         type(unit, unitStr);
         click(btnSave);
     }
+    public void clickLoginOnFridgeGate() {
+        By btnDangNhap = By.xpath("//android.widget.Button[contains(@text,'Đăng nhập')]");
+        logStep("Click nút Đăng nhập trên popup Tủ lạnh");
+        click(btnDangNhap);
+    }
 }
