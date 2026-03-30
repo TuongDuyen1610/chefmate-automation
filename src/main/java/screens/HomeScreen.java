@@ -17,7 +17,6 @@ public class HomeScreen extends BaseScreen {
     private final By bottomNavHome = By.xpath("//android.widget.TextView[@text='Trang chủ']");
     private final By bottomNavFridge = By.xpath("//android.widget.TextView[@text='Tủ lạnh']");
     private final By bottomNavProfile = By.xpath("//android.widget.TextView[@text='Tài khoản']");
-
     public void openBepesAI() {
         logStep("Mở Trò chuyện với Bepes");
         click(btnBepesAI);
@@ -47,7 +46,6 @@ public class HomeScreen extends BaseScreen {
         logStep("Click tab Tủ lạnh trên Bottom Navigation");
         click(bottomNavFridge);
     }
-
     public void clickBottomNavProfile() {
         logStep("Click tab Tài khoản trên Bottom Navigation");
         click(bottomNavProfile);

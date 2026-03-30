@@ -15,6 +15,7 @@ public class LoginScreen extends BaseScreen {
     private final By phoneEmailField = By.xpath("//android.widget.ScrollView/android.widget.EditText[1]");
     private final By passwordField = By.xpath("//android.widget.ScrollView/android.widget.EditText[2]");
     private final By togglePassword = By.xpath("//android.widget.ScrollView/android.widget.EditText[2]/android.view.View/android.widget.Button");
+    // Nút Đăng nhập trên màn Login chính
     private final By loginButton = By.xpath("//android.widget.ScrollView/android.view.View[2]/android.widget.Button");
     private final By registerLink = By.xpath("//android.widget.TextView[@text='Đăng ký ngay']");
 
@@ -40,7 +41,7 @@ public class LoginScreen extends BaseScreen {
      * Tên method đã chuẩn hóa thành clickLogin()
      */
     public void clickLogin() {
-        logStep("Dang cho va nhan nut dang nhap");
+        logStep("Nhan nut dang nhap tren man hinh Login");
         // Cách 1: Wait clickable + scroll nếu cần
         WaitingHelper.waitForClickable(loginButton);
         WaitingHelper.sleepSeconds(2);     // Quan trọng: Đợi nút active sau khi nhập đủ thông tin
@@ -48,7 +49,7 @@ public class LoginScreen extends BaseScreen {
         // Cách 2: Thử click nhiều lần nếu cần
         try {
             click(loginButton);
-            logStep("Đã click nút Đăng nhập");
+            logStep("Da click nut dang nhap");
         } catch (Exception e) {
             logStep("Click lần 1 thất bại, thử lần 2...");
             WaitingHelper.sleepSeconds(1);

@@ -4,6 +4,7 @@ import core.base.BaseFlow;
 import core.utils.WaitingHelper;
 import screens.HomeScreen;
 import screens.LoginScreen;
+import screens.LoginGateHelper;
 import screens.SplashScreen;
 /**
  * AuthenticationFlow.java
@@ -15,6 +16,7 @@ public class AuthenticationFlow extends BaseFlow {
     private final SplashScreen splash = new SplashScreen();
     private final HomeScreen home = new HomeScreen();
     private final LoginScreen login = new LoginScreen();
+    private final LoginGateHelper gateHelper = new LoginGateHelper();
 
     public void loginSuccessfully(String phoneOrEmail, String password) {
         logStep("=== BẮT ĐẦU LUỒNG ĐĂNG NHẬP THÀNH CÔNG ===");
@@ -23,6 +25,10 @@ public class AuthenticationFlow extends BaseFlow {
 
         // Trigger Login bằng nút Trò chuyện với Bepes (cách dễ và ổn định nhất)
         home.openBepesAI();
+
+        // Trigger bằng tab Tủ lạnh → hiện popup → click Đăng nhập
+        gateHelper.triggerLoginByFridgeTab();
+
 
         login.enterPhoneOrEmail(phoneOrEmail);
         login.enterPassword(password);
@@ -44,7 +50,7 @@ public class AuthenticationFlow extends BaseFlow {
         splash.waitUntilSplashDisappear();
 
         home.openBepesAI();   // Trigger Login
-
+        gateHelper.triggerLoginByFridgeTab();
         login.enterPhoneOrEmail(phoneOrEmail);
         login.enterPassword(wrongPassword);
         login.clickLogin();
