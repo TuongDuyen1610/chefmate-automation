@@ -1,6 +1,7 @@
 package screens;
 
 import core.base.BaseScreen;
+import core.utils.WaitingHelper;
 import org.openqa.selenium.By;
 /**
  * LoginScreen.java
@@ -36,11 +37,18 @@ public class LoginScreen extends BaseScreen {
     /**
      * Tên method đã chuẩn hóa thành clickLogin()
      */
+//    public void clickLogin() {
+//        logStep("Nhấn nút Đăng nhập");
+//        click(loginButton);
+//    }
     public void clickLogin() {
         logStep("Nhấn nút Đăng nhập");
+        // Tăng wait và sleep để chắc chắn button clickable
+        WaitingHelper.waitForClickable(loginButton);
+        WaitingHelper.sleep(1500);   // Đợi UI ổn định sau khi nhập text
         click(loginButton);
+        logStep("Đã click nút Đăng nhập");
     }
-
     public void clickRegisterLink() {
         logStep("Nhấn nút Đăng ký ngay");
         click(registerLink);
