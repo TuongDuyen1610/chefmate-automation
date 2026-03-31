@@ -2,37 +2,30 @@ package screens;
 
 import core.base.BaseScreen;
 import core.utils.WaitingHelper;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 
-/**
- * LoginGateHelper.java
- *
- * MỤC ĐÍCH: Xử lý popup "Bạn cần đăng nhập để quản lý tủ lạnh"
- * và các popup yêu cầu đăng nhập khác
- */
 public class LoginGateHelper extends BaseScreen {
 
-    // Popup "Bạn cần đăng nhập để quản lý tủ lạnh"
-    private final By popupTitle = By.xpath("//android.widget.TextView[@text='Bạn cần đăng nhập để quản lý tủ lạnh']");
+    // Tab Tủ lạnh trên thanh Navigation
+    private final By tabFridge = AppiumBy.androidUIAutomator("new UiSelector().description(\"Tủ lạnh\")");
 
-    // Nút "Đăng nhập" trên popup Tủ lạnh
-    private final By btnDangNhapOnPopup = By.xpath("//z0.h0/android.view.View/android.view.View/android.view.View[1]/android.view.View[2]/android.view.View/android.widget.Button");
+    // Tiêu đề để xác nhận đã vào đúng màn "Tủ lạnh cá nhân"
+    private final By tvFridgeTitle = By.xpath("//android.widget.TextView[@text='Tủ lạnh cá nhân']");
 
-    /**
-     * Click tab Tủ lạnh → chờ popup hiện lên → click nút Đăng nhập trên popup
-     */
-    public void triggerLoginByFridgeTab() {
-        logStep("Click tab Tủ lạnh để trigger popup Đăng nhập");
+    // Nút "Đăng nhập" màu cam nằm giữa màn hình Tủ lạnh cá nhân
+    private final By btnOpenLoginForm = By.xpath("//android.widget.Button[contains(@text, 'Đăng nhập')]");
 
-        // Click tab Tủ lạnh (sẽ dùng Bottom Navigation sau)
-        click(By.xpath("//android.widget.TextView[@text='Tủ lạnh']"));
+    public void goToLoginScreenViaFridge() {
+        logStep("1. Click vào Tab Tủ lạnh");
+        WaitingHelper.waitForClickable(tabFridge);
+        click(tabFridge);
 
-        // Chờ popup hiện lên
-        WaitingHelper.waitForVisible(popupTitle);
-        WaitingHelper.sleepSeconds(1);
+        logStep("2. Chờ màn hình 'Tủ lạnh cá nhân' hiển thị");
+        WaitingHelper.waitForVisible(tvFridgeTitle);
 
-        // Click nút Đăng nhập trên popup
-        logStep("Click nút 'Đăng nhập' trên popup Tủ lạnh");
-        click(btnDangNhapOnPopup);
+        logStep("3. Click nút Đăng nhập để mở Form nhập liệu");
+        WaitingHelper.waitForClickable(btnOpenLoginForm);
+        click(btnOpenLoginForm);
     }
 }
