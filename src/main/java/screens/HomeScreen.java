@@ -101,4 +101,16 @@ public class HomeScreen extends BaseScreen {
         logStep("Click tab Tài khoản");
         click(bottomNavProfile);
     }
+
+    public void clickBepesAIButton() {
+        logStep("Click nút 'Trò chuyện với Bepes'");
+        click(btnBepesAI);
+        core.utils.WaitingHelper.sleepSeconds(2);
+    }
+
+    public void clickFridgeSuggestionButton() {
+        logStep("Click nút 'Gợi ý từ tủ lạnh'");
+        click(btnGoiYTuTuLanh);
+        core.utils.WaitingHelper.sleepSeconds(2);
+    }
 }
