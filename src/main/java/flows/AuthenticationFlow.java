@@ -8,6 +8,10 @@ import screens.LoginGateHelper;
 import screens.SplashScreen;
 import screens.FridgeScreen;
 import screens.ProfileScreen;
+import screens.RegistrationScreen;
+import screens.LogoutScreen;
+import org.openqa.selenium.By;  // ✅ THÊM IMPORT NÀY
+
 /**
  * AuthenticationFlow.java
  * ✅ Updated: Thêm extra wait + better logging
@@ -20,7 +24,10 @@ public class AuthenticationFlow extends BaseFlow {
     private final LoginGateHelper gateHelper = new LoginGateHelper();
     private final FridgeScreen fridge = new FridgeScreen();
     private final ProfileScreen profile = new ProfileScreen();
+    private final RegistrationScreen registration = new RegistrationScreen();
+    private final LogoutScreen logout = new LogoutScreen();  // ✅ FIX: Khai báo variable
 
+    // ==================== LOGIN METHODS ====================
     // ==================== Way 1: Từ Tủ lạnh ====================
     public void loginFromFridgeTab(String phoneOrEmail, String password) {
         logStep("=== WAY 1: ĐĂNG NHẬP TỪ TỦ LẠNH (TAB) ===");
@@ -34,9 +41,6 @@ public class AuthenticationFlow extends BaseFlow {
         logStep("=== WAY 2: ĐĂNG NHẬP TỪ TÀI KHOẢN (PROFILE) ===");
         splash.waitUntilSplashDisappear();
         gateHelper.triggerLoginByProfileTab();
-//        home.clickBottomNavProfile();
-//        profile.waitForProfileScreen();
-//        profile.clickLoginOnProfileGate();
         login.performLogin(phoneOrEmail, password);
     }
 
@@ -106,7 +110,60 @@ public class AuthenticationFlow extends BaseFlow {
         return login.isLoginScreenDisplayed();
     }
 
-    public void logout() {
-        logStep("Thực hiện Đăng xuất");
+    // ==================== REGISTRATION METHODS ====================
+
+    public void registerNewAccount(String fullName, String phone, String email, String password, String confirmPassword) {
+        logStep("=== THỰC HIỆN ĐĂNG KÝ ===");
+        splash.waitUntilSplashDisappear();
+        gateHelper.triggerLoginByFridgeTab();
+        clickRegisterNowButton();
+        registration.performRegistration(fullName, phone, email, password, confirmPassword);
+    }
+
+    public void clickRegisterNowButton() {
+        logStep("Click nút 'Đăng ký ngay'");
+        By registerNowBtn = org.openqa.selenium.By.xpath("//android.widget.TextView[@text='Đăng ký ngay']");
+        WaitingHelper.waitForClickable(registerNowBtn);
+        click(registerNowBtn);
+        WaitingHelper.sleepSeconds(2);
+    }
+
+    public boolean isRegistrationScreenDisplayed() {
+        logStep("🔍 Verify: Kiểm tra màn Đăng ký");
+        return registration.isRegistrationScreenDisplayed();
+    }
+
+    public boolean isRegistrationSuccessful() {
+        logStep("🔍 Verify: Kiểm tra đăng ký thành công");
+        return home.isHomeDisplayed();
+    }
+
+    public boolean isErrorMessageDisplayedOnRegistration() {
+        logStep("🔍 Verify: Kiểm tra thông báo lỗi");
+        return registration.isErrorMessageDisplayed();
+    }
+    // ==================== LOGOUT METHODS ====================
+
+    public void performLogout() {
+        logStep("=== THỰC HIỆN ĐĂNG XUẤT ===");
+        profile.clickBottomNavProfile();
+        logout.performLogout();
+    }
+
+    public void cancelLogout() {
+        logStep("=== HỦY ĐĂNG XUẤT ===");
+        profile.clickBottomNavProfile();
+        logout.cancelLogoutProcess();
+    }
+
+    public boolean isLogoutSuccessful() {
+        logStep("🔍 Verify: Kiểm tra đăng xuất thành công (quay lại Profile)");
+        WaitingHelper.sleepSeconds(2);
+        return profile.isProfileScreenDisplayed();
+    }
+
+    public boolean isStillLoggedIn() {
+        logStep("🔍 Verify: Kiểm tra vẫn đăng nhập (vẫn ở Home)");
+        return home.isHomeDisplayed();
     }
 }
