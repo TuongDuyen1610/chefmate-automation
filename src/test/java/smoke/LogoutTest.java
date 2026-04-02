@@ -33,8 +33,7 @@ public class LogoutTest extends BaseTest {
 
         // 3. Verify: Quay lại Màn Profile
         System.out.println("📝 Step 3: Verify quay lai Profile");
-        Assert.assertTrue(authFlow.isLogoutSuccessful(), " Quay lai man Profile");
-
+        Assert.assertTrue(authFlow.isLogoutSuccessful(), " Quay lai man Profile o trang thai chua dang nhap");
         System.out.println("✅ DangXuat_TC_01 PASS");
     }
 
