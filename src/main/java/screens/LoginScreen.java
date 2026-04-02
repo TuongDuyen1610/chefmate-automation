@@ -43,7 +43,7 @@ public class LoginScreen extends BaseScreen {
 
         // ✅ QUAN TRỌNG: Tăng từ 8s lên 15s
         logStep("⏳ Chờ app xử lý đăng nhập");
-        WaitingHelper.sleepSeconds(1);
+        WaitingHelper.sleepSeconds(8);
     }
     public void performLogin(String phoneOrEmail, String password) {
         logStep("=== THỰC HIỆN ĐĂNG NHẬP ===");
