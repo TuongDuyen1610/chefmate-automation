@@ -38,12 +38,12 @@ public class LoginScreen extends BaseScreen {
             logStep("✓ Click nút via XPath thành công");
         } else {
             clickByCoordinates(531, 1636);
-            logStep("✓ Click nút via Coordinates thành công");
+            logStep("Click nút via Coordinates thành công");
         }
 
         // ✅ QUAN TRỌNG: Tăng từ 8s lên 15s
-        logStep("⏳ Chờ app xử lý đăng nhập + redirect (15 giây)...");
-        WaitingHelper.sleepSeconds(15);
+        logStep("⏳ Chờ app xử lý đăng nhập");
+        WaitingHelper.sleepSeconds(1);
     }
     public void performLogin(String phoneOrEmail, String password) {
         logStep("=== THỰC HIỆN ĐĂNG NHẬP ===");
