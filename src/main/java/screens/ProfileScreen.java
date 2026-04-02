@@ -27,4 +27,20 @@ public class ProfileScreen extends BaseScreen {
         logStep("Click nút Đăng nhập ngay trên Trang cá nhân");
         click(btnDangNhapNgay);
     }
+    public boolean isProfileScreenDisplayed() {
+        logStep("Verify: Kiểm tra màn Trang cá nhân");
+        try {
+            return isDisplayed(userName);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void waitForProfileScreen() {
+        logStep("Chờ màn Tài khoản hiển thị");
+        org.openqa.selenium.support.ui.WebDriverWait wait =
+                new org.openqa.selenium.support.ui.WebDriverWait(
+                        getDriver(), java.time.Duration.ofSeconds(20));
+        wait.until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated(userName));
+    }
 }
