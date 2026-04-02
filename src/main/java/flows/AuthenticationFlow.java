@@ -119,7 +119,13 @@ public class AuthenticationFlow extends BaseFlow {
         clickRegisterNowButton();
         registration.performRegistration(fullName, phone, email, password, confirmPassword);
     }
-
+    public void registerWithoutTermsAgreement(String fullName, String phone, String email, String password) {
+        logStep("=== ĐĂNG KÝ KHÔNG TICK ĐIỀU KHOẢN ===");
+        splash.waitUntilSplashDisappear();
+        gateHelper.triggerLoginByFridgeTab();
+        clickRegisterNowButton();
+        registration.registerWithoutTermsAgreement(fullName, phone, email, password);
+    }
     public void clickRegisterNowButton() {
         logStep("Click nút 'Đăng ký ngay'");
         By registerNowBtn = org.openqa.selenium.By.xpath("//android.widget.TextView[@text='Đăng ký ngay']");
@@ -158,7 +164,7 @@ public class AuthenticationFlow extends BaseFlow {
 
     public boolean isLogoutSuccessful() {
         logStep("🔍 Verify: Kiểm tra đăng xuất thành công (quay lại Profile)");
-        WaitingHelper.sleepSeconds(2);
+        WaitingHelper.sleepSeconds(1);
         return profile.isProfileScreenDisplayed();
     }
 
