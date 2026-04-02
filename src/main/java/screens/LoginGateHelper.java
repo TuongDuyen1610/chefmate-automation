@@ -24,7 +24,7 @@ public class LoginGateHelper extends BaseScreen {
     // XPath Tủ lạnh rút gọn dựa trên cấu trúc chị gửi: //.../android.view.View[2]/android.view.View/android.widget.Button
     private final By btnOpenLoginFormFridge = By.xpath("//android.view.View[2]/android.view.View/android.widget.Button");
 
-    // XPath Tủ lạnh rút gọn dựa trên cấu trúc chị gửi: //.../android.view.View[2]/android.view.View/android.widget.Button
+    // XPath Tài khoán rút gọn dựa trên cấu trúc chị gửi: //.../android.view.View[2]/android.view.View/android.widget.Button
     private final By btnOpenLoginFormProfile = By.xpath("//android.widget.TextView[@text='Đăng nhập ngay']");
     public void triggerLoginByFridgeTab() {
         logStep("1. Click vao Tab Tu lanh");
