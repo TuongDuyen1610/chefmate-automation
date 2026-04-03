@@ -127,11 +127,11 @@ public class AuthenticationFlow extends BaseFlow {
         registration.registerWithoutTermsAgreement(fullName, phone, email, password);
     }
     public void clickRegisterNowButton() {
-        logStep("Click nút 'Đăng ký ngay'");
+        logStep("Click nut 'Đang ky ngay'");
         By registerNowBtn = org.openqa.selenium.By.xpath("//android.widget.TextView[@text='Đăng ký ngay']");
         WaitingHelper.waitForClickable(registerNowBtn);
         click(registerNowBtn);
-        WaitingHelper.sleepSeconds(2);
+        WaitingHelper.sleepSeconds(3);
     }
 
     public boolean isRegistrationScreenDisplayed() {
@@ -144,9 +144,16 @@ public class AuthenticationFlow extends BaseFlow {
         return home.isHomeDisplayed();
     }
 
-    public boolean isErrorMessageDisplayedOnRegistration() {
-        logStep("🔍 Verify: Kiểm tra thông báo lỗi");
-        return registration.isErrorMessageDisplayed();
+    public boolean isFillAllInfoErrorDisplayed() {
+        return registration.isFillAllInfoErrorDisplayed();
+    }
+
+    public boolean isPasswordMismatchErrorDisplayed_MK() {
+        return registration. isFillAllInfoErrorDisplayed_MK();
+    }
+
+    public boolean isTermsRequiredErrorDisplayed_DK() {
+        return registration. isFillAllInfoErrorDisplayed_DK();
     }
     // ==================== LOGOUT METHODS ====================
 
@@ -172,4 +179,13 @@ public class AuthenticationFlow extends BaseFlow {
         logStep("🔍 Verify: Kiểm tra vẫn đăng nhập (vẫn ở Home)");
         return home.isHomeDisplayed();
     }
+
+    public void goBackToLoginFromRegistration(){
+        logStep("Quay lai man dang nhap tu man dang ky");
+        splash.waitUntilSplashDisappear();
+        gateHelper.triggerLoginByFridgeTab();
+        clickRegisterNowButton();
+        registration.clickLogintoRegister();
+    }
+
 }
