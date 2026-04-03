@@ -1,11 +1,15 @@
 package screens;
-
+//import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.openqa.selenium.support.ui.ExpectedConditions;
+//import org.openqa.selenium.TimeoutException;
+//import java.time.Duration;
 import core.base.BaseScreen;
 import core.utils.WaitingHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Keys;
-
+//import org.openqa.selenium.Keys;
+//import java.util.Map;
+//import java.util.HashMap;
 /**
  * RegistrationScreen.java
  * Đại diện cho màn hình Đăng ký
@@ -27,8 +31,6 @@ public class RegistrationScreen extends BaseScreen {
     // ==================== CHECKBOX & BUTTON ====================
     private final By checkboxTerms = By.xpath("//android.widget.CheckBox");
     private final By registerButton = By.xpath("(//android.widget.TextView[@text='Đăng ký'])[2]");
-    private final By registerButtonAlt = By.xpath("//android.widget.ScrollView/android.view.View/android.widget.Button");
-
     // ==================== LABELS ====================
     private final By lblFullName = By.xpath("//android.widget.TextView[@text='Họ và tên']");
     private final By lblPhone = By.xpath("//android.widget.TextView[@text='Số điện thoại']");
@@ -37,8 +39,19 @@ public class RegistrationScreen extends BaseScreen {
     private final By lblConfirmPassword = By.xpath("//android.widget.TextView[@text='Xác nhận mật khẩu']");
 
     // ==================== ERROR MESSAGE LOCATORS ====================
-    private final By errorMessageGeneral = By.xpath("//android.widget.TextView[contains(@text, 'Vui lòng')]");
 
+    // TC02 → TC07
+    private final By toastFillAllInfo = By.xpath("//android.widget.Toast[@text='Vui lòng điền đầy đủ thông tin']");
+
+    // TC08
+    private final By toastPasswordMismatch = By.xpath("//android.widget.Toast[@text='Mật khẩu không khớp']");
+
+    // TC09
+    private final By toastTermsRequired = By.xpath("//android.widget.Toast[@text='Vui lòng đồng ý với điều khoản dịch vụ']");
+
+    //TC13
+    private final By loginToRegister =
+            By.xpath("//android.widget.TextView[@text='Đăng nhập ngay']");
     // ==================== VERIFY SCREEN ====================
 
     public boolean isRegistrationScreenDisplayed() {
@@ -145,21 +158,27 @@ public class RegistrationScreen extends BaseScreen {
             // Try locator 1
             WaitingHelper.waitForClickable(registerButton);
             click(registerButton);
-            logStep("✓ Đã click nút Đăng ký (locator 1)");
+            logStep(" Da click nut dang ky");
         } catch (Exception e) {
-            logStep("⚠️ Locator 1 thất bại, thử locator 2");
-            try {
-                click(registerButtonAlt);
-                logStep("✓ Đã click nút Đăng ký (locator 2)");
-            } catch (Exception e2) {
-                logStep("❌ Không click được nút Đăng ký");
-                throw e2;
-            }
+            logStep("Khong click duoc dang ky");
+            throw e;
         }
 
-        WaitingHelper.sleepSeconds(15); // Chờ backend xử lý
+//        WaitingHelper.sleepSeconds(7); // Chờ backend xử lý
     }
 
+    public void clickLogintoRegister(){
+        logStep("Click nut Dang nhap ngay");
+        try {
+            scrollToText("Đăng nhập ngay");
+            WaitingHelper.waitForClickable(loginToRegister);
+            click(loginToRegister);
+            logStep("Da click dang nhap ngay tu man dang ky");
+        } catch (Exception e) {
+            logStep("Khong click duoc dang nhap ngay");
+            throw e;
+        }
+    }
     // ==================== HELPER METHODS ====================
 
     public void performRegistration(String fullName, String phone, String email, String password, String confirmPassword) {
@@ -239,28 +258,47 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     // ==================== VERIFY ERROR MESSAGES ====================
+    public boolean isFillAllInfoErrorDisplayed() {
 
-    public boolean isErrorMessageDisplayed() {
-        logStep("Verify: Kiểm tra thông báo lỗi hiển thị");
+        logStep("🔍 Verify Toast: Vui lòng điền đầy đủ thông tin");
+
         try {
-            WaitingHelper.waitForVisible(errorMessageGeneral);
-            return isDisplayed(errorMessageGeneral);
+            Thread.sleep(1000); // chờ toast xuất hiện
+            getDriver().findElement(toastFillAllInfo);
+            logStep("✅ Toast đã hiển thị");
+            return true;
         } catch (Exception e) {
-            logStep("❌ Không thấy thông báo lỗi");
+            logStep("❌ Không thấy Toast");
             return false;
         }
     }
 
-    public String getErrorMessage() {
-        logStep("Lấy thông báo lỗi");
+    public boolean isFillAllInfoErrorDisplayed_MK() {
+
+        logStep("🔍 Verify Toast: Vui lòng điền đầy đủ thông tin");
+
         try {
-            WebElement errorElement = getDriver().findElement(errorMessageGeneral);
-            String message = errorElement.getAttribute("text");
-            logStep("Error message: " + message);
-            return message;
+            Thread.sleep(1000); // chờ toast xuất hiện
+            getDriver().findElement(toastPasswordMismatch);
+            logStep("✅ Toast đã hiển thị");
+            return true;
         } catch (Exception e) {
-            logStep("❌ Không thể lấy thông báo lỗi");
-            return "";
+            logStep("❌ Không thấy Toast");
+            return false;
+        }
+    }
+    public boolean isFillAllInfoErrorDisplayed_DK() {
+
+        logStep("🔍 Verify Toast: Vui lòng điền đầy đủ thông tin");
+
+        try {
+            Thread.sleep(1000); // chờ toast xuất hiện
+            getDriver().findElement(toastTermsRequired);
+            logStep("✅ Toast đã hiển thị");
+            return true;
+        } catch (Exception e) {
+            logStep("❌ Không thấy Toast");
+            return false;
         }
     }
 
