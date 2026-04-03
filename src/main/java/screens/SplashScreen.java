@@ -40,7 +40,7 @@ public class SplashScreen extends BaseScreen {
         } catch (Exception e) {
             logStep("Splash không xuất hiện hoặc đã biến mất");
         }
-        WaitingHelper.sleepSeconds(3);
+        WaitingHelper.sleepSeconds(2);
         logStep("Splash Screen completed");
     }
 
