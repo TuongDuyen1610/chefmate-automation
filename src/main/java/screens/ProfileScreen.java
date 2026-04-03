@@ -17,7 +17,8 @@ public class ProfileScreen extends BaseScreen {
     private final By userName = By.xpath("//android.widget.TextView[@text='Tuong Thi Duyen']");
     private final By btnEdit = By.xpath("//android.view.View[@content-desc='Edit']");
     private final By btnLogout = By.xpath("//z0.h0/android.view.View/android.view.View/android.view.View[1]/android.widget.Button");
-    private final By bottomNavProfile = By.xpath("//android.widget.TextView[@text='Tài khoản']");
+//    private final By bottomNavProfile = By.xpath("//android.widget.TextView[@text='Tài khoản']");
+private final By bottomNavProfile = By.xpath("//android.view.View[@content-desc='Tài khoản']");
     private final By sessionLogout = By.xpath("(//android.widget.TextView[@text=\"Đang cập nhật...\"])[1]");
     // ==================== VERIFY PROFILE SCREEN ====================
 
@@ -77,7 +78,7 @@ public class ProfileScreen extends BaseScreen {
         logStep("Click tab Tài khoản");
         WaitingHelper.waitForClickable(bottomNavProfile);
         click(bottomNavProfile);
-        WaitingHelper.sleepSeconds(1);
+        WaitingHelper.sleepSeconds(2);
     }
 
     /**
