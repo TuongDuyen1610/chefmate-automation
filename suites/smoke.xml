@@ -5,7 +5,8 @@
         <classes>
 <!--            <class name="smoke.LoginTest"/>-->
 <!--            <class name="smoke.LogoutTest"/>-->
-            <class name="smoke.RegistrationTest"/>
+<!--            <class name="smoke.RegistrationTest"/>-->
+            <class name="smoke.EditProfileTest"></class>
             <!--<class name="smoke.HomeTest"/>-->
 <!--            <class name="smoke.BepesAIChatTest"/>-->
 <!--            <class name="smoke.SearchTest"/>-->
