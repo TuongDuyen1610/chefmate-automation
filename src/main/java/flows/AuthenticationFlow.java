@@ -11,7 +11,7 @@ import screens.ProfileScreen;
 import screens.RegistrationScreen;
 import screens.LogoutScreen;
 import org.openqa.selenium.By;  // ✅ THÊM IMPORT NÀY
-
+import screens.EditProfileScreen;
 /**
  * AuthenticationFlow.java
  * ✅ Updated: Thêm extra wait + better logging
@@ -26,7 +26,7 @@ public class AuthenticationFlow extends BaseFlow {
     private final ProfileScreen profile = new ProfileScreen();
     private final RegistrationScreen registration = new RegistrationScreen();
     private final LogoutScreen logout = new LogoutScreen();  // ✅ FIX: Khai báo variable
-
+    private final EditProfileScreen edit = new EditProfileScreen();
     // ==================== LOGIN METHODS ====================
     // ==================== Way 1: Từ Tủ lạnh ====================
     public void loginFromFridgeTab(String phoneOrEmail, String password) {
@@ -188,4 +188,51 @@ public class AuthenticationFlow extends BaseFlow {
         registration.clickLogintoRegister();
     }
 
+    // ==================== EDIT PROFILE ====================
+
+    public void openEditProfileScreen() {
+        logStep("=== MỞ MÀN CHỈNH SỬA THÔNG TIN ===");
+        splash.waitUntilSplashDisappear();
+        profile.clickBottomNavProfile();
+        edit.openEditProfileScreen();
+    }
+
+    public void updateFullName(String name) {
+        openEditProfileScreen();
+        edit.enterFullName(name);
+        edit.clickSave();
+    }
+
+    public void updateEmail(String email) {
+        openEditProfileScreen();
+        edit.enterEmail(email);
+        edit.clickSave();
+    }
+
+    public void updatePhone(String phone) {
+        openEditProfileScreen();
+        edit.enterPhone(phone);
+        edit.clickSave();
+    }
+
+    public void updateAllInfo(String name, String email, String phone) {
+        openEditProfileScreen();
+        edit.enterFullName(name);
+        edit.enterEmail(email);
+        edit.enterPhone(phone);
+        edit.clickSave();
+    }
+
+    public void saveAndBackProfile() {
+        edit.clickSave();
+        edit.clickBack();
+    }
+
+    public boolean isEditProfileDisplayed() {
+        return edit.isEditProfileDisplayed();
+    }
+
+    public boolean isEditToastErrorDisplayed() {
+        return edit.isToastErrorDisplayed();
+    }
 }
