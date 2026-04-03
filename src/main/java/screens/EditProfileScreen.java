@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
 public class EditProfileScreen extends BaseScreen {
 
     // ===== HEADER =====
-    private final By titleEditProfile = By.xpath("//android.widget.TextView[@text='Chỉnh sửa thông tin']");
+    private final By titleEditProfile = By.xpath("//android.widget.TextView[@text='Trang cá nhân']");
 
     // ===== ICON EDIT (từ Profile) =====
 //    private final By iconEditProfile = By.xpath("//android.view.View[@content-desc='Edit']");
@@ -40,7 +40,7 @@ public class EditProfileScreen extends BaseScreen {
         WaitingHelper.waitForClickable(iconEditProfile);
         click(iconEditProfile);
 
-        WaitingHelper.sleepSeconds(2);
+//        WaitingHelper.sleepSeconds(2);
     }
 
     public boolean isEditProfileDisplayed() {
@@ -77,7 +77,7 @@ public class EditProfileScreen extends BaseScreen {
         WaitingHelper.waitForClickable(btnSave);
         click(btnSave);
 
-        WaitingHelper.sleepSeconds(3);
+        WaitingHelper.sleepSeconds(6);
     }
 
     public void clickBack() {
