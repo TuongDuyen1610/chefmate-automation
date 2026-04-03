@@ -2,6 +2,7 @@ package core.base;
 
 import core.driver.DriverManager;
 import core.utils.WaitingHelper;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 
@@ -41,7 +42,17 @@ public class BaseScreen {
             return false;
         }
     }
+    public void scrollToText(String text){
 
+        logStep("Scroll to: " + text);
+
+        getDriver().findElement(
+                AppiumBy.androidUIAutomator(
+                        "new UiScrollable(new UiSelector().scrollable(true))"
+                                + ".scrollIntoView(new UiSelector().text(\"" + text + "\"))"
+                )
+        );
+    }
     protected void logStep(String stepName) {
         System.out.println("📍 [SCREEN] " + stepName);
     }
