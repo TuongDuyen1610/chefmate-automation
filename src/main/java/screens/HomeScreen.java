@@ -24,7 +24,8 @@ public class HomeScreen extends BaseScreen {
     private final By recipeCardFirst = By.xpath("//android.widget.ScrollView/android.view.View[1]");
 
     private final By bottomNavFridge = By.xpath("//android.widget.TextView[@text='Tủ lạnh']");
-    private final By bottomNavProfile = By.xpath("//android.widget.TextView[@text='Tài khoản']");
+//    private final By bottomNavProfile = By.xpath("//android.widget.TextView[@text='Tài khoản']");
+    private final By bottomNavProfile = By.xpath("//android.view.View[@content-desc='Tài khoản']");
 
     // ==================== ACTIONS ====================
 
