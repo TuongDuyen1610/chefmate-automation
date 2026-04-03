@@ -43,15 +43,15 @@ public class LoginScreen extends BaseScreen {
 
         // ✅ QUAN TRỌNG: Tăng từ 8s lên 15s
         logStep("⏳ Chờ app xử lý đăng nhập");
-        WaitingHelper.sleepSeconds(8);
+        WaitingHelper.sleepSeconds(6);
     }
     public void performLogin(String phoneOrEmail, String password) {
         logStep("=== THỰC HIỆN ĐĂNG NHẬP ===");
         enterPhoneOrEmail(phoneOrEmail);
         enterPassword(password);
         clickLogin();
-        logStep("✓ Đã click nút Đăng nhập");
-        WaitingHelper.sleepSeconds(3);
+//        logStep("✓ Đã click nút Đăng nhập");
+//        WaitingHelper.sleepSeconds(3);
     }
     private void clickByCoordinates(int x, int y) {
         org.openqa.selenium.interactions.PointerInput finger =
