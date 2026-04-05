@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
  * - Cho phép các Flow sau này kế thừa và mở rộng các phương thức chung
  * - Tách biệt rõ ràng giữa "luồng nghiệp vụ" và "tương tác UI"
  */
+
 public abstract class BaseFlow {
 
     // ==================== DRIVER ACCESS ====================
@@ -21,7 +22,6 @@ public abstract class BaseFlow {
     protected AndroidDriver getDriver() {
         return DriverManager.getDriver();
     }
-
     // ==================== BASIC ACTIONS ====================
 
     /**
@@ -68,4 +68,5 @@ public abstract class BaseFlow {
     protected void logStep(String stepName) {
         System.out.println("📍 [FLOW] Executing: " + stepName);
     }
+
 }
