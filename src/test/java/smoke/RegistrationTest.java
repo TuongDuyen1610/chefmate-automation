@@ -24,10 +24,10 @@ public class RegistrationTest extends BaseTest {
         System.out.println("\n=== DangKy_TC_01 - ĐĂNG KÝ THÀNH CÔNG ===");
         registrationCounter++;
 
-        String fullName = "Duyen1" + registrationCounter;
-        String phone = "14441" + (1000000 + registrationCounter);
-        String email = "14441" + registrationCounter + "@gmail.com";
-        String password = "111111";
+        String fullName = "Duyen1220" + registrationCounter;
+        String phone = "14441202" + (1000000 + registrationCounter);
+        String email = "14441220" + registrationCounter + "@gmail.com";
+        String password = "111111220";
 
         authFlow.registerNewAccount(fullName, phone, email, password, password);
         Assert.assertTrue(authFlow.isRegistrationSuccessful(), "❌ Lỗi: Đăng ký thất bại, không vào được Home!");
