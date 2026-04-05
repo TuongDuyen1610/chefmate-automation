@@ -1,6 +1,7 @@
 package flows;
 
 import core.base.BaseFlow;
+import core.base.BaseScreen;
 import core.utils.WaitingHelper;
 import screens.HomeScreen;
 import screens.LoginScreen;
@@ -119,6 +120,13 @@ public class AuthenticationFlow extends BaseFlow {
         clickRegisterNowButton();
         registration.performRegistration(fullName, phone, email, password, confirmPassword);
     }
+    public void registerNewAccount_toEdit(String fullName, String phone, String email, String password, String confirmPassword) {
+        logStep("=== THỰC HIỆN ĐĂNG KÝ ===");
+        splash.waitUntilSplashDisappear();
+        gateHelper.triggerLoginByFridgeTab();
+        clickRegisterNowButton();
+        registration.performRegistration(fullName, phone, email, password, confirmPassword);
+    }
     public void registerWithoutTermsAgreement(String fullName, String phone, String email, String password) {
         logStep("=== ĐĂNG KÝ KHÔNG TICK ĐIỀU KHOẢN ===");
         splash.waitUntilSplashDisappear();
@@ -189,38 +197,48 @@ public class AuthenticationFlow extends BaseFlow {
     }
 
     // ==================== EDIT PROFILE ====================
-
-    public void openEditProfileScreen() {
-        logStep("=== MỞ MÀN CHỈNH SỬA THÔNG TIN ===");
-        splash.waitUntilSplashDisappear();
+//
+////    public void openEditProfileScreen() {
+////        logStep("=== MỞ MÀN CHỈNH SỬA THÔNG TIN ===");
+//////        splash.waitUntilSplashDisappear();
+////        edit.clickSave();
+////        edit.clickBack();
+////        profile.clickBottomNavProfile();
+////        edit.openEditProfileScreen();
+////    }
+//
+    public void updateFullName(String name) {
         profile.clickBottomNavProfile();
         edit.openEditProfileScreen();
-    }
-
-    public void updateFullName(String name) {
-        openEditProfileScreen();
         edit.enterFullName(name);
         edit.clickSave();
+        edit.clickBack();
     }
 
     public void updateEmail(String email) {
-        openEditProfileScreen();
+        profile.clickBottomNavProfile();
+        edit.openEditProfileScreen();
         edit.enterEmail(email);
         edit.clickSave();
+        edit.clickBack();
     }
 
     public void updatePhone(String phone) {
-        openEditProfileScreen();
+        profile.clickBottomNavProfile();
+        edit.openEditProfileScreen();
         edit.enterPhone(phone);
         edit.clickSave();
+        edit.clickBack();
     }
 
     public void updateAllInfo(String name, String email, String phone) {
-        openEditProfileScreen();
+        profile.clickBottomNavProfile();
+        edit.openEditProfileScreen();
         edit.enterFullName(name);
         edit.enterEmail(email);
         edit.enterPhone(phone);
         edit.clickSave();
+        edit.clickBack();
     }
 
     public void saveAndBackProfile() {
@@ -228,11 +246,41 @@ public class AuthenticationFlow extends BaseFlow {
         edit.clickBack();
     }
 
-    public boolean isEditProfileDisplayed() {
-        return edit.isEditProfileDisplayed();
+    public void openEditProfileScreen(String name, String email, String phone){
+        profile.clickBottomNavProfile();
+        edit.openEditProfileScreen();
+        edit.enterFullName(name);
+        edit.enterEmail(email);
+        edit.enterPhone(phone);
+        edit.clickSave();
+        edit.clickBack();
+        logout.clickLogoutIcon();
+        logout.confirmLogout();
     }
 
-    public boolean isEditToastErrorDisplayed() {
-        return edit.isToastErrorDisplayed();
+    public void checkDisplayErrorMsgEmail(String name, String email, String phone){
+        profile.clickBottomNavProfile();
+        edit.openEditProfileScreen();
+        edit.enterFullName(name);
+        edit.enterEmail(email);
+        edit.enterPhone(phone);
+        edit.clickSave();
     }
+    public void checkDisplayErrorMsgSDT(String name, String email, String phone){
+        profile.clickBottomNavProfile();
+        edit.openEditProfileScreen();
+        edit.enterFullName(name);
+        edit.enterEmail(email);
+        edit.enterPhone(phone);
+        edit.clickSave();
+    }
+    public boolean isToastErrorDisplayed() {
+        return  edit.isToastErrorDisplayed();
+    }
+    public boolean isToastUpdateInfoDisplayed(){
+        return edit.isToastUpdateInfoDisplayed();
+    }
+//    public void clickDangky(){
+//        edit.clickRegister();
+//    }
 }
