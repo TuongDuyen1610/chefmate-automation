@@ -53,6 +53,7 @@ public class BaseScreen {
                 )
         );
     }
+
     protected void logStep(String stepName) {
         System.out.println("📍 [SCREEN] " + stepName);
     }
