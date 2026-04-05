@@ -14,7 +14,7 @@ import java.time.Duration;
 public class ProfileScreen extends BaseScreen {
 
     // ==================== LOCATORS ====================
-    private final By userName = By.xpath("//android.widget.TextView[@text='Tuong Thi Duyen']");
+    private final By userName = By.xpath("//android.widget.TextView[@text='Trang cá nhân']");
     private final By btnEdit = By.xpath("//android.view.View[@content-desc='Edit']");
     private final By btnLogout = By.xpath("//z0.h0/android.view.View/android.view.View/android.view.View[1]/android.widget.Button");
 //    private final By bottomNavProfile = By.xpath("//android.widget.TextView[@text='Tài khoản']");
