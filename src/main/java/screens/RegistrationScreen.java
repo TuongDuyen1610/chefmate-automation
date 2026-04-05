@@ -37,6 +37,7 @@ public class RegistrationScreen extends BaseScreen {
     private final By lblEmail = By.xpath("//android.widget.TextView[@text='Email']");
     private final By lblPassword = By.xpath("//android.widget.TextView[@text='Mật khẩu']");
     private final By lblConfirmPassword = By.xpath("//android.widget.TextView[@text='Xác nhận mật khẩu']");
+    private final BaseScreen base = new BaseScreen();
 
     // ==================== ERROR MESSAGE LOCATORS ====================
 
@@ -147,12 +148,6 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void clickRegisterButton() {
-        logStep("Click nút Đăng ký");
-        try {
-            getDriver().hideKeyboard();
-        } catch (Exception e) {
-            logStep("⚠️ Không ẩn keyboard được");
-        }
 
         try {
             // Try locator 1
@@ -189,7 +184,16 @@ public class RegistrationScreen extends BaseScreen {
         enterPassword(password);
         enterConfirmPassword(confirmPassword);
         tickTermsCheckbox();
-        clickRegisterButton();
+        logStep("Click nut Dang ky");
+        try {
+            scrollToText("Đăng ký");
+            WaitingHelper.waitForClickable(registerButton);
+            click(registerButton);
+            logStep("Da click dang ky tu man dang ky");
+        } catch (Exception e) {
+            logStep("Khong click duoc dang ky");
+            throw e;
+        }
     }
 
     // ==================== CLEAR FIELD METHODS ====================
