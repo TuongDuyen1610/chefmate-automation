@@ -478,7 +478,7 @@ public class AuthenticationFlow extends BaseFlow {
         By registerNowBtn = By.xpath("//android.widget.TextView[@text='Đăng ký ngay']");
         WaitingHelper.waitForClickable(registerNowBtn);
         click(registerNowBtn);
-        WaitingHelper.sleepSeconds(3);
+        WaitingHelper.sleepSeconds(1);
     }
 
     public boolean isRegistrationScreenDisplayed() {
@@ -518,7 +518,7 @@ public class AuthenticationFlow extends BaseFlow {
 
     public boolean isLogoutSuccessful() {
         logStep("🔍 Verify: Kiểm tra đăng xuất thành công (quay lại Profile)");
-        WaitingHelper.sleepSeconds(1);
+//        WaitingHelper.sleepSeconds(1);
         return profile.isProfileScreenDisplayed();
     }
 
@@ -541,7 +541,24 @@ public class AuthenticationFlow extends BaseFlow {
         edit.openEditProfileScreen();
         edit.enterFullName(name);
         edit.clickSave();
+//        edit.clickBack();
+    }
+    public void goBackToProfileFromEditScreen(){
+        logStep("Back tu Edit Profile screen sang Profile screen");
+
+        // ✅ WAIT để màn Edit Profile load xong
+        WaitingHelper.sleepSeconds(2);
+
+        // ✅ VERIFY đã quay về Edit Profile
+        if (!edit.isChangePasswordScreenDisplayed()) {
+            logger.info("Confirmed: On Edit Profile screen");
+        }
+
+        // ✅ Click back
         edit.clickBack();
+
+        // ✅ VERIFY quay về Profile
+        profile.isProfileDisplayed();
     }
 
     public void updateEmail(String email) {
@@ -549,7 +566,7 @@ public class AuthenticationFlow extends BaseFlow {
         edit.openEditProfileScreen();
         edit.enterEmail(email);
         edit.clickSave();
-        edit.clickBack();
+//        edit.clickBack();
     }
 
     public void updatePhone(String phone) {
@@ -557,7 +574,7 @@ public class AuthenticationFlow extends BaseFlow {
         edit.openEditProfileScreen();
         edit.enterPhone(phone);
         edit.clickSave();
-        edit.clickBack();
+//        edit.clickBack();
     }
 
     public void updateAllInfo(String name, String email, String phone) {
@@ -567,7 +584,7 @@ public class AuthenticationFlow extends BaseFlow {
         edit.enterEmail(email);
         edit.enterPhone(phone);
         edit.clickSave();
-        edit.clickBack();
+//        edit.clickBack();
     }
 
     public void saveAndBackProfile() {
@@ -604,12 +621,95 @@ public class AuthenticationFlow extends BaseFlow {
         edit.enterPhone(phone);
         edit.clickSave();
     }
-
+    public boolean isProfileInfoCorrect(
+            String fullName,
+            String email,
+            String phone
+    ){
+        return profile.isProfileInfoCorrect(fullName, email, phone);
+    }
     public boolean isToastErrorDisplayed() {
         return edit.isToastErrorDisplayed();
     }
 
     public boolean isToastUpdateInfoDisplayed() {
         return edit.isToastUpdateInfoDisplayed();
+    }
+
+    // ==================== CHANGE PASSWORD METHODS ====================
+
+    /**
+     * Navigate toi Profile screen
+     */
+    public void navigateToProfile() {
+        logStep("Navigate toi Profile screen");
+        profile.clickBottomNavProfile();
+        WaitingHelper.sleepSeconds(2);
+    }
+
+    /**
+     * Safe logout chap app stable
+     */
+    public void performLogoutSafely() {
+        logStep("Dang xuat an toan");
+//        WaitingHelper.sleepSeconds(2);
+        profile.clickBottomNavProfile();
+//        WaitingHelper.sleepSeconds(2);
+        logout.performLogout();
+//        WaitingHelper.sleepSeconds(3);
+    }
+
+    /**
+     * Change password flow
+     * @param currentPassword Mat khau hien tai tu JSON hoac param
+     * @param newPassword Mat khau moi
+     * @param confirmPassword Xac nhan mat khau moi
+     */
+    public void changePassword(String currentPassword, String newPassword, String confirmPassword) {
+        logStep("Thuc hien doi mat khau");
+
+        profile.clickBottomNavProfile();
+
+        edit.openEditProfileScreen();
+
+        edit.clickChangePasswordButtonNavigate();
+
+//        if (!edit.isChangePasswordScreenDisplayed()) {
+//            logger.error("Change password screen khong hien thi");
+//            AllureHelper.attachScreenshot("Change Password Screen NOT Found");
+//            throw new AssertionError("Change password screen khong hien thi");
+//        }
+
+        edit.enterCurrentPassword(currentPassword);
+        edit.enterNewPassword(newPassword);
+        edit.enterConfirmPassword(confirmPassword);
+
+        edit.clickConfirmChangePassword();
+        logStep("Change password flow completed");
+    }
+
+    /**
+     * Verify toast change password success
+     */
+    public boolean isChangePasswordSuccessDisplayed() {
+        logStep("Kiem tra Toast Doi mat khau thanh cong");
+        return edit.isChangePasswordSuccessDisplayed();
+    }
+
+    /**
+     * Verify toast change password error
+     */
+    public boolean isChangePasswordErrorDisplayed() {
+        logStep("Kiem tra Toast Loi doi mat khau");
+        return edit.isChangePasswordErrorDisplayed();
+    }
+
+    /**
+     * Back tu man Change Password
+     */
+    public void backFromChangePassword() {
+        logStep("Quay lai tu man Doi mat khau");
+        edit.clickBackFromChangePassword();
+        WaitingHelper.sleepSeconds(2);
     }
 }
