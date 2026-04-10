@@ -22,4 +22,7 @@ public class ProfileFlow extends BaseFlow {
     public boolean isProfileDisplayed() {
         return profile.isProfileDisplayed();
     }
+    public void clickProfileDisplayed() {
+        profile.clickBottomNavProfile();
+    }
 }
