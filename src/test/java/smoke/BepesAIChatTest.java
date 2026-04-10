@@ -1,7 +1,6 @@
 package smoke;
 
 import core.base.BaseTest;
-import core.utils.Constants;
 import flows.BepesAIFlow;
 import org.testng.Assert;
 import org.testng.annotations.Test;
