@@ -4,9 +4,14 @@ package screens;
 //import org.openqa.selenium.TimeoutException;
 //import java.time.Duration;
 import core.base.BaseScreen;
+import core.utils.AllureHelper;
 import core.utils.WaitingHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import core.utils.AllureHelper;
+import io.qameta.allure.Step;
 //import org.openqa.selenium.Keys;
 //import java.util.Map;
 //import java.util.HashMap;
@@ -16,6 +21,8 @@ import org.openqa.selenium.WebElement;
  * ✅ Fixed: Import WebElement, clear field, checkbox handling
  */
 public class RegistrationScreen extends BaseScreen {
+
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationScreen.class);
 
     // ==================== HEADER LOCATORS ====================
     private final By headerTitle = By.xpath("(//android.widget.TextView[@text='Đăng ký'])[1]");
@@ -269,12 +276,18 @@ public class RegistrationScreen extends BaseScreen {
         try {
             Thread.sleep(1000); // chờ toast xuất hiện
             getDriver().findElement(toastFillAllInfo);
+            logger.info("✅ Toast error msg hien thi thanh cong");
+            AllureHelper.attachScreenshot("Toast error msg hien thi thanh cong");
+
             logStep("✅ Toast đã hiển thị");
             return true;
         } catch (Exception e) {
             logStep("❌ Không thấy Toast");
+            logger.info("✅ Toast error msg khong hien thi ");
+            AllureHelper.attachScreenshot("Toast error msg khong hien thi");
             return false;
         }
+
     }
 
     public boolean isFillAllInfoErrorDisplayed_MK() {
@@ -284,10 +297,13 @@ public class RegistrationScreen extends BaseScreen {
         try {
             Thread.sleep(1000); // chờ toast xuất hiện
             getDriver().findElement(toastPasswordMismatch);
+            logger.info("✅ Toast error msg hien thi thanh cong");
+            AllureHelper.attachScreenshot("Toast error msg hien thi thanh cong");
             logStep("✅ Toast đã hiển thị");
             return true;
         } catch (Exception e) {
-            logStep("❌ Không thấy Toast");
+            logger.info("✅ Toast error msg khong hien thi ");
+            AllureHelper.attachScreenshot("Toast error msg khong hien thi");
             return false;
         }
     }
@@ -298,10 +314,14 @@ public class RegistrationScreen extends BaseScreen {
         try {
             Thread.sleep(1000); // chờ toast xuất hiện
             getDriver().findElement(toastTermsRequired);
+            logger.info("✅ Toast error msg hien thi thanh cong");
+            AllureHelper.attachScreenshot("Toast error msg hien thi thanh cong");
             logStep("✅ Toast đã hiển thị");
             return true;
         } catch (Exception e) {
             logStep("❌ Không thấy Toast");
+            logger.info("✅ Toast error msg khong hien thi ");
+            AllureHelper.attachScreenshot("Toast error msg khong hien thi");
             return false;
         }
     }
