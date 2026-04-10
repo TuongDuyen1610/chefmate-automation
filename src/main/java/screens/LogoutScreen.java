@@ -56,15 +56,15 @@ public class LogoutScreen extends BaseScreen {
      */
     public void clickLogoutIcon() {
         logStep("Click icon Logout tren trang ca nhan");
-        try {
+//        try {
             WaitingHelper.waitForClickable(logoutIcon);
             click(logoutIcon);
             logStep("✓ Da click icon Logout");
-            WaitingHelper.sleepSeconds(2);
-        } catch (Exception e) {
-            logStep("❌ Khong click đuoc icon Logout: " + e.getMessage());
-            throw e;
-        }
+//            WaitingHelper.sleepSeconds(2);
+//        } catch (Exception e) {
+//            logStep("❌ Khong click đuoc icon Logout: " + e.getMessage());
+//            throw e;
+//        }
     }
 
     /**
@@ -72,22 +72,22 @@ public class LogoutScreen extends BaseScreen {
      */
     public void confirmLogout() {
         logStep("Click nut Đang xuat đe xac nhan");
-        try {
+//        try {
             WaitingHelper.waitForClickable(confirmLogoutButton);
             click(confirmLogoutButton);
             logStep("✓ Đa click nut Đang xuat");
-            WaitingHelper.sleepSeconds(3);
-        } catch (Exception e) {
-            logStep("⚠️ Locator 1 thất bại, thử locator 2");
-            try {
-                click(confirmLogoutButtonAlt);
-                logStep("✓ Đã click nút Đăng xuất (locator 2)");
-                WaitingHelper.sleepSeconds(3);
-            } catch (Exception e2) {
-                logStep("❌ Không click được nút Đăng xuất");
-                throw e2;
-            }
-        }
+//            WaitingHelper.sleepSeconds(3);
+//        } catch (Exception e) {
+//            logStep("⚠️ Locator 1 thất bại, thử locator 2");
+//            try {
+//                click(confirmLogoutButtonAlt);
+//                logStep("✓ Đã click nút Đăng xuất (locator 2)");
+//                WaitingHelper.sleepSeconds(3);
+//            } catch (Exception e2) {
+//                logStep("❌ Không click được nút Đăng xuất");
+//                throw e2;
+//            }
+//        }
     }
 
     /**
@@ -95,45 +95,45 @@ public class LogoutScreen extends BaseScreen {
      */
     public void cancelLogout() {
         logStep("Click nut X hoac Huy đe huy đang xuat");
-        try {
-            // Try Close Sheet first
-            try {
-                WaitingHelper.waitForClickable(popupCloseSheet);
-                click(popupCloseSheet);
-                logStep("✓ Đa click Close Sheet");
-                WaitingHelper.sleepSeconds(1);
-                return;
-            } catch (Exception e1) {
-                logStep("⚠️ Close Sheet that bai, thu Button X");
-            }
+////        try {
+////            // Try Close Sheet first
+////            try {
+//                WaitingHelper.waitForClickable(popupCloseSheet);
+//                click(popupCloseSheet);
+//                logStep("✓ Đa click Close Sheet");
+//                WaitingHelper.sleepSeconds(1);
+//                return;
+//            } catch (Exception e1) {
+//                logStep("⚠️ Close Sheet that bai, thu Button X");
+//            }
 
-            // Try Button X
-            try {
+//            // Try Button X
+//            try {
                 WaitingHelper.waitForClickable(cancelButtonX);
                 click(cancelButtonX);
-                logStep("✓ Đã click nút X");
-                WaitingHelper.sleepSeconds(1);
-                return;
-            } catch (Exception e2) {
-                logStep("⚠️ Button X thất bại, thử ImageView");
-            }
+                logStep("✓ Đa click nut X");
+//                WaitingHelper.sleepSeconds(1);
+//                return;
+//            } catch (Exception e2) {
+//                logStep("⚠️ Button X thất bại, thử ImageView");
+//            }
 
-            // Try ImageView
-            try {
-                WaitingHelper.waitForClickable(cancelButtonImageView);
-                click(cancelButtonImageView);
-                logStep("✓ Đã click ImageView");
-                WaitingHelper.sleepSeconds(1);
-                return;
-            } catch (Exception e3) {
-                logStep("❌ Không click được nút Hủy");
-                throw e3;
-            }
-
-        } catch (Exception e) {
-            logStep("❌ Hủy đăng xuất thất bại: " + e.getMessage());
-            throw e;
-        }
+//            // Try ImageView
+//            try {
+//                WaitingHelper.waitForClickable(cancelButtonImageView);
+//                click(cancelButtonImageView);
+//                logStep("✓ Đã click ImageView");
+//                WaitingHelper.sleepSeconds(1);
+//                return;
+//            } catch (Exception e3) {
+                logStep("Da click duoc nut Huy");
+//                throw e3;
+//            }
+//
+//        } catch (Exception e) {
+//            logStep("❌ Hủy đăng xuất thất bại: " + e.getMessage());
+//            throw e;
+//        }
     }
 
     /**
