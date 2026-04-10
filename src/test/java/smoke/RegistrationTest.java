@@ -5,7 +5,8 @@ import flows.AuthenticationFlow;
 import screens.RegistrationScreen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import core.data.LoginData;
+import core.utils.JsonHelper;
 /**
  * RegistrationTest.java
  * Test case đăng ký theo spec: 1 Happy + 11 Unhappy
@@ -15,22 +16,25 @@ public class RegistrationTest extends BaseTest {
 
     private final AuthenticationFlow authFlow = new AuthenticationFlow();
     private final RegistrationScreen registration = new RegistrationScreen();
-    private static int registrationCounter = 0;
 
     // ==================== HAPPY CASE ====================
-
-    @Test(priority = 1, description = "DangKy_TC_01 - Đăng ký thành công")
+// Chỉ dùng khi chưa có tài khoản, và chỉ chạy 1 lần sau đó disable, test sau sẽ chạy test login ko cần chạy registation
+    @Test(priority = 1, enabled = false, description = "DangKy_TC_01 - Đăng ký thành công")
     public void DangKy_TC_01_RegisterSuccessfully() {
-        System.out.println("\n=== DangKy_TC_01 - ĐĂNG KÝ THÀNH CÔNG ===");
-        registrationCounter++;
 
-        String fullName = "Duyen1220" + registrationCounter;
-        String phone = "14441202" + (1000000 + registrationCounter);
-        String email = "14441220" + registrationCounter + "@gmail.com";
-        String password = "111111220";
+        System.out.println("\n=== DangKy_TC_01 - ĐĂNG KÝ THÀNH CÔNG ===");
+
+        String fullName = "Tuong Thi Duyen";
+        String phone = "0900009999";
+        String email = "duyentest@gmail.com";
+        String password = "123456";
 
         authFlow.registerNewAccount(fullName, phone, email, password, password);
-        Assert.assertTrue(authFlow.isRegistrationSuccessful(), "❌ Lỗi: Đăng ký thất bại, không vào được Home!");
+        Assert.assertTrue(
+                authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+
         System.out.println("✅ DangKy_TC_01 PASS");
     }
 
