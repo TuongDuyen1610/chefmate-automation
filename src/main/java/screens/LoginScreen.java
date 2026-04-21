@@ -136,19 +136,19 @@ public class LoginScreen extends BaseScreen {
     }
 
     // ✅ COPY LOGIC CŨ - performLogin_TC10
-    public void performLogin_TC10(String password) {
+    public void performLogin_TC06(String password) {
         logStep("=== THỰC HIỆN ĐĂNG NHẬP ===");
         enterPassword(password);
     }
 
     // ✅ COPY LOGIC CŨ - performLogin_TC11
-    public void performLogin_TC11(String phoneOrEmail) {
+    public void performLogin_TC07(String phoneOrEmail) {
         logStep("=== THỰC HIỆN ĐĂNG NHẬP ===");
         enterPhoneOrEmail(phoneOrEmail);
     }
 
-    // ✅ COPY LOGIC CŨ - isToastUpdateInfoDisplayed_TC1011
-    public boolean isToastUpdateInfoDisplayed_TC1011() {
+    // ✅ COPY LOGIC CŨ - isToastUpdateInfoDisplayed_TC0607
+    public boolean isToastUpdateInfoDisplayed_TC0607() {
         logStep("🔍 Verify Toast: Cập nhật thành công");
         AllureHelper.step("Verify error toast");
 
