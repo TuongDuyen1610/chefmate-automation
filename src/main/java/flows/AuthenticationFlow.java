@@ -426,25 +426,25 @@ public class AuthenticationFlow extends BaseFlow {
     }
 
     @Step("✅ Verify error toast displayed")
-    public boolean isToastUpdateInfoDisplayed_TC1011() {
+    public boolean isToastUpdateInfoDisplayed_TC0607() {
         logStep("🔍 Verify: Toast error message");
         AllureHelper.step("Verify error toast message");
 
-        return login.isToastUpdateInfoDisplayed_TC1011();
+        return login.isToastUpdateInfoDisplayed_TC0607();
     }
 
     // ✅ THÊM CÁC METHOD NÀY CHO TC_10 VÀ TC_11
-    public void TC_10(String password) {
+    public void TC_06(String password) {
         splash.waitUntilSplashDisappear();
         gateHelper.triggerLoginByProfileTab();
-        login.performLogin_TC10(password);
+        login.performLogin_TC06(password);
         login.clickLogin();
     }
 
-    public void TC_11(String phoneOrEmail) {
+    public void TC_07(String phoneOrEmail) {
         splash.waitUntilSplashDisappear();
         gateHelper.triggerLoginByProfileTab();
-        login.performLogin_TC11(phoneOrEmail);
+        login.performLogin_TC07(phoneOrEmail);
         login.clickLogin();
     }
 
@@ -628,8 +628,12 @@ public class AuthenticationFlow extends BaseFlow {
     ){
         return profile.isProfileInfoCorrect(fullName, email, phone);
     }
-    public boolean isToastErrorDisplayed() {
-        return edit.isToastErrorDisplayed();
+    public boolean isToastErrorEmailDisplayed() {
+        return edit.isToastErrorEmailDisplayed();
+    }
+
+    public boolean isToastErrorPhoneDisplayed() {
+        return edit.isToastErrorPhoneDisplayed();
     }
 
     public boolean isToastUpdateInfoDisplayed() {
