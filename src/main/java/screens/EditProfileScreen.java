@@ -198,7 +198,8 @@ public class EditProfileScreen extends BaseScreen {
     // ✅ Nút Back TRÊN (ở header, ngoài ScrollView) - Edit Profile -> Profile
     private final By btnBack = By.xpath("//android.widget.Button[not(ancestor::android.widget.ScrollView)]");
     // ===== TOAST MESSAGE =====
-    private final By toastError = By.xpath("//android.widget.Toast[@text='This phone is already exist']");
+    private final By toastErrorPhone = By.xpath("//android.widget.Toast[@text='This phone is already exist']");
+    private final By toastErrorEmail = By.xpath("//android.widget.Toast[@text='This email is already exist']");
     private final By toastUpdate = By.xpath("//android.widget.Toast[@text='Cập nhật thành công']");
     private final By toastChangePasswordSuccess = By.xpath("//android.widget.Toast[@text=\"Đổi mật khẩu thành công\"]");
     private final By toastChangePasswordError = By.xpath("//android.widget.Toast[@text='Mật khẩu mới không được trùng với mật khẩu hiện tại']");
@@ -378,12 +379,27 @@ public class EditProfileScreen extends BaseScreen {
 
     // ==================== LEGACY METHODS ====================
 
-    public boolean isToastErrorDisplayed() {
+    public boolean isToastErrorPhoneDisplayed() {
         logStep("Kiem tra Toast Co loi xay ra");
         WaitingHelper.sleepSeconds(1);
 
         try {
-            getDriver().findElement(toastError);
+            getDriver().findElement(toastErrorPhone);
+            logger.info("Toast error displayed");
+            AllureHelper.attachScreenshot("Toast Error Displayed");
+            return true;
+        } catch (Exception e) {
+            logger.error("Toast error NOT displayed");
+            return false;
+        }
+    }
+
+    public boolean isToastErrorEmailDisplayed() {
+        logStep("Kiem tra Toast Co loi xay ra");
+        WaitingHelper.sleepSeconds(1);
+
+        try {
+            getDriver().findElement(toastErrorEmail);
             logger.info("Toast error displayed");
             AllureHelper.attachScreenshot("Toast Error Displayed");
             return true;
