@@ -24,17 +24,6 @@ import org.testng.annotations.*;
         core.listener.GoogleSheetTestListener.class
 })public class BaseTest {
 
-//    @BeforeMethod(alwaysRun = true)
-//    public void setup() {
-//        System.out.println("🚀 [SETUP] Starting test - Initializing Appium Driver...");
-//        DriverManager.initDriver();
-//    }
-//
-//    @AfterMethod(alwaysRun = true)
-//    public void tearDown() {
-//        System.out.println("🛑 [TEARDOWN] Test finished - Quitting Appium Driver...");
-//        DriverManager.quitDriver();
-//    }
     protected static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
     protected AppiumDriver driver;
     protected AllureHelper allureHelper;
