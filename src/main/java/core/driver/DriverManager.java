@@ -6,11 +6,11 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
-
+import java.time.Duration;
 public class DriverManager {
 
     private static final ThreadLocal<AndroidDriver> driverThreadLocal = new ThreadLocal<>();
-
+    private static final int DRIVER_TIMEOUT_SECONDS = 10; // ⏱️ 60 GIÂY TIMEOUT
     public static AndroidDriver getDriver() {
         return driverThreadLocal.get();
     }
@@ -23,6 +23,8 @@ public class DriverManager {
                     new URL(appiumUrl),
                     CapabilityConfig.getAndroidCapabilities()
             );
+            // ✅ THÊM TIMEOUT 10 GIÂY
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 
             driverThreadLocal.set(driver);
 
