@@ -119,10 +119,25 @@ public class GoogleSheetService {
 
             Sheets sheets = getSheetService();
 
-            List<List<Object>> rows = sheets.spreadsheets().values()
-                    .get(SPREADSHEET_ID, SHEET_NAME + "!A11:I")
-                    .execute()
-                    .getValues();
+//            List<List<Object>> rows = sheets.spreadsheets().values()
+//                    .get(SPREADSHEET_ID, SHEET_NAME + "!A11:I")
+//                    .execute()
+//                    .getValues();
+            // ✅ THÊM TIMEOUT 30 GIÂY CHO GOOGLE SHEETS
+            ValueRange response = null;
+            try {
+                response = sheets.spreadsheets().values()
+                        .get(SPREADSHEET_ID, SHEET_NAME + "!A11:I")
+                        .execute();
+            } catch (java.net.SocketTimeoutException e) {
+                logger.error("⏱️ Google Sheets read timeout after 30 seconds");
+                return;
+            } catch (java.io.IOException e) {
+                logger.error("❌ Failed to read from Google Sheets: " + e.getMessage());
+                return;
+            }
+
+            List<List<Object>> rows = response != null ? response.getValues() : null;
 
             if (rows == null || rows.isEmpty()) {
                 logger.error("Sheet is empty");
