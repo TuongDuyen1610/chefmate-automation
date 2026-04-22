@@ -9,14 +9,22 @@ import java.util.List;
 import io.qameta.allure.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 
+import java.time.Duration;
+import java.text.Normalizer;
+import java.util.Collections;
+import java.util.Locale;
+import java.util.regex.Pattern;
 /**
  * RecipeDetailScreen.java
  * ✅ Sử dụng getDriver() từ BaseScreen
  */
 public class RecipeDetailScreen extends BaseScreen {
     private static final Logger logger = LoggerFactory.getLogger(RecipeDetailScreen.class);
-
+    private static final Pattern DIACRITICS_PATTERN =
+            Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
     // ==================== LOCATORS ====================
     private final By btnBack = By.xpath("//android.view.View[@content-desc='Quay lại']");
     private final By btnMark = By.xpath("//android.view.View[@content-desc='Mark']");
@@ -33,8 +41,12 @@ public class RecipeDetailScreen extends BaseScreen {
     private final By cookTime = By.xpath("//android.widget.TextView[contains(@text, 'phút')]");
 
     private final By tagsLabel = By.xpath("//android.widget.TextView[@text='Tags: ']");
-    private final By tagsContainer = By.xpath("//android.widget.HorizontalScrollView");
-
+    private final By tagsContainer = By.xpath(
+            "//android.widget.TextView[@text='Tags: ']/following-sibling::android.widget.HorizontalScrollView"
+    );
+    private final By tagItems = By.xpath(
+            "//android.widget.TextView[@text='Tags: ']/following-sibling::android.widget.HorizontalScrollView//android.widget.TextView"
+    );
     private final By tabIngredients = By.xpath("(//android.widget.TextView[@text='Nguyên liệu'])[1]");
     private final By tabInstructions = By.xpath("//android.widget.TextView[@text='Cách thực hiện']");
 
@@ -323,6 +335,104 @@ public class RecipeDetailScreen extends BaseScreen {
             logger.error("❌ Recipe detail failed to load: " + e.getMessage());
             AllureHelper.attachErrorMessage("Recipe detail load error: " + e.getMessage());
             throw new RuntimeException("Recipe detail failed to load", e);
+        }
+    }
+    private String normalize(String s) {
+        if (s == null) return "";
+
+        String out = s.trim().toLowerCase(Locale.ROOT);
+        out = out.replace('đ', 'd').replace('Đ', 'd');
+
+        out = Normalizer.normalize(out, Normalizer.Form.NFD);
+        out = DIACRITICS_PATTERN.matcher(out).replaceAll("");
+
+        out = out.replaceAll("\\s+", " ").trim();
+        return out;
+    }
+    @Step("Verify tag keyword with horizontal scroll: {keyword}")
+    public boolean verifyTagWithScroll(String keyword) {
+
+        waitForRecipeDetailDisplayed();
+
+        if (getDriver().findElements(tagsContainer).isEmpty()) {
+            logger.warn("⚠️ Không thấy vùng TAG");
+            AllureHelper.attachScreenshot("NO TAG CONTAINER");
+            return false;
+        }
+
+        String normalizedKeyword = normalize(keyword);
+
+        AllureHelper.attachScreenshot("TAG START | " + keyword);
+
+        int maxScroll = 10;
+
+        for (int i = 0; i < maxScroll; i++) {
+
+            AllureHelper.attachScreenshot("TAG SCAN STEP " + i);
+
+            // ❗ TẮT WAIT
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+
+            List<WebElement> tags = getDriver().findElements(tagItems);
+
+            for (WebElement tag : tags) {
+                String text = tag.getText();
+
+                if (normalize(text).contains(normalizedKeyword)) {
+
+                    AllureHelper.attachScreenshot("MATCH TAG | " + keyword + " | " + text);
+
+                    // 👉 bật lại wait trước khi return
+                    getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+                    return true;
+                }
+            }
+
+            // 👉 bật lại wait sau scan
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+            swipeTagInsideContainer();
+
+            AllureHelper.attachScreenshot("AFTER SWIPE STEP " + i);
+
+            WaitingHelper.sleepSeconds(0);
+        }
+
+        logger.warn("⚠️ Không match tag → ACCEPT");
+        AllureHelper.attachScreenshot("NO MATCH TAG | " + keyword);
+
+        return false;
+    }
+    private void swipeTagInsideContainer() {
+
+        try {
+            WebElement container = getDriver().findElement(tagsContainer);
+
+            int startX = container.getLocation().getX() + (int)(container.getSize().width * 0.85);
+            int endX   = container.getLocation().getX() + (int)(container.getSize().width * 0.15);
+
+            int y = container.getLocation().getY() + (container.getSize().height / 2);
+
+            PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            Sequence swipe = new Sequence(finger, 1);
+
+            swipe.addAction(finger.createPointerMove(Duration.ZERO,
+                    PointerInput.Origin.viewport(), startX, y));
+
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(800),
+                    PointerInput.Origin.viewport(), endX, y));
+
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+            getDriver().perform(Collections.singletonList(swipe));
+
+            logger.info("👉 Swipe TAG thành công");
+
+        } catch (Exception e) {
+            logger.error("❌ Swipe TAG lỗi", e);
         }
     }
 }
