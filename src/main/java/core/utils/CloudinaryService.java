@@ -175,6 +175,7 @@ public class CloudinaryService {
         } catch (Exception e) {
             logger.error("❌ Failed to upload screenshot: " + e.getMessage());
             return "N/A";
+//            return "UPLOAD_FAILED: " + e.getClass().getSimpleName() + " - " + e.getMessage();
         }
     }
 

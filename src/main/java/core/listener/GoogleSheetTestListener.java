@@ -232,6 +232,7 @@ public class GoogleSheetTestListener implements ITestListener {
 
             logger.info("✅ [" + testId + "] COMPLETE: Sheet Updated with Evidence: " + evidenceLink);
 
+//            logger.info("✅ [" + testId + "] COMPLETE: Attempted sheet update. Evidence: " + evidenceLink);
         } catch (Exception e) {
             logger.error("❌ Error in sendToSheet: " + e.getMessage(), e);
         }
