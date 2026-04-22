@@ -14,10 +14,10 @@
 <!--            <class name="smoke.RegistrationTest"/>-->
 <!--            <class name="smoke.EditProfileTest"></class>-->
 <!--            <class name="smoke.ChangePasswordTest"></class>-->
-             <class name="smoke.RecipeDisplayTest"/>
+<!--             <class name="smoke.RecipeDisplayTest"/>-->
             <!--<class name="smoke.HomeTest"/>-->
 <!--            <class name="smoke.BepesAIChatTest"/>-->
-<!--            <class name="smoke.SearchTest"/>-->
+            <class name="smoke.SearchTest"/>
 <!--            <class name="smoke.FridgeTest"/>-->
 <!--            <class name="smoke.ProfileTest"/>-->
 <!--            <class name="smoke.ShoppingListTest"/>-->
