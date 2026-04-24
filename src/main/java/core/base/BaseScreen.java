@@ -58,4 +58,17 @@ public class BaseScreen {
         System.out.println("📍 [SCREEN] " + stepName);
     }
 
+    public void scrollDown() {
+        int startX = getDriver().manage().window().getSize().width / 2;
+
+        int startY = (int) (getDriver().manage().window().getSize().height * 0.8);
+        int endY = (int) (getDriver().manage().window().getSize().height * 0.3);
+
+        new io.appium.java_client.TouchAction<>(getDriver())
+                .press(io.appium.java_client.touch.offset.PointOption.point(startX, startY))
+                .waitAction(io.appium.java_client.touch.WaitOptions.waitOptions(java.time.Duration.ofMillis(500)))
+                .moveTo(io.appium.java_client.touch.offset.PointOption.point(startX, endY))
+                .release()
+                .perform();
+    }
 }
