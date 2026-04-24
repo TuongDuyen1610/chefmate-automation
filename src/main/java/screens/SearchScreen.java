@@ -60,13 +60,12 @@ public class SearchScreen extends BaseScreen {
         WaitingHelper.sleepSeconds(1);
     }
 
-    @Step("Wait SearchScreen displayed (has Back)")
-    public void waitForSearchScreenDisplayed() {
-        AllureHelper.step("Wait SearchScreen displayed (has Back)");
-        logStep("Chờ SearchScreen hiển thị (có nút Quay lại)");
-        WaitingHelper.waitForVisible(btnBack);
-        WaitingHelper.sleepSeconds(1);
-    }
+//    @Step("Wait SearchScreen displayed (has Back)")
+//    public void waitForSearchScreenDisplayed() {
+//        AllureHelper.step("Wait SearchScreen displayed (has Back)");
+//        logStep("Chờ SearchScreen hiển thị (có nút Quay lại)");
+//        WaitingHelper.waitForVisible(btnBack);
+//    }
 
     // ==================== ACTIONS ====================
 
@@ -181,7 +180,6 @@ public class SearchScreen extends BaseScreen {
         List<WebElement> items = getDriver().findElements(resultItems);
         if (index >= items.size()) throw new RuntimeException("Index out of range: " + index);
         items.get(index).click();
-//        WaitingHelper.sleepSeconds(2);
         AllureHelper.attachScreenshot("Clicked result index " + index);
     }
 
