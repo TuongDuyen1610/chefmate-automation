@@ -22,8 +22,10 @@ public class ProfileScreen extends BaseScreen {
     private final By userName = By.xpath("//android.widget.TextView[@text='Trang cá nhân']");
     private final By btnEdit = By.xpath("//android.view.View[@content-desc='Edit']");
     private final By btnLogout = By.xpath("//z0.h0/android.view.View/android.view.View/android.view.View[1]/android.widget.Button");
-    private final By bottomNavProfile = By.xpath("//android.view.View[@content-desc='Tài khoản']");
+    private final By bottomNavProfile = By.xpath("//android.widget.TextView[@text='Tài khoản']");
     private final By sessionLogout = By.xpath("(//android.widget.TextView[@text=\"Đang cập nhật...\"])[1]");
+    private final By btnSavedRecipes = By.xpath("//android.widget.TextView[@text='Kho công thức']");
+    private final By bottomNavHome = By.xpath("//android.widget.TextView[@text='Trang chủ']");
 
     // ==================== PROFILE INFO - DYNAMIC LOCATORS ====================
     // Sử dụng contains() để match dữ liệu động
@@ -126,14 +128,16 @@ public class ProfileScreen extends BaseScreen {
 
     public void clickBottomNavProfile() {
         logStep("Click tab Tài khoản");
-        WaitingHelper.waitForClickable(bottomNavProfile);
         click(bottomNavProfile);
-        WaitingHelper.sleepSeconds(2); // Chờ profile load
     }
 
     public void clickTabProfile() {
         logStep("Click tab Profile");
         clickBottomNavProfile();
+    }
+    public void clickTabHome() {
+        logStep("Click tab Tài khoản");
+        click(bottomNavHome);
     }
 
     // ==================== VERIFY PROFILE INFO - UPDATED ====================
@@ -172,4 +176,12 @@ public class ProfileScreen extends BaseScreen {
 
         return false;
     }
+
+    public void openSavedRecipes() {
+        logStep("Open Saved Recipes");
+        click(btnSavedRecipes);
+        AllureHelper.attachScreenshot("OPEN SAVED RECIPES");
+    }
+
+
 }
