@@ -26,16 +26,17 @@ public class RecipeDetailScreen extends BaseScreen {
     private static final Pattern DIACRITICS_PATTERN =
             Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
     // ==================== LOCATORS ====================
-    private final By btnBack = By.xpath("//android.view.View[@content-desc='Quay lại']");
-    private final By btnMark = By.xpath("//android.view.View[@content-desc='Mark']");
-    private final By btnShare = By.xpath("//android.view.View[@content-desc='Share']");
 
     private final By recipeTitle = By.xpath("//android.widget.TextView[1]");
-    private final By recipeAuthor = By.xpath("//android.widget.TextView[@text='Hồ Anh Khoa']");
-    private final By recipeTimeAgo = By.xpath("//android.widget.TextView[@text='2 tuần trước']");
+    private final By recipeAuthor =
+            By.xpath("//android.widget.TextView[1]/following-sibling::android.widget.TextView[1]");
+    private final By recipeTimeAgo =
+            By.xpath("//android.widget.TextView[1]/following-sibling::android.widget.TextView[2]");
     private final By btnFollow = By.xpath("//android.widget.TextView[@text='Theo dõi']");
 
-    private final By likeCount = By.xpath("(//android.widget.TextView)[position()=last()-3]");
+    private final By likeCount = By.xpath(
+            "//android.view.View[@content-desc='Like']/parent::android.view.View//android.widget.TextView"
+    );
     private final By commentCount = By.xpath("(//android.widget.TextView)[position()=last()-2]");
     private final By saveCount = By.xpath("(//android.widget.TextView)[position()=last()-1]");
     private final By cookTime = By.xpath("//android.widget.TextView[contains(@text, 'phút')]");
@@ -64,6 +65,57 @@ public class RecipeDetailScreen extends BaseScreen {
     private final By commentsSection = By.xpath("//android.widget.TextView[@text='Bình luận']");
     private final By loginMessage = By.xpath("//android.widget.TextView[@text='Vui lòng đăng nhập để bình luận công thức này.']");
 
+    // ===== LOCATORS SaveRecipe =====
+    private final By btnSave = By.xpath("//android.view.View[@content-desc='Mark']");
+    private final By toastSaved = By.xpath("//android.widget.Toast[@text='Đã lưu']");
+    private final By btnBack = By.xpath("//android.view.View[@content-desc='Quay lại']");
+    private final By btnLike = By.xpath("//android.view.View[@content-desc='Like']");
+    private final By btnShare = By.xpath("//android.view.View[@content-desc='Share']");
+
+    // ===== COMMENT LOCATOR =====
+    private final By inputComment = By.xpath("//android.widget.EditText");
+    private final By btnSendComment = By.xpath("//android.view.View[@content-desc='Send']");
+
+    // username của comment (optional check)
+    private final By commentUser = By.xpath("(//android.widget.TextView)[last()-2]");
+    private final By commentTime = By.xpath("(//android.widget.TextView)[last()-1]");
+
+    // ===== SHARE TARGET =====
+    private final By shareSheetTitle =
+            By.xpath("//android.widget.TextView[@text='Chia sẻ văn bản']");
+
+    private final By shareMessenger =
+            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Messenger')]");
+
+    private final By shareZalo =
+            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Zalo')]");
+
+    private final By shareGmail =
+            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Gmail')]");
+
+    // ===== SHARE Messenger (Facebook) =====
+    private final By fbSearchBtn =
+            By.xpath("//android.widget.Button[@content-desc='Tìm kiếm']");
+
+    private final By fbSearchInput =
+            By.xpath("//android.widget.AutoCompleteTextView");
+
+    private final By fbResultUser =
+            By.xpath("//android.widget.AutoCompleteTextView[@text='Tưởng Duyên']");
+
+    private final By fbSendBtn =
+            By.xpath("//android.widget.Button[contains(@text,'GỬI')]");
+
+    private final By fbSentStatus =
+            By.xpath("//android.widget.Button[contains(@text,'Đã gửi')]");
+
+    // ===== SHARE Zalo =====
+    private final By toastShared =
+            By.xpath("//android.widget.Toast[@text='Đã chia sẻ']");
+
+    // ===== SHARE Gmail =====
+    private final By gmailSendBtn =
+            By.id("com.google.android.gm:id/send");
     /**
      * ✅ KIỂM TRA DETAIL SCREEN HIỂN THỊ
      */
@@ -433,6 +485,230 @@ public class RecipeDetailScreen extends BaseScreen {
 
         } catch (Exception e) {
             logger.error("❌ Swipe TAG lỗi", e);
+        }
+    }
+    @Step("Wait Recipe Detail Screen")
+    public void waitForLoaded() {
+        WaitingHelper.waitForVisible(btnBack);
+    }
+    public boolean isToastDisplayed(By toastLocator, int timeoutSeconds) {
+        logStep("Verify Toast hiển thị");
+
+        long endTime = System.currentTimeMillis() + timeoutSeconds * 1000;
+
+        while (System.currentTimeMillis() < endTime) {
+            try {
+                if (getDriver().findElement(toastLocator).isDisplayed()) {
+                    logger.info("✅ Toast displayed");
+                    AllureHelper.attachScreenshot("Toast Displayed");
+                    return true;
+                }
+            } catch (Exception ignored) {}
+
+            WaitingHelper.sleepSeconds(1);
+        }
+
+        logger.error("❌ Toast NOT displayed");
+        AllureHelper.attachScreenshot("Toast NOT Found");
+        return false;
+    }
+    @Step("Save recipe (double click to trigger toast)")
+    public boolean clickSaveAndVerifyToast() {
+
+        logStep("Click Save 2 lần + bắt toast theo kiểu ổn định");
+
+        try {
+            // click lần 1
+            click(btnSave);
+
+            // delay NGẮN để UI update state
+            WaitingHelper.sleepSeconds(1);
+
+            // click lần 2 để trigger toast
+            click(btnSave);
+
+            // 🔥 QUAN TRỌNG: delay NGẮN để toast kịp render
+            WaitingHelper.sleepSeconds(1);
+
+            // ✅ DÙNG CÁCH CŨ CỦA CHỊ (ổn định hơn polling)
+            getDriver().findElement(toastSaved);
+
+            logger.info("✅ Toast displayed");
+            AllureHelper.attachScreenshot("TOAST: Đã lưu");
+
+            return true;
+
+        } catch (Exception e) {
+            logger.error("❌ Toast NOT displayed: " + e.getMessage());
+            AllureHelper.attachScreenshot("TOAST NOT FOUND");
+            return false;
+        }
+    }
+    public void clickBack() {
+        click(btnBack);
+    }
+    @Step("Click Back")
+    public void clickBackToHome() {
+
+        logStep("Back về Home bằng UI button");
+
+        clickBack(); // Detail -> Search
+        clickBack(); // Search -> Home
+
+    }
+    public void clickLike(){
+        click(btnLike);
+    }
+    public int getLikeCount() {
+        try {
+            String text = getDriver().findElement(likeCount).getText();
+
+            System.out.println("LIKE TEXT: " + text);
+
+            return Integer.parseInt(text.replaceAll("[^0-9]", ""));
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    public boolean isLiked() {
+        try {
+            String attr = getDriver().findElement(btnLike).getAttribute("selected");
+            return attr != null && attr.equals("true");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Step("Enter comment: {text}")
+    public void enterComment(String text) {
+        logStep("Nhập comment: " + text);
+        try {
+            WebElement input = getDriver().findElement(inputComment);
+            input.clear();
+            input.sendKeys(text);
+        } catch (Exception e) {
+            throw new RuntimeException("Cannot input comment", e);
+        }
+    }
+
+    @Step("Click send comment")
+    public void clickSendComment() {
+        logStep("Click gửi comment");
+        click(btnSendComment);
+        WaitingHelper.sleepSeconds(1); // đợi UI render
+    }
+    public boolean isCommentDisplayed(String text) {
+        try {
+            WaitingHelper.waitForVisible(commentContentContains(text));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private By commentContentContains(String text) {
+        return By.xpath("//android.widget.TextView[contains(@text,'" + text + "')]");
+    }
+
+    @Step("Verify login required message displayed")
+    public boolean isLoginRequiredMessageDisplayed() {
+        try {
+            return isDisplayed(
+                    By.xpath("//android.widget.TextView[@text='Vui lòng đăng nhập để bình luận công thức này.']")
+            );
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Step("Click Share button")
+    public void clickShare() {
+        logStep("Click Share");
+        click(btnShare);
+    }
+    public boolean isShareOptionsDisplayed() {
+        return isDisplayed(shareSheetTitle);
+    }
+
+    @Step("Share via Messenger (search + send + verify sent)")
+    public boolean shareViaMessengerFullFlow() {
+
+        try {
+            click(shareMessenger);
+            WaitingHelper.sleepSeconds(3);
+
+            // 👉 click search
+            click(fbSearchBtn);
+            WaitingHelper.sleepSeconds(1);
+
+            // 👉 nhập tên
+            WebElement input = getDriver().findElement(fbSearchInput);
+            input.sendKeys("Tưởng Duyên");
+            WaitingHelper.sleepSeconds(2);
+
+            // 👉 chọn user
+            click(fbResultUser);
+            WaitingHelper.sleepSeconds(1);
+
+            // 👉 click gửi
+            click(fbSendBtn);
+
+            // 👉 đợi status "Đã gửi"
+            for (int i = 0; i < 5; i++) {
+                if (isDisplayed(fbSentStatus)) {
+                    AllureHelper.attachScreenshot("MESSENGER SENT SUCCESS");
+                    return true;
+                }
+                WaitingHelper.sleepSeconds(1);
+            }
+
+            return false;
+
+        } catch (Exception e) {
+            AllureHelper.attachErrorMessage("Messenger share failed: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Step("Share via Zalo (click + verify toast)")
+    public boolean shareViaZaloQuick() {
+        try {
+            click(shareZalo);
+            // 👉 Zalo auto gửi → bắt toast
+            getDriver().findElement(toastShared);
+            logger.info("Toast success displayed");
+            AllureHelper.attachScreenshot("ZALO SHARE SUCCESS");
+            return true;
+
+        } catch (Exception e) {
+            AllureHelper.attachErrorMessage("Zalo share failed: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Step("Share via Gmail (open + send)")
+    public boolean shareViaGmailFlow() {
+
+        try {
+            click(shareGmail);
+            WaitingHelper.sleepSeconds(2);
+
+            // 👉 verify vào compose
+            if (!isDisplayed(gmailSendBtn)) {
+                return false;
+            }
+            // 🔥 CHỤP MÀN HÌNH TRƯỚC KHI GỬI
+            AllureHelper.attachScreenshot("GMAIL COMPOSE SCREEN");
+            // 👉 click gửi
+            click(gmailSendBtn);
+
+            AllureHelper.attachScreenshot("GMAIL SEND SUCCESS");
+
+            return true;
+
+        } catch (Exception e) {
+            AllureHelper.attachErrorMessage("Gmail share failed: " + e.getMessage());
+            return false;
         }
     }
 }
