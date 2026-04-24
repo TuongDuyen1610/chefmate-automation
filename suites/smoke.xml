@@ -17,8 +17,9 @@
 <!--             <class name="smoke.RecipeDisplayTest"/>-->
             <!--<class name="smoke.HomeTest"/>-->
 <!--            <class name="smoke.BepesAIChatTest"/>-->
-            <class name="smoke.SearchTest"/>
+<!--            <class name="smoke.SearchTest"/>-->
 <!--            <class name="smoke.FridgeTest"/>-->
+            <class name="smoke.SaveRecipeTest"/>
 <!--            <class name="smoke.ProfileTest"/>-->
 <!--            <class name="smoke.ShoppingListTest"/>-->
         </classes>
