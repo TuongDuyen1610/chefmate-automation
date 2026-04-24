@@ -192,6 +192,18 @@
                 <configuration>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <argLine>
+                        -Djavax.net.ssl.trustStoreType=Windows-ROOT
+                        -Dhttps.protocols=TLSv1.2
+                    </argLine>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
