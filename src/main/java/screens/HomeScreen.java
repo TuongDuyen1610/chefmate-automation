@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 public class HomeScreen extends BaseScreen {
     private static final Logger logger = LoggerFactory.getLogger(HomeScreen.class);
-
+    private final By btnBack = By.xpath("//android.view.View[@content-desc='Quay lại']");
     // ==================== LOCATORS ====================
     private final By txtNauNgon = By.xpath("//android.widget.TextView[@text='Nấu ngon']");
     private final By btnNotification = By.xpath("//android.view.View[@content-desc='Thông báo']");
@@ -46,25 +46,33 @@ public class HomeScreen extends BaseScreen {
     /**
      * ✅ KIỂM TRA MÀN HOME HIỂN THỊ
      */
+//    public boolean isHomeDisplayed() {
+//        AllureHelper.step("Verify: Kiểm tra màn Home hiển thị (Chờ tối đa 20s)");
+//        logStep("Verify: Đang đợi màn Home hiển thị (Chờ tối đa 20s)...");
+//
+//        try {
+////            WaitingHelper.waitForVisible(txtNauNgon);
+//            if (isDisplayed(txtNauNgon) && isDisplayed(lblTopTrendingRecipes) ) {
+//                logStep("✅ Verify PASS: Đã vào Home!");
+//                logger.info("✅ Home is displayed successful");
+//                AllureHelper.attachScreenshot("✅ Home is displayed successful");
+//                return true;
+//            }
+//        } catch (Exception e) {
+//            logStep("❌ Home screen not displayed: " + e.getMessage());
+//            logger.error("Home screen failed to display", e);
+//            AllureHelper.attachErrorMessage("Home screen error: " + e.getMessage());
+//            return false;
+//        }
+//        return false;
+//    }
     public boolean isHomeDisplayed() {
-        AllureHelper.step("Verify: Kiểm tra màn Home hiển thị (Chờ tối đa 20s)");
-        logStep("Verify: Đang đợi màn Home hiển thị (Chờ tối đa 20s)...");
 
         try {
-            WaitingHelper.waitForVisible(txtNauNgon);
-            if (isDisplayed(txtNauNgon)) {
-                logStep("✅ Verify PASS: Đã vào Home!");
-                logger.info("✅ Home is displayed successful");
-                AllureHelper.attachScreenshot("✅ Home is displayed successful");
-                return true;
-            }
+            return getDriver().findElements(lblTopTrendingRecipes).size() > 0;
         } catch (Exception e) {
-            logStep("❌ Home screen not displayed: " + e.getMessage());
-            logger.error("Home screen failed to display", e);
-            AllureHelper.attachErrorMessage("Home screen error: " + e.getMessage());
             return false;
         }
-        return false;
     }
 
     /**
@@ -370,5 +378,32 @@ public class HomeScreen extends BaseScreen {
             AllureHelper.attachErrorMessage("Recipe list load error: " + e.getMessage());
             throw new RuntimeException("Recipe list failed to load", e);
         }
+    }
+
+    public void backToHome() {
+
+        logStep("Back về Home thật");
+
+        int max = 5;
+
+        while (max-- > 0) {
+
+            if (isHomeDisplayed()) {
+                logStep("✅ Đã về Home");
+                return;
+            }
+
+            // ✅ Ưu tiên click nút back UI
+            if (getDriver().findElements(btnBack).size() > 0) {
+                click(btnBack);
+            } else {
+                // fallback nếu không có nút
+                getDriver().navigate().back();
+            }
+
+            WaitingHelper.sleepSeconds(1);
+        }
+
+        throw new RuntimeException("❌ Không back được về Home");
     }
 }
