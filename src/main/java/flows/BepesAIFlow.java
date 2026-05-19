@@ -1,22 +1,25 @@
 package flows;
 
-import core.base.BaseFlow;
 import screens.BepesAIScreen;
 import screens.HomeScreen;
 
-public class BepesAIFlow extends BaseFlow {
+public class BepesAIFlow {
 
-    private final HomeScreen home = new HomeScreen();
-    private final BepesAIScreen ai = new BepesAIScreen();
+    private final HomeScreen home;
+    private final BepesAIScreen bepes;
 
-    public void chatWithBepes(String question) {
-        logStep("Bắt đầu chat với Bepes: " + question);
-        home.openBepesAI();
-        ai.sendQuestion(question);
+    public BepesAIFlow(HomeScreen home, BepesAIScreen bepes) {
+        this.home = home;
+        this.bepes = bepes;
     }
 
-    public boolean verifyAIResponse() {
-        logStep("Kiểm tra Bepes đã trả lời");
-        return ai.isAIResponseDisplayed();
+    public void openBepesFromHome() {
+        home.clickTabHome();
+
+        home.waitForRecipeListLoad();
+        home.openBepesAI();
+
+        bepes.waitForBepesLoaded();
+        bepes.verifyBepesMainUI();
     }
 }
