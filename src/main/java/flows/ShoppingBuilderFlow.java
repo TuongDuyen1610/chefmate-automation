@@ -101,24 +101,3 @@ public class ShoppingBuilderFlow {
         builder.clickBack();
     }
 }
-//// Tick A, tick B, untick A
-//        builderFlow.toggleRecipeByIndex(1); // tick công thức A (item 1)
-//        builderFlow.toggleRecipeByIndex(2); // tick thêm công thức B (item 2)
-//        builderFlow.toggleRecipeByIndex(3); // tick thêm công thức B (item 2)
-//        builderFlow.toggleRecipeByIndex(4); // tick thêm công thức B (item 2)
-//        builderFlow.toggleRecipeByIndex(5); // tick thêm công thức B (item 2)
-//        builderFlow.toggleRecipeByIndex(6); // tick thêm công thức B (item 2)
-//        builder.slowSwipeDownInside("//z0.h0/android.view.View/android.view.View[2]", 2);
-//        builderFlow.toggleRecipeByIndex(3); // tick công thức A (item 1)
-//        builderFlow.toggleRecipeByIndex(4); // tick công thức A (item 1)
-//        builderFlow.toggleRecipeByIndex(5); // tick công thức A (item 1)
-//        builderFlow.toggleRecipeByIndex(6); // tick công thức A (item 1)
-//
-//// preview: chưa có xpath -> verify sau khi complete bằng tab recipe
-//        builderFlow.toggleRecipeByIndex(7); // untick lại A
-//
-//completeToListAndVerify();
-//
-//        listFlow.verifyRecipeTabExists(titles.get(1));
-//        builder.slowSwipeDownOnScreen(7);
-//        listFlow.verifyRecipeTabNotExists(titles.get(0));
