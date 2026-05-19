@@ -71,7 +71,7 @@ public class RegistrationTest extends BaseTest {
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_05 PASS");
     }
-     //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
+    //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
     @Test(priority = 6, description = "DangKy_TC_06 - Để trống Xác nhận mật khẩu")
     public void DangKy_TC_06() {
         authFlow.registerNewAccount("Test User 06", "0912345606", "test06@gmail.com", "Pass@123", "");
@@ -79,7 +79,7 @@ public class RegistrationTest extends BaseTest {
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_06 PASS");
     }
-     //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
+    //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
     @Test(priority = 7, description = "DangKy_TC_07 - Để trống tất cả field")
     public void DangKy_TC_07() {
         authFlow.registerNewAccount("", "", "", "", "");
@@ -87,7 +87,7 @@ public class RegistrationTest extends BaseTest {
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_07 PASS");
     }
- //android.widget.Toast[@text="Mật khẩu không khớp"]
+    //android.widget.Toast[@text="Mật khẩu không khớp"]
     @Test(priority = 8, description = "DangKy_TC_08 - Mật khẩu ≠ Xác nhận mật khẩu")
     public void DangKy_TC_08() {
         authFlow.registerNewAccount("Test User 08", "0912345608", "test08@gmail.com", "Pass@123", "Pass@456");
@@ -95,7 +95,7 @@ public class RegistrationTest extends BaseTest {
                 "❌ Phải hiển thị: Mật khẩu không khớp");
         System.out.println("✅ DangKy_TC_08 PASS");
     }
- //android.widget.Toast[@text="Vui lòng đồng ý với điều khoản dịch vụ"]
+    //android.widget.Toast[@text="Vui lòng đồng ý với điều khoản dịch vụ"]
     @Test(priority = 9, description = "DangKy_TC_09 - Không tick Điều khoản")
     public void DangKy_TC_09() {
         authFlow.registerWithoutTermsAgreement("Test User 09", "123451000009", "test09@gmail.com", "00000");
@@ -103,26 +103,26 @@ public class RegistrationTest extends BaseTest {
                 "❌ Phải hiển thị: Vui lòng đồng ý với điều khoản dịch vụ");
         System.out.println("✅ DangKy_TC_09 PASS");
     }
- //android.widget.ProgressBar BUG backend
+    //android.widget.ProgressBar BUG backend
     @Test(priority = 10, description = "DangKy_TC_10 - Thông tin đã tồn tại")
     public void DangKy_TC_10() {
         authFlow.registerNewAccount("Test User", "0000000000", "00000@gmail.com", "Pass@123", "Pass@123");
 
         System.out.println("⏳ TC10 - Hiện tại loading stuck (BUG: Backend không xử lý)");
     }
- //android.widget.ProgressBar  BUG backend
+    //android.widget.ProgressBar  BUG backend
     @Test(priority = 11, description = "DangKy_TC_11 - Email đã tồn tại")
     public void DangKy_TC_11() {
         authFlow.registerNewAccount("Test User 11", "0912345611", "00000@gmail.com", "Pass@123", "Pass@123");
         System.out.println("⏳ TC11 - Hiện tại loading stuck (BUG: Backend không xử lý)");
     }
- //android.widget.ProgressBar BUG backend
+    //android.widget.ProgressBar BUG backend
     @Test(priority = 12, description = "DangKy_TC_12 - SĐT đã tồn tại")
     public void DangKy_TC_12() {
         authFlow.registerNewAccount("Test User 12", "0000000000", "test12@gmail.com", "Pass@123", "Pass@123");
         System.out.println("⏳ TC12 - Hiện tại loading stuck (BUG: Backend không xử lý)");
     }
- //android.widget.TextView[@text="Đăng nhập ngay"]
+    //android.widget.TextView[@text="Đăng nhập ngay"]
     @Test(priority = 13,
             description = "DangKy_TC_13 - Quay lại màn Đăng nhập từ màn Đăng ký")
     public void DangKy_TC_13() {
