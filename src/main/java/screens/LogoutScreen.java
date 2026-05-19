@@ -24,7 +24,8 @@ public class LogoutScreen extends BaseScreen {
     // ==================== CANCEL BUTTON LOCATORS ====================
     // Nút "X" để hủy đăng xuất tài khoản
 //    private final By cancelButtonX = By.xpath("//android.widget.Button1");
-    private final By cancelButtonX = By.xpath("//android.view.View[@content-desc='Close sheet']");
+//    private final By cancelButtonX = By.xpath("//android.view.View[@content-desc='Close sheet']");
+    private final By cancelButtonX = By.xpath("//android.view.View[@content-desc='Đóng trang tính']");
     private final By cancelButtonImageView = By.xpath("//android.widget.ImageView[@content-desc='Account Logout']");
 
     // ==================== CONFIRM LOGOUT LOCATORS ====================
@@ -51,16 +52,16 @@ public class LogoutScreen extends BaseScreen {
 
     public void clickLogoutIcon() {
         logStep("Click icon Logout tren trang ca nhan");
-            WaitingHelper.waitForClickable(logoutIcon);
-            click(logoutIcon);
-            logStep("✓ Da click icon Logout");
+        WaitingHelper.waitForClickable(logoutIcon);
+        click(logoutIcon);
+        logStep("✓ Da click icon Logout");
     }
 
     public void confirmLogout() {
         logStep("Click nut Đang xuat đe xac nhan");
-            WaitingHelper.waitForClickable(confirmLogoutButton);
-            click(confirmLogoutButton);
-            logStep("✓ Đa click nut Đang xuat");
+        WaitingHelper.waitForClickable(confirmLogoutButton);
+        click(confirmLogoutButton);
+        logStep("✓ Đa click nut Đang xuat");
     }
 
     public void cancelLogout() {
