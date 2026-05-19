@@ -7,11 +7,17 @@ import core.base.BaseScreen;
 import core.utils.AllureHelper;
 import core.utils.WaitingHelper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import core.utils.AllureHelper;
 import io.qameta.allure.Step;
+
+import java.time.Duration;
+import java.util.Collections;
 //import org.openqa.selenium.Keys;
 //import java.util.Map;
 //import java.util.HashMap;
@@ -63,12 +69,12 @@ public class RegistrationScreen extends BaseScreen {
     // ==================== VERIFY SCREEN ====================
 
     public boolean isRegistrationScreenDisplayed() {
-        logStep("Verify: Kiểm tra màn Đăng ký hiển thị");
+        logStep("Verify RegisterScreen");
         try {
-            WaitingHelper.waitForVisible(headerTitle);
+//            WaitingHelper.waitForVisible(headerTitle);
             return isDisplayed(headerTitle);
         } catch (Exception e) {
-            logStep("❌ Màn Đăng ký không hiển thị");
+            logStep("RegisterScreen not display");
             return false;
         }
     }
@@ -76,80 +82,80 @@ public class RegistrationScreen extends BaseScreen {
     // ==================== INPUT ACTIONS ====================
 
     public void enterFullName(String fullName) {
-        logStep("Nhập Họ và tên: " + fullName);
-        WaitingHelper.waitForVisible(fullNameField);
+        logStep("Enter fullName: " + fullName);
+//        WaitingHelper.waitForVisible(fullNameField);
         type(fullNameField, fullName);
     }
 
     public void enterPhone(String phone) {
-        logStep("Nhập Số điện thoại: " + phone);
-        WaitingHelper.waitForVisible(phoneField);
+        logStep("Enter phone: " + phone);
+//        WaitingHelper.waitForVisible(phoneField);
         type(phoneField, phone);
     }
 
     public void enterEmail(String email) {
-        logStep("Nhập Email: " + email);
-        WaitingHelper.waitForVisible(emailField);
+        logStep("Enter Email: " + email);
+//        WaitingHelper.waitForVisible(emailField);
         type(emailField, email);
     }
 
     public void enterPassword(String password) {
-        logStep("Nhập Mật khẩu");
-        WaitingHelper.waitForVisible(passwordField);
+        logStep("Enter password: " + password);
+//        WaitingHelper.waitForVisible(passwordField);
         type(passwordField, password);
     }
 
     public void enterConfirmPassword(String confirmPassword) {
-        logStep("Nhập Xác nhận Mật khẩu");
-        WaitingHelper.waitForVisible(confirmPasswordField);
+        logStep("Enter confirmPassword: " + confirmPassword);
+//        WaitingHelper.waitForVisible(confirmPasswordField);
         type(confirmPasswordField, confirmPassword);
     }
 
     public void tickTermsCheckbox() {
-        logStep("Tick checkbox Điều khoản");
+        logStep("Tick checkbox Term");
         try {
-            WaitingHelper.waitForClickable(checkboxTerms);
+//            WaitingHelper.waitForClickable(checkboxTerms);
             WebElement checkbox = getDriver().findElement(checkboxTerms);
 
             // Check nếu chưa được tick
             if (!checkbox.isSelected()) {
                 click(checkboxTerms);
-                logStep("✓ Đã tick checkbox");
+                logStep("✓ Ticked checkbox");
             } else {
-                logStep("⚠️ Checkbox đã được tick sẵn");
+                logStep("⚠️ Checkbox tick available");
             }
         } catch (Exception e) {
-            logStep("❌ Không thể tick checkbox: " + e.getMessage());
+            logStep("❌ Untick checkbox: " + e.getMessage());
             throw e;
         }
     }
 
     public void untickTermsCheckbox() {
-        logStep("Bỏ tick checkbox Điều khoản");
+        logStep("Don't tick checkbox term");
         try {
-            WaitingHelper.waitForClickable(checkboxTerms);
+//            WaitingHelper.waitForClickable(checkboxTerms);
             WebElement checkbox = getDriver().findElement(checkboxTerms);
 
             // Uncheck nếu đã được tick
             if (checkbox.isSelected()) {
                 click(checkboxTerms);
-                logStep("✓ Đã bỏ tick checkbox");
+                logStep("✓ Unticked checkbox");
             } else {
-                logStep("⚠️ Checkbox chưa được tick");
+                logStep("⚠️ Checkbox untick");
             }
         } catch (Exception e) {
-            logStep("❌ Không thể bỏ tick checkbox: " + e.getMessage());
+            logStep("❌ Can't tick checkbox: " + e.getMessage());
             throw e;
         }
     }
 
     public boolean isCheckboxTicked() {
-        logStep("Verify: Kiểm tra checkbox đã tick chưa");
+        logStep("Verify: checkbox ticked ?");
         try {
             WebElement checkbox = getDriver().findElement(checkboxTerms);
             return checkbox.isSelected();
         } catch (Exception e) {
-            logStep("❌ Không thể check trạng thái checkbox");
+            logStep("❌ Not check status checkbox");
             return false;
         }
     }
@@ -157,10 +163,9 @@ public class RegistrationScreen extends BaseScreen {
     public void clickRegisterButton() {
 
         try {
-            // Try locator 1
-            WaitingHelper.waitForClickable(registerButton);
+            slowSwipeDownOnScreen(1);
             click(registerButton);
-            logStep(" Da click nut dang ky");
+            logStep(" Clicked nut dang ky");
         } catch (Exception e) {
             logStep("Khong click duoc dang ky");
             throw e;
@@ -173,7 +178,6 @@ public class RegistrationScreen extends BaseScreen {
         logStep("Click nut Dang nhap ngay");
         try {
             scrollToText("Đăng nhập ngay");
-            WaitingHelper.waitForClickable(loginToRegister);
             click(loginToRegister);
             logStep("Da click dang nhap ngay tu man dang ky");
         } catch (Exception e) {
@@ -184,7 +188,7 @@ public class RegistrationScreen extends BaseScreen {
     // ==================== HELPER METHODS ====================
 
     public void performRegistration(String fullName, String phone, String email, String password, String confirmPassword) {
-        logStep("=== THỰC HIỆN ĐĂNG KÝ ===");
+        logStep("=== THUC HIEN DANG KY ===");
         enterFullName(fullName);
         enterPhone(phone);
         enterEmail(email);
@@ -193,8 +197,8 @@ public class RegistrationScreen extends BaseScreen {
         tickTermsCheckbox();
         logStep("Click nut Dang ky");
         try {
+            slowSwipeDownOnScreen(1);
             scrollToText("Đăng ký");
-            WaitingHelper.waitForClickable(registerButton);
             click(registerButton);
             logStep("Da click dang ky tu man dang ky");
         } catch (Exception e) {
@@ -211,19 +215,19 @@ public class RegistrationScreen extends BaseScreen {
             WaitingHelper.waitForVisible(field);
             WebElement element = getDriver().findElement(field);
             element.clear();
-            logStep("✓ Đã clear field");
+            logStep(" Cleared field");
         } catch (Exception e) {
-            logStep("❌ Không thể clear field: " + e.getMessage());
+            logStep("❌ Can't clear field: " + e.getMessage());
         }
     }
 
     public void clearFullNameField() {
-        logStep("Clear Họ và tên");
+        logStep("Clear Fullname");
         clearField(fullNameField);
     }
 
     public void clearPhoneField() {
-        logStep("Clear Số điện thoại");
+        logStep("Clear phone");
         clearField(phoneField);
     }
 
@@ -233,17 +237,17 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void clearPasswordField() {
-        logStep("Clear Mật khẩu");
+        logStep("Clear password");
         clearField(passwordField);
     }
 
     public void clearConfirmPasswordField() {
-        logStep("Clear Xác nhận Mật khẩu");
+        logStep("Clear confirm password");
         clearField(confirmPasswordField);
     }
 
     public void clearAllFields() {
-        logStep("Clear tất cả field");
+        logStep("Clear All field");
         clearFullNameField();
         clearPhoneField();
         clearEmailField();
@@ -251,40 +255,38 @@ public class RegistrationScreen extends BaseScreen {
         clearConfirmPasswordField();
     }
 
-    // ==================== VERIFY FIELD VALUES ====================
-
-    public String getFullNameValue() {
-        WebElement element = getDriver().findElement(fullNameField);
-        return element.getAttribute("text");
-    }
-
-    public String getPhoneValue() {
-        WebElement element = getDriver().findElement(phoneField);
-        return element.getAttribute("text");
-    }
-
-    public String getEmailValue() {
-        WebElement element = getDriver().findElement(emailField);
-        return element.getAttribute("text");
-    }
+//    // ==================== VERIFY FIELD VALUES ====================
+//
+//    public String getFullNameValue() {
+//        WebElement element = getDriver().findElement(fullNameField);
+//        return element.getAttribute("text");
+//    }
+//
+//    public String getPhoneValue() {
+//        WebElement element = getDriver().findElement(phoneField);
+//        return element.getAttribute("text");
+//    }
+//
+//    public String getEmailValue() {
+//        WebElement element = getDriver().findElement(emailField);
+//        return element.getAttribute("text");
+//    }
 
     // ==================== VERIFY ERROR MESSAGES ====================
     public boolean isFillAllInfoErrorDisplayed() {
 
-        logStep("🔍 Verify Toast: Vui lòng điền đầy đủ thông tin");
+        logStep("🔍 Verify Toast: Vui long đien đay đu thong tin");
 
         try {
-            Thread.sleep(1000); // chờ toast xuất hiện
             getDriver().findElement(toastFillAllInfo);
             logger.info("✅ Toast error msg hien thi thanh cong");
-            AllureHelper.attachScreenshot("Toast error msg hien thi thanh cong");
-
-            logStep("✅ Toast đã hiển thị");
+            AllureHelper.attachScreenshot("Toast error displayed");
+            logStep("✅ Toast displayed");
             return true;
         } catch (Exception e) {
-            logStep("❌ Không thấy Toast");
+            logStep("❌ Not Toast");
             logger.info("✅ Toast error msg khong hien thi ");
-            AllureHelper.attachScreenshot("Toast error msg khong hien thi");
+            AllureHelper.attachScreenshot("Toast error not displayed");
             return false;
         }
 
@@ -292,36 +294,33 @@ public class RegistrationScreen extends BaseScreen {
 
     public boolean isFillAllInfoErrorDisplayed_MK() {
 
-        logStep("🔍 Verify Toast: Vui lòng điền đầy đủ thông tin");
+        logStep("🔍 Verify Toast: Vui long đien đay đu thong tin");
 
         try {
-            Thread.sleep(1000); // chờ toast xuất hiện
             getDriver().findElement(toastPasswordMismatch);
             logger.info("✅ Toast error msg hien thi thanh cong");
-            AllureHelper.attachScreenshot("Toast error msg hien thi thanh cong");
-            logStep("✅ Toast đã hiển thị");
+            AllureHelper.attachScreenshot("Toast error displayed");
+            logStep("✅ Toast displayed");
             return true;
         } catch (Exception e) {
             logger.info("✅ Toast error msg khong hien thi ");
-            AllureHelper.attachScreenshot("Toast error msg khong hien thi");
+            AllureHelper.attachScreenshot("Toast error not displayed");
             return false;
         }
     }
     public boolean isFillAllInfoErrorDisplayed_DK() {
 
-        logStep("🔍 Verify Toast: Vui lòng điền đầy đủ thông tin");
+        logStep("🔍 Verify Toast: Vui long đien đay đu thong tin");
 
         try {
-            Thread.sleep(1000); // chờ toast xuất hiện
             getDriver().findElement(toastTermsRequired);
             logger.info("✅ Toast error msg hien thi thanh cong");
-            AllureHelper.attachScreenshot("Toast error msg hien thi thanh cong");
-            logStep("✅ Toast đã hiển thị");
+            AllureHelper.attachScreenshot("Toast error displayed");
+            logStep("✅ Toast displayed");
             return true;
         } catch (Exception e) {
-            logStep("❌ Không thấy Toast");
             logger.info("✅ Toast error msg khong hien thi ");
-            AllureHelper.attachScreenshot("Toast error msg khong hien thi");
+            AllureHelper.attachScreenshot("Toast error not displayed");
             return false;
         }
     }
@@ -332,7 +331,7 @@ public class RegistrationScreen extends BaseScreen {
      * Scenario: Để trống field nhưng vẫn click Đăng ký
      */
     public void registerWithoutFullName(String phone, String email, String password) {
-        logStep("=== ĐĂNG KÝ KHÔNG CÓ HỌ VÀ TÊN ===");
+        logStep("=== Register Without FullName ===");
         clearFullNameField();
         enterPhone(phone);
         enterEmail(email);
@@ -343,7 +342,7 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void registerWithoutPhone(String fullName, String email, String password) {
-        logStep("=== ĐĂNG KÝ KHÔNG CÓ SĐT ===");
+        logStep("=== Register Without Phone ===");
         enterFullName(fullName);
         clearPhoneField();
         enterEmail(email);
@@ -354,7 +353,7 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void registerWithoutEmail(String fullName, String phone, String password) {
-        logStep("=== ĐĂNG KÝ KHÔNG CÓ EMAIL ===");
+        logStep("=== Register Without Email ===");
         enterFullName(fullName);
         enterPhone(phone);
         clearEmailField();
@@ -365,7 +364,7 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void registerWithoutPassword(String fullName, String phone, String email) {
-        logStep("=== ĐĂNG KÝ KHÔNG CÓ MẬT KHẨU ===");
+        logStep("=== Register Without Password ===");
         enterFullName(fullName);
         enterPhone(phone);
         enterEmail(email);
@@ -376,7 +375,7 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void registerWithoutConfirmPassword(String fullName, String phone, String email, String password) {
-        logStep("=== ĐĂNG KÝ KHÔNG CÓ XÁC NHẬN MẬT KHẨU ===");
+        logStep("=== Register Without Confirm Password ===");
         enterFullName(fullName);
         enterPhone(phone);
         enterEmail(email);
@@ -387,7 +386,7 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void registerWithMismatchPassword(String fullName, String phone, String email, String password, String confirmPassword) {
-        logStep("=== ĐĂNG KÝ VỚI MẬT KHẨU KHÔNG TRÙNG KHỚP ===");
+        logStep("=== Register With Mismatch Password ===");
         enterFullName(fullName);
         enterPhone(phone);
         enterEmail(email);
@@ -398,7 +397,7 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void registerWithoutTermsAgreement(String fullName, String phone, String email, String password) {
-        logStep("=== ĐĂNG KÝ KHÔNG TICK ĐIỀU KHOẢN ===");
+        logStep("=== Register Without Terms Agreement ===");
         enterFullName(fullName);
         enterPhone(phone);
         enterEmail(email);
@@ -409,9 +408,32 @@ public class RegistrationScreen extends BaseScreen {
     }
 
     public void registerWithAllFieldsEmpty() {
-        logStep("=== ĐĂNG KÝ KHÔNG CÓ THÔNG TIN NÀO ===");
+        logStep("=== Register With All Fields Empty ===");
         clearAllFields();
         // NOT tick checkbox
         clickRegisterButton();
+    }
+    @Step("Swipe down on screen (times={times})")
+    public void slowSwipeDownOnScreen(int times) {
+        Dimension size = getDriver().manage().window().getSize();
+
+        int x = size.width / 2;
+        int startY = (int) (size.height * 0.75);
+        int endY = (int) (size.height * 0.30);
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+
+        for (int i = 1; i <= times; i++) {
+            Sequence swipe = new Sequence(finger, 1);
+            swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), x, endY));
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+            getDriver().perform(Collections.singletonList(swipe));
+            WaitingHelper.sleepSeconds(1);
+        }
+
+        // ❌ bỏ attachScreenshot ở đây
     }
 }
