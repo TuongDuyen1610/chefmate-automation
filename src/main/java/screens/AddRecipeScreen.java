@@ -119,7 +119,7 @@ public class AddRecipeScreen extends BaseScreen {
     //Click Button “Thêm Công Thức” để điều hướng vào màn Thêm công thức:
     private  final By btnDieuHuongAdd = By.xpath("//android.widget.TextView[@text='Thêm công thức']");
 
-//    private  final By ktra = By.xpath("//android.view.View[@content-desc='']");
+    //    private  final By ktra = By.xpath("//android.view.View[@content-desc='']");
 //    private  final By gallery1 = By.xpath("//android.widget.ImageButton[@content-desc='Show roots']");
 //    private  final By gallery2 = By.xpath("(//android.widget.ImageView[@resource-id='android:id/icon'])[3]");
     private static final boolean DEBUG_SCREENSHOT = false;
