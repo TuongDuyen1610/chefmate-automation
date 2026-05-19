@@ -1,6 +1,7 @@
 package screens;
 
 import core.base.BaseScreen;
+import core.utils.AllureHelper;
 import core.utils.WaitingHelper;
 import org.openqa.selenium.By;
 
@@ -35,26 +36,18 @@ public class SplashScreen extends BaseScreen {
     }
     public void waitUntilSplashDisappear() {
         logStep("Chờ Splash Screen biến mất");
-//        try {
             WaitingHelper.waitForVisible(splashScreen);
-//        } catch (Exception e) {
-//            logStep("Splash không xuất hiện hoặc đã biến mất");
-//        }
-//        WaitingHelper.sleepSeconds(2);
+                WaitingHelper.sleepSeconds(2);
         logStep("Splash Screen completed");
     }
 
     public void clickBepesAIButton() {
-        logStep("Click nút 'Trò chuyện với Bepes'");
-        WaitingHelper.waitForClickable(btnBepesAI);
         click(btnBepesAI);
-//        WaitingHelper.sleepSeconds(2);
+        AllureHelper.attachScreenshot("Clicked Bepes AI button");
     }
 
     public void clickFridgeSuggestionButton() {
-        logStep("Click nút 'Gợi ý từ tủ lạnh'");
-        WaitingHelper.waitForClickable(btnFridgeSuggestion);
         click(btnFridgeSuggestion);
-//        WaitingHelper.sleepSeconds(2);
+        AllureHelper.attachScreenshot("Clicked Fridge suggestion button");
     }
 }
