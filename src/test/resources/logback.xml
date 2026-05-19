@@ -35,5 +35,5 @@
     <logger name="core" level="DEBUG"/>
     <logger name="screens" level="DEBUG"/>
     <logger name="flows" level="DEBUG"/>
-    <logger name="smoke" level="DEBUG"/>
+    <logger name="tests" level="DEBUG"/>
 </configuration>

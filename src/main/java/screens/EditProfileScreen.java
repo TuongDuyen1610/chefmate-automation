@@ -1,140 +1,9 @@
-//package screens;
-//
-//import core.base.BaseScreen;
-//import core.utils.AllureHelper;
-//import core.utils.WaitingHelper;
-//import org.openqa.selenium.By;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//
-///**
-// * EditProfileScreen
-// * Màn hình chỉnh sửa thông tin cá nhân
-// */
-//
-//public class EditProfileScreen extends BaseScreen {
-//    private static final Logger logger = LoggerFactory.getLogger(EditProfileScreen.class);
-//
-//    // ==================== HEADER =====
-//    private final By titleEditProfile = By.xpath("//android.widget.TextView[@text='Trang cá nhân']");
-//
-//    // ===== ICON EDIT (từ Profile) =====
-//    private final By iconEditProfile = By.xpath("//android.widget.TextView[@text='Sửa']");
-//
-//    // ===== INPUT FIELD (EDIT INFO) =====
-//    private final By inputFullName = By.xpath("//android.widget.ScrollView/android.widget.EditText[1]");
-//    private final By inputEmail = By.xpath("//android.widget.ScrollView/android.widget.EditText[2]");
-//    private final By inputPhone = By.xpath("//android.widget.ScrollView/android.widget.EditText[3]");
-//
-//    // ===== BUTTON EDIT INFO =====
-//    private final By btnSave = By.xpath("//android.widget.TextView[@text='Lưu thay đổi']");
-//    private final By btnChangePassword = By.xpath("//android.widget.TextView[@text='Đổi mật khẩu']");
-//    private final By btnBack = By.xpath("//android.widget.ScrollView/android.widget.Button");
-//
-//    // ==================== CHANGE PASSWORD SCREEN ====================
-//
-//    // ===== HEADER (CHANGE PASSWORD) =====
-//    private final By titleChangePassword = By.xpath("//android.widget.TextView[@text='Chỉnh sửa thông tin']");
-//
-//    // ===== LABELS (CHANGE PASSWORD) =====
-//    private final By labelCurrentPassword = By.xpath("//android.widget.TextView[@text='Mật khẩu hiện tại']");
-//    private final By labelNewPassword = By.xpath("//android.widget.TextView[@text='Mật khẩu mới']");
-//    private final By labelConfirmPassword = By.xpath("//android.widget.TextView[@text='Xác nhận mật khẩu mới']");
-//
-//    // ===== INPUT FIELD (CHANGE PASSWORD) =====
-//    private final By inputCurrentPassword = By.xpath("//android.widget.ScrollView/android.widget.EditText[1]");
-//    private final By inputNewPassword = By.xpath("//android.widget.ScrollView/android.widget.EditText[2]");
-//    private final By inputConfirmPassword = By.xpath("//android.widget.ScrollView/android.widget.EditText[3]");
-//
-//    // ===== EYE ICON TOGGLE (SHOW/HIDE PASSWORD) ✅ THÊM =====
-//    private final By eyeIconCurrentPassword = By.xpath("//android.widget.ScrollView/android.widget.EditText[1]/android.widget.Button");
-//    private final By eyeIconNewPassword = By.xpath("//android.widget.ScrollView/android.widget.EditText[2]/android.widget.Button");
-//    private final By eyeIconConfirmPassword = By.xpath("//android.widget.ScrollView/android.widget.EditText[3]/android.widget.Button");
-//
-//    // ===== BUTTON (CHANGE PASSWORD) =====
-//    private final By btnConfirmChangePassword = By.xpath("//android.widget.TextView[@text='Đổi mật khẩu']");
-//    private final By btnBackFromChangePassword = By.xpath("//android.widget.ScrollView/android.widget.Button");
-//
-//    // ===== TOAST MESSAGE ✅ UPDATED =====
-//    private final By toastError = By.xpath("//android.widget.Toast[@text='This phone is already exist']");
-//    private final By toastUpdate = By.xpath("//android.widget.Toast[@text='Cập nhật thành công']");
-//
-//    // ✅ THÊM Toast chính xác cho Change Password
-//    private final By toastChangePasswordSuccess = By.xpath("//android.widget.Toast[@text='Đổi mật khẩu thành công']");
-//    private final By toastChangePasswordError = By.xpath("//android.widget.Toast[@text='Mật khẩu mới không được trùng với mật khẩu hiện tại']");
-////    private final By toastChangePasswordErrorGeneric = By.xpath("//android.widget.Toast[contains(@text, 'lỗi')]");
-//
-//    // ==================== EDIT PROFILE ACTIONS ====================
-//    public void openEditProfileScreen() {
-//        logStep("Mở màn chỉnh sửa thông tin");
-//        click(iconEditProfile);
-//    }
-//// ================= INPUT =================
-//    public void enterFullName(String name) {
-//        logStep("Nhap ho và ten: " + name);
-//        type(inputFullName, name);
-//    }
-//
-//    public void enterEmail(String email) {
-//        logStep("Nhap email: " + email);
-//        type(inputEmail, email);
-//    }
-//
-//    public void enterPhone(String phone) {
-//        logStep("Nhap so đien thoai: " + phone);
-//        type(inputPhone, phone);
-//    }
-//
-//    public void clickSave() {
-//        logStep("Click Luu thay đoi");
-//        click(btnSave);
-//    }
-//
-//    public void clickBack() {
-//        logStep("Back Tai khoan");
-//        click(btnBack);
-//    }
-//
-//    public boolean isToastErrorDisplayed() {
-//
-//        logStep("🔍 Verify Toast: Co loi xay ra, vui long thuc hien lai");
-//
-//        try {
-//            getDriver().findElement(toastError);
-//            logger.info("✅ Toast is displayed update inf successful");
-//            AllureHelper.attachScreenshot("Toast is displayed update inf successful");
-//            return true;
-//        } catch (Exception e) {
-//            logStep("❌ Không thấy Toast");
-//            return false;
-//        }
-//    }
-//
-//    public boolean isToastUpdateInfoDisplayed() {
-//
-//        logStep("🔍 Verify Toast: Cap nhat thanh cong");
-//
-//        try {
-//            Thread.sleep(0000); // chờ toast xuất hiện
-//            getDriver().findElement(toastUpdate);
-//            logStep("✅ Toast đã hiển thị");
-//            logger.info("✅ Toast is displayed update inf successful");
-//            AllureHelper.attachScreenshot("Toast is displayed update inf successful");
-//            return true;
-//        } catch (Exception e) {
-//            logStep("❌ Không thấy Toast");
-//            return false;
-//        }
-//
-//    }
-//
-//}
-
 package screens;
 
 import core.base.BaseScreen;
 import core.utils.AllureHelper;
 import core.utils.WaitingHelper;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
@@ -201,8 +70,9 @@ public class EditProfileScreen extends BaseScreen {
     private final By toastErrorPhone = By.xpath("//android.widget.Toast[@text='This phone is already exist']");
     private final By toastErrorEmail = By.xpath("//android.widget.Toast[@text='This email is already exist']");
     private final By toastUpdate = By.xpath("//android.widget.Toast[@text='Cập nhật thành công']");
-    private final By toastChangePasswordSuccess = By.xpath("//android.widget.Toast[@text=\"Đổi mật khẩu thành công\"]");
+    private final By toastChangePasswordSuccess = By.xpath("//android.widget.Toast[@text='Đổi mật khẩu thành công']");
     private final By toastChangePasswordError = By.xpath("//android.widget.Toast[@text='Mật khẩu mới không được trùng với mật khẩu hiện tại']");
+    private final By toastChangePasswordError2 = By.xpath("//android.widget.Toast[@text='Mật khẩu mới và xác nhận mật khẩu không khớp']");
 
     // ==================== EDIT PROFILE ACTIONS ====================
 
@@ -343,36 +213,44 @@ public class EditProfileScreen extends BaseScreen {
 
     // ==================== TOAST VERIFICATION =====
 
-    public boolean isChangePasswordSuccessDisplayed() {
-            if (isDisplayed(toastChangePasswordSuccess)) {
-
-                WaitingHelper.waitForVisible(toastChangePasswordSuccess);
-                logger.info("Toast Doi mat khau thanh cong displayed");
-                AllureHelper.attachScreenshot("Change Password Success Toast");
-                return true;
-            }
-                logger.error("Toast success NOT displayed");
-                AllureHelper.attachScreenshot("Change Password Success Toast NOT Found");
-                return false;
-    }
+//    public boolean isChangePasswordSuccessDisplayed() {
+//        click(btnChangePassword);
+//        WaitingHelper.sleepSeconds(1);
+//        try {
+//            getDriver().findElement(toastChangePasswordSuccess);
+//            logger.info("Toast error displayed");
+//            AllureHelper.attachScreenshot("Toast Error Displayed");
+//            return true;
+//        } catch (Exception e) {
+//            logger.error("Toast error NOT displayed");
+//            return false;
+//        }
+//    }
 
     public boolean isChangePasswordErrorDisplayed() {
-        logStep("Kiem tra Toast Mat khau moi khong duoc trung");
-        WaitingHelper.sleepSeconds(2);
-
+        click(btnChangePassword);
+        WaitingHelper.sleepSeconds(1);
         try {
-            if (isDisplayed(toastChangePasswordError)) {
-                logger.info("Toast Mat khau moi khong duoc trung displayed");
-                AllureHelper.attachScreenshot("Change Password Error Toast");
-                return true;
-            }
-
-            logger.error("Toast error NOT displayed");
-            AllureHelper.attachScreenshot("Change Password Error Toast NOT Found");
-            return false;
-
+            getDriver().findElement(toastChangePasswordError);
+            logger.info("Toast error displayed");
+            AllureHelper.attachScreenshot("Toast Error Displayed");
+            return true;
         } catch (Exception e) {
-            logger.error("Exception: " + e.getMessage());
+            logger.error("Toast error NOT displayed");
+            return false;
+        }
+    }
+
+    public boolean isChangePasswordErrorDisplayed2() {
+        click(btnChangePassword);
+        WaitingHelper.sleepSeconds(1);
+        try {
+            getDriver().findElement(toastChangePasswordError2);
+            logger.info("Toast error displayed");
+            AllureHelper.attachScreenshot("Toast Error Displayed");
+            return true;
+        } catch (Exception e) {
+            logger.error("Toast error NOT displayed");
             return false;
         }
     }
@@ -381,8 +259,6 @@ public class EditProfileScreen extends BaseScreen {
 
     public boolean isToastErrorPhoneDisplayed() {
         logStep("Kiem tra Toast Co loi xay ra");
-        WaitingHelper.sleepSeconds(1);
-
         try {
             getDriver().findElement(toastErrorPhone);
             logger.info("Toast error displayed");

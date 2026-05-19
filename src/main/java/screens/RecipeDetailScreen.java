@@ -711,4 +711,5 @@ public class RecipeDetailScreen extends BaseScreen {
             return false;
         }
     }
+
 }
