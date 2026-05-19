@@ -75,46 +75,37 @@ public class LoginScreen extends BaseScreen {
 
     @Step("📍 Enter phone/email: {value}")
     public void enterPhoneOrEmail(String value) {
-        logStep("Nhập tài khoản: " + value);
-        AllureHelper.stepWithParam("Enter phone/email", value);
+        logStep("Enter email: " + value);
+        AllureHelper.attachScreenshot("Enter email");
 
-        WaitingHelper.waitForVisible(phoneEmailField);
         type(phoneEmailField, value);
 
-        logger.info("✅ Phone/Email entered: " + value);
     }
 
     @Step("📍 Enter password")
     public void enterPassword(String password) {
-        logStep("Nhập mật khẩu");
-        AllureHelper.step("Enter password");
+        logStep("Enter password: "+ password);
+        AllureHelper.attachScreenshot("Enter password");
 
         type(passwordField, password);
-
-        logger.info("✅ Password entered");
     }
 
     @Step("📍 Click login button")
     public void clickLogin() {
-        logStep("Click nút Đăng nhập");
-        AllureHelper.step("Click login button");
+        logStep("Click btn Login");
+        AllureHelper.attachScreenshot("Click login button");
 
         click(loginButton);
-        logger.info("✅ Login button clicked");
 
-        WaitingHelper.sleepSeconds(1);
     }
 
     @Step("📍 Perform login with credentials")
     public void performLogin(String phoneOrEmail, String password) {
-        logStep("=== THỰC HIỆN ĐĂNG NHẬP ===");
-        AllureHelper.stepWithParam("Start login flow", phoneOrEmail);
+        logStep("=== THUC HIEN DANG NHAP ===");
 
         enterPhoneOrEmail(phoneOrEmail);
         enterPassword(password);
         clickLogin();
-
-        logger.info("✅ Login flow completed");
     }
 
     @Step("📍 Verify login screen displayed")
@@ -137,19 +128,19 @@ public class LoginScreen extends BaseScreen {
 
     // ✅ COPY LOGIC CŨ - performLogin_TC10
     public void performLogin_TC06(String password) {
-        logStep("=== THỰC HIỆN ĐĂNG NHẬP ===");
+        logStep("=== THUC HIEN DANG NHAP ===");
         enterPassword(password);
     }
 
     // ✅ COPY LOGIC CŨ - performLogin_TC11
     public void performLogin_TC07(String phoneOrEmail) {
-        logStep("=== THỰC HIỆN ĐĂNG NHẬP ===");
+        logStep("=== THUC HIEN DANG NHAP ===");
         enterPhoneOrEmail(phoneOrEmail);
     }
 
     // ✅ COPY LOGIC CŨ - isToastUpdateInfoDisplayed_TC0607
     public boolean isToastUpdateInfoDisplayed_TC0607() {
-        logStep("🔍 Verify Toast: Cập nhật thành công");
+        logStep("🔍 Verify Toast: Update Success");
         AllureHelper.step("Verify error toast");
 
         try {
