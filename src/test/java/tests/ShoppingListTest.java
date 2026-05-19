@@ -214,7 +214,7 @@ public class ShoppingListTest extends BaseTest {
         listFlow.verifyListUI();
     }
 
-//    @Test(priority = 13)
+    //    @Test(priority = 13)
     public void RecipeShoppingManage_TC_13() {
 
         seedAndGoToShoppingListWithOneRecipeSelected();

@@ -105,7 +105,7 @@ public class ShoppingHistoryTest extends BaseTest {
         AllureHelper.attachScreenshot("RecipeHistoryShopping_TC_01 PASSED");
     }
 
-//     RecipeHistoryShopping_TC_02_CreateHistoryAfterCompleteShoppingList
+    //     RecipeHistoryShopping_TC_02_CreateHistoryAfterCompleteShoppingList
     @Test(priority = 2)
     public void RecipeHistoryShopping_TC_02() {
         createHistoryByCompletingListWithEditedIngredient();
@@ -164,7 +164,7 @@ public class ShoppingHistoryTest extends BaseTest {
         historyFlow.backToHistoryList();
     }
 
-//     RecipeHistoryShopping_TC_06_DataMatchesCompletedShoppingList (data match)
+    //     RecipeHistoryShopping_TC_06_DataMatchesCompletedShoppingList (data match)
     @Test(priority = 6)
     public void RecipeHistoryShopping_TC_06() {
         String expectedText = createHistoryByCompletingListWithEditedIngredient();
@@ -176,7 +176,7 @@ public class ShoppingHistoryTest extends BaseTest {
         AllureHelper.attachScreenshot("RecipeHistoryShopping_TC_06 PASSED");
     }
 
-//     RecipeHistoryShopping_TC_07 timestamp format
+    //     RecipeHistoryShopping_TC_07 timestamp format
     @Test(priority = 7)
     public void RecipeHistoryShopping_TC_07() {
         createHistoryByCompletingListWithEditedIngredient();
