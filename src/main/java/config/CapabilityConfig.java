@@ -26,5 +26,7 @@ public class CapabilityConfig {
 
         System.out.println("✅ [CAPABILITY] Android capabilities configured successfully");
         return options;
+
+
     }
 }
