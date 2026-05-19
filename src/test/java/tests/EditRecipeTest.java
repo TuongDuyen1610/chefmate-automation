@@ -49,24 +49,24 @@ public class EditRecipeTest extends BaseTest {
 
         saved.clickEditAt(0);
     }
-////    private void saveMultipleRecipes(int count) {
-////
-////        authFlow.loginFromFridgeTab("duyentest@gmail.com", "123456");
-////
-////        searchFlow.searchByTag("cà phê");
-////
-////        for (int i = 0; i < count; i++) {
-////
-////            search.clickResultAt(i);
-////            detail.waitForLoaded();
-////
-////            boolean isSaved = detail.clickSaveAndVerifyToast();
-////            Assert.assertTrue(isSaved, "❌ Save thất bại tại index: " + i);
-////
-////            detail.clickBackToHome();
-////            home.backToHome();
-////        }
-////    }
+    ////    private void saveMultipleRecipes(int count) {
+    ////
+    ////        authFlow.loginFromFridgeTab("duyentest@gmail.com", "123456");
+    ////
+    ////        searchFlow.searchByTag("cà phê");
+    ////
+    ////        for (int i = 0; i < count; i++) {
+    ////
+    ////            search.clickResultAt(i);
+    ////            detail.waitForLoaded();
+    ////
+    ////            boolean isSaved = detail.clickSaveAndVerifyToast();
+    ////            Assert.assertTrue(isSaved, "❌ Save thất bại tại index: " + i);
+    ////
+    ////            detail.clickBackToHome();
+    ////            home.backToHome();
+    ////        }
+    ////    }
 //    // =========================
 //    // TC_01 - FORM LOAD
 //    // =========================
@@ -347,224 +347,174 @@ public class EditRecipeTest extends BaseTest {
     // =========================
     // TC_06 - UPDATE AVATAR
     // =========================
-//    @Test(priority = 6)
-//    public void RecipeEdit_TC_06() {
-//
-//        goToEditScreen();
-//
-//        edit.clickAvatar();
-////        edit.chooseImageFromGalleryReal(); // auto update UI REAL
-//        edit.chooseImageFromGalleryEmulator(1); // auto update UI EMULATOR
-//
-//        edit.slowSwipeDownOnScreen(2);
-//        edit.clickUpdate();
-//
-//        saved.clickBack();
-//        profile.clickTabProfile();
-//        profile.openSavedRecipes();
-//
-//        Assert.assertTrue(true, "✅ Avatar update success");
-//    }
+    @Test(priority = 6)
+    public void RecipeEdit_TC_06() {
+
+        goToEditScreen();
+
+        edit.clickAvatar();
+//        edit.chooseImageFromGalleryReal(); // auto update UI REAL
+        edit.chooseImageFromGalleryEmulator(1); // auto update UI EMULATOR
+
+        edit.slowSwipeDownOnScreen(2);
+        edit.clickUpdate();
+
+        saved.clickBack();
+        profile.clickTabProfile();
+        profile.openSavedRecipes();
+
+        Assert.assertTrue(true, "✅ Avatar update success");
+    }
 
     // =========================
     // TC_07 - ADD 1 TAG
     // =========================
-    //@Test(priority = 7, description = "RecipeEdit_TC_07 - Add 1 tag thành công")
-    //public void RecipeEdit_TC_07() {
-    //
-    //    goToEditScreen();
-    //
-    //    String tagName = "Cá Kem";
-    //
-    //    // 1. Mở popup
-    //    edit.openAddTagPopup();
-    //
-    //    // 2. Click input
-    //    edit.clickTagNameInput();
-    //
-    //    // 3. Nhập text (reuse method cũ)
-    //    edit.typeKeywordAndSelectDropdownTag(tagName, tagName);
-    //
-    //    // 4. Click Thêm
-    //    edit.clickAddInPopup();
-    //
-    //    // 5. Đóng popup
-    //    edit.closePopup();
-    //
-    //    // 6. Update
-    //    edit.slowSwipeDownOnScreen(2);
-    //    edit.clickUpdate();
-    //
-    //    Assert.assertTrue(true, "✅ Add tag done");
-    //}
+    @Test(priority = 7, description = "RecipeEdit_TC_07 - Add 1 tag thành công")
+    public void RecipeEdit_TC_07() {
+
+        goToEditScreen();
+
+        String tagName = "Cá Kem";
+
+        // 1. Mở popup
+        edit.openAddTagPopup();
+
+        // 2. Click input
+        edit.clickTagNameInput();
+
+        // 3. Nhập text (reuse method cũ)
+        edit.typeKeywordAndSelectDropdownTag(tagName, tagName);
+
+        // 4. Click Thêm
+        edit.clickAddInPopup();
+
+        // 5. Đóng popup
+        edit.closePopup();
+
+        // 6. Update
+        edit.slowSwipeDownOnScreen(2);
+        edit.clickUpdate();
+
+        Assert.assertTrue(true, "✅ Add tag done");
+    }
     // =========================
     // TC_08 - ADD MULTI TAG
     // =========================
-//    @Test(priority = 8, description = "RecipeEdit_TC_08 - Add multiple tags (mỗi lần 1 popup)")
-//    public void RecipeEdit_TC_08() {
-//
-//        goToEditScreen();
-//
-//        List<String> tags = Arrays.asList("Cá", "Kem", "Trứng");
-//
-//        // 👉 mỗi tag = 1 lần click Thêm
-//        edit.addMultipleTags(tags);
-//
-//        // 👉 update cuối cùng
-//        edit.slowSwipeDownOnScreen(2);
-//        edit.clickUpdate();
-//
-//        Assert.assertTrue(true, "✅ Add multiple tags done");
-//    }
+    @Test(priority = 8, description = "RecipeEdit_TC_08 - Add multiple tags (mỗi lần 1 popup)")
+    public void RecipeEdit_TC_08() {
+
+        goToEditScreen();
+
+        List<String> tags = Arrays.asList("Cá", "Kem", "Trứng");
+
+        // 👉 mỗi tag = 1 lần click Thêm
+        edit.addMultipleTags(tags);
+
+        // 👉 update cuối cùng
+        edit.slowSwipeDownOnScreen(2);
+        edit.clickUpdate();
+
+        Assert.assertTrue(true, "✅ Add multiple tags done");
+    }
 
     // =========================
     // TC_09 - AVATAR + MULTI TAG
     // =========================
-//    @Test(priority = 9, description = "RecipeEdit_TC_09 - Avatar + Multi tag")
-//    public void RecipeEdit_TC_09() {
-//
-//        goToEditScreen();
-//
-//        // ===== AVATAR =====
-//        edit.clickAvatar();
-//        edit.chooseImageFromGalleryEmulator(2);
-//
-//        WaitingHelper.sleepSeconds(1);
-//
-//        // ===== TAG =====
-//        List<String> tags = Arrays.asList("Cá", "Kem", "Trứng");
-//
-//        edit.addMultipleTags(tags);
-//
-//        // ===== UPDATE =====
-//        edit.slowSwipeDownOnScreen(2);
-//        edit.clickUpdate();
-//
-//        Assert.assertTrue(true, "✅ Avatar + Multi tag done");
-//    }
+    @Test(priority = 9, description = "RecipeEdit_TC_09 - Avatar + Multi tag")
+    public void RecipeEdit_TC_09() {
+
+        goToEditScreen();
+
+        // ===== AVATAR =====
+        edit.clickAvatar();
+        edit.chooseImageFromGalleryEmulator(2);
+
+        WaitingHelper.sleepSeconds(1);
+
+        // ===== TAG =====
+        List<String> tags = Arrays.asList("Cá", "Kem", "Trứng");
+
+        edit.addMultipleTags(tags);
+
+        // ===== UPDATE =====
+        edit.slowSwipeDownOnScreen(2);
+        edit.clickUpdate();
+
+        Assert.assertTrue(true, "✅ Avatar + Multi tag done");
+    }
     // =========================
     // TC_10 - REQUIRED FIELD
     // =========================
-//    @Test(priority = 10)
-//    public void RecipeEdit_TC_10() {
-//
-//        goToEditScreen();
-//
-//        editFlow.clearRequiredField();
-//
-//        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-//        try {
-//            getDriver().hideKeyboard();
-//        } catch (Exception ignored) {}
-//
-//        edit.slowSwipeDownOnScreen(2);
-//
-//        edit.clickUpdate(); // ✅ FIX
-//
-//        Assert.assertTrue(
-//                editFlow.isRequiredToast(),
-//                "❌ Không hiển thị toast required"
-//        );
-//    }
+    @Test(priority = 10)
+    public void RecipeEdit_TC_10() {
+
+        goToEditScreen();
+
+        editFlow.clearRequiredField();
+
+        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
+        try {
+            getDriver().hideKeyboard();
+        } catch (Exception ignored) {}
+
+        edit.slowSwipeDownOnScreen(2);
+
+        edit.clickUpdate(); // ✅ FIX
+
+        Assert.assertTrue(
+                editFlow.isRequiredToast(),
+                "❌ Không hiển thị toast required"
+        );
+    }
 
     // =========================
     // TC_11 - EMPTY INGREDIENT
     // =========================
-//    @Test(priority = 11)
-//    public void RecipeEdit_TC_11() {
-//
-//        goToEditScreen();
-//
-//        edit.slowSwipeDownOnScreen(1);
-//
-//        editFlow.clearAllIngredients();
-//        edit.clearInput3();
-//        edit.clearInput4();
-//        edit.clearInput5();
-//
-//        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-//        try {
-//            getDriver().hideKeyboard();
-//        } catch (Exception ignored) {}
-//
-//        edit.slowSwipeDownOnScreen(1);
-//
-//        edit.clickUpdate(); // ✅ FIX
-//
-//        Assert.assertTrue(
-//                editFlow.isInvalidToast(),
-//                "❌ Không hiển thị toast nguyên liệu"
-//        );
-//    }
+    @Test(priority = 11)
+    public void RecipeEdit_TC_11() {
+
+        goToEditScreen();
+
+        edit.slowSwipeDownOnScreen(1);
+
+        editFlow.clearAllIngredients();
+        edit.clearInput3();
+        edit.clearInput4();
+        edit.clearInput5();
+
+        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
+        try {
+            getDriver().hideKeyboard();
+        } catch (Exception ignored) {}
+
+        edit.slowSwipeDownOnScreen(1);
+
+        edit.clickUpdate(); // ✅ FIX
+
+        Assert.assertTrue(
+                editFlow.isInvalidToast(),
+                "❌ Không hiển thị toast nguyên liệu"
+        );
+    }
 
     // =========================
     // TC_12 - EMPTY STEP
     // =========================
-//    @Test(priority = 12)
-//    public void RecipeEdit_TC_12() {
-//
-//        goToEditScreen();
-//
-//        edit.slowSwipeDownOnScreen(2);
-//        editFlow.clearAllSteps();
-//
-//        edit.clearInput1();
-//
-//        edit.clickUpdate();
-//
-//        Assert.assertTrue(
-//                editFlow.isInvalidToast(),
-//                "❌ Không hiển thị toast bước nấu"
-//        );
-//    }
-    // =========================
-    // TC_11 - EMPTY INGREDIENT
-    // =========================
-//    @Test(priority = 11)
-//    public void RecipeEdit_TC_11() {
-//
-//        goToEditScreen();
-//
-//        edit.slowSwipeDownOnScreen(1);
-//
-//        editFlow.clearAllIngredients();
-//        edit.clearInput3();
-//        edit.clearInput4();
-//        edit.clearInput5();
-//
-//        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-//        try {
-//            getDriver().hideKeyboard();
-//        } catch (Exception ignored) {}
-//
-//        edit.slowSwipeDownOnScreen(1);
-//
-//        edit.clickUpdate(); // ✅ FIX
-//
-//        Assert.assertTrue(
-//                editFlow.isInvalidToast(),
-//                "❌ Không hiển thị toast nguyên liệu"
-//        );
-//    }
+    @Test(priority = 12)
+    public void RecipeEdit_TC_12() {
 
-    // =========================
-    // TC_12 - EMPTY STEP
-    // =========================
-//    @Test(priority = 12)
-//    public void RecipeEdit_TC_12() {
-//
-//        goToEditScreen();
-//
-//        edit.slowSwipeDownOnScreen(2);
-//        editFlow.clearAllSteps();
-//
-//        edit.clearInput1();
-//
-//        edit.clickUpdate();
-//
-//        Assert.assertTrue(
-//                editFlow.isInvalidToast(),
-//                "❌ Không hiển thị toast bước nấu"
-//        );
-//    }
+        goToEditScreen();
+
+        edit.slowSwipeDownOnScreen(2);
+        editFlow.clearAllSteps();
+
+        edit.clearInput1();
+
+        edit.clickUpdate();
+
+        Assert.assertTrue(
+                editFlow.isInvalidToast(),
+                "❌ Không hiển thị toast bước nấu"
+        );
+    }
 }
