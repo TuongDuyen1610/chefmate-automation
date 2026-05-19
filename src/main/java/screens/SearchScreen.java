@@ -160,7 +160,6 @@ public class SearchScreen extends BaseScreen {
 
     @Step("Get result count")
     public int getResultCount() {
-        WaitingHelper.sleepSeconds(0); // đợi UI settle nhẹ
         return getDriver().findElements(resultItems).size();
     }
 
