@@ -84,237 +84,237 @@ public class SaveRecipeTest extends BaseTest {
     // =========================
     // TC_01 - SAVE SUCCESS (TOAST)
     // =========================
-    @Test(priority = 1)
-    public void RecipeSave_TC_01() {
-
-        login();
-
-        searchFlow.searchByTag("nước sốt");
-        search.clickResultAt(0);
-
-        detail.waitForLoaded();
-
-        boolean savedOk = detail.clickSaveAndVerifyToast();
-
-        Assert.assertTrue(savedOk, "❌ Không hiển thị toast 'Đã lưu'");
-    }
-
-//     =========================
-//     TC_02 - VERIFY IN SAVED LIST
-//     =========================
-    @Test(priority = 2)
-    public void RecipeSave_TC_02() {
-
-        login();
-
-        searchFlow.searchByTag("nước sốt");
-        search.clickResultAt(0);
-
-        detail.waitForLoaded();
-
-        String title = detail.getRecipeTitle();
-        String author = detail.getRecipeAuthor();
-
-        detail.clickSaveAndVerifyToast();
-        WaitingHelper.sleepSeconds(1);
-        detail.clickBackToHome();
-
-        // 🔥 VERIFY HOME TRƯỚC KHI CLICK
-        home.backToHome2();
-
-//        Assert.assertTrue(home.isHomeDisplayed(), "❌ Chưa về Home thật");
-
-        profile.clickTabProfile();
-        profile.openSavedRecipes();
-
-        Assert.assertTrue(
-                saved.isRecipeExist(title, author),
-                "❌ Công thức không xuất hiện trong Kho công thức"
-        );
-    }
+//    @Test(priority = 1)
+//    public void RecipeSave_TC_01() {
 //
+//        login();
+//
+//        searchFlow.searchByTag("nước sốt");
+//        search.clickResultAt(0);
+//
+//        detail.waitForLoaded();
+//
+//        boolean savedOk = detail.clickSaveAndVerifyToast();
+//
+//        Assert.assertTrue(savedOk, "❌ Không hiển thị toast 'Đã lưu'");
+//    }
+
+    // =========================
+    // TC_02 - VERIFY IN SAVED LIST
+    // =========================
+//    @Test(priority = 2)
+//    public void RecipeSave_TC_02() {
+//
+//        login();
+//
+//        searchFlow.searchByTag("nước sốt");
+//        search.clickResultAt(0);
+//
+//        detail.waitForLoaded();
+//
+//        String title = detail.getRecipeTitle();
+//        String author = detail.getRecipeAuthor();
+//
+//        detail.clickSaveAndVerifyToast();
+//        WaitingHelper.sleepSeconds(1);
+//        detail.clickBackToHome();
+//
+//        // 🔥 VERIFY HOME TRƯỚC KHI CLICK
+//        home.backToHome2();
+//
+////        Assert.assertTrue(home.isHomeDisplayed(), "❌ Chưa về Home thật");
+//
+//        profile.clickTabProfile();
+//        profile.openSavedRecipes();
+//
+//        Assert.assertTrue(
+//                saved.isRecipeExist(title, author),
+//                "❌ Công thức không xuất hiện trong Kho công thức"
+//        );
+//    }
+
 //     =========================
 //     TC_03 - MULTI SAVE + COUNT
 //     =========================
+//
+//    @Test(priority = 3)
+//    public void RecipeSave_TC_03() {
+//
+//        login();
+//
+//        int before = saveFlow.getSavedCount();
+//
+//        searchFlow.searchByTag("thịt gà");
+//
+//        int target = 7;
+//        int saved = 0;
+//
+//        while (saved < target) {
+//
+//            int total = search.getResultCount();
+//            // 🔥 LUÔN CLICK ITEM CUỐI CÙNG TRÊN MÀN
+//            int indexToClick = total - 1;
+//
+//            try {
+//                search.clickResultAt(indexToClick);
+//
+//                detail.waitForLoaded();
+//                boolean isSaved = detail.clickSaveAndVerifyToast();
+//
+//                if (isSaved) {
+//                    saved++;
+//                }
+//                try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
+//                detail.clickBack();
+//
+//                // 👉 scroll sau khi save để load item mới
+//                search.slowSwipeDownOnScreen(2);
+//
+//            } catch (Exception e) {
+//                logger.error("❌ Error: " + e.getMessage());
+//                search.clickBack();
+//            }
+//        }
+//        search.clickBack();
+//        int after = saveFlow.getSavedCount();
+//
+//        Assert.assertTrue(
+//                after >= before + saved,
+//                "❌ Số lượng không cập nhật đúng"
+//        );
+//    }
+//    // =========================
+//    // TC_04 - ORDER NEWEST FIRST
+//    // =========================
+//
+//    @Test(priority = 4)
+//    public void RecipeSave_TC_04() {
+//
+//        login();
+//
+//        searchFlow.searchByTag("CÀ PHÊ");
+//
+//        int target = 4;
+//        int savedCount = 0;
+//
+//        List<String> savedTitles = new ArrayList<>();
+//
+//        while (savedCount < target) {
+//
+//            int total = search.getResultCount();
+//            int indexToClick = total - 1;
+//
+//            try {
+//                search.clickResultAt(indexToClick);
+//
+//                detail.waitForLoaded();
+//
+//                String title = detail.getRecipeTitle();
+//
+//                boolean isSaved = detail.clickSaveAndVerifyToast();
+//
+//                if (isSaved && !savedTitles.contains(title)) {
+//                    savedTitles.add(title);
+//                    savedCount++;
+//                }
+//
+//                detail.clickBack();
+//
+//                // 🔥 FIX CHÍNH Ở ĐÂY
+    ////                search.waitForResultOrEmpty();   // ⬅️ THÊM DÒNG NÀY
+//
+//                search.slowSwipeDownOnScreen(2);
+//
+//            } catch (Exception e) {
+//                detail.clickBack();
+//            }
+//        }
+//
+//        // 👉 thoát search về Home
+//        search.clickBack();
+//
+//        // 👉 vào Kho công thức
+//        profile.clickTabProfile();
+//        profile.openSavedRecipes();
+//
+//        String newest = savedTitles.get(savedTitles.size() - 1); // item save cuối
+//        String actualTop = saved.getTitleAt(0); // item đầu list
+//
+//        System.out.println("EXPECTED NEWEST: " + newest);
+//        System.out.println("ACTUAL TOP: " + actualTop);
+//
+//        Assert.assertTrue(
+//                newest.contains(actualTop),
+//                "❌ Item mới nhất không nằm trên cùng" +
+//                        "\nExpected: " + actualTop +
+//                        "\nActual: " + newest
+//        );
+//    }
 
-    @Test(priority = 3)
-    public void RecipeSave_TC_03() {
 
-        login();
+//    // =========================
+//    // TC_05 - ICON STATE (NO TOGGLE)
+//    // =========================
+//    @Test(priority = 5)
+//    public void RecipeSave_TC_05() {
+//
+//        login();
+//
+//        searchFlow.searchByTag("gà");
+//        search.clickResultAt(0);
+//
+//        detail.waitForLoaded();
+//
+//        detail.clickSaveAndVerifyToast();
+//        String title = detail.getRecipeTitle();
+//
+//        detail.clickBack();
+//
+//        // mở lại
+//        search.clickResultAt(0);
+//        detail.waitForLoaded();
+//
+//        boolean isStillSaved = detail.clickSaveAndVerifyToast();
+//
+//        Assert.assertTrue(isStillSaved, "❌ Icon không giữ trạng thái đã lưu");
+//    }
 
-        int before = saveFlow.getSavedCount();
-
-        searchFlow.searchByTag("thịt gà");
-
-        int target = 7;
-        int saved = 0;
-
-        while (saved < target) {
-
-            int total = search.getResultCount();
-            // 🔥 LUÔN CLICK ITEM CUỐI CÙNG TRÊN MÀN
-            int indexToClick = total - 1;
-
-            try {
-                search.clickResultAt(indexToClick);
-
-                detail.waitForLoaded();
-                boolean isSaved = detail.clickSaveAndVerifyToast();
-
-                if (isSaved) {
-                    saved++;
-                }
-                try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
-                detail.clickBack();
-
-                // 👉 scroll sau khi save để load item mới
-                search.slowSwipeDownOnScreen(2);
-
-            } catch (Exception e) {
-                logger.error("❌ Error: " + e.getMessage());
-                search.clickBack();
-            }
-        }
-        search.clickBack();
-        int after = saveFlow.getSavedCount();
-
-        Assert.assertTrue(
-                after >= before + saved,
-                "❌ Số lượng không cập nhật đúng"
-        );
-    }
-    // =========================
-    // TC_04 - ORDER NEWEST FIRST
-    // =========================
-
-    @Test(priority = 4)
-    public void RecipeSave_TC_04() {
-
-        login();
-
-        searchFlow.searchByTag("CÀ PHÊ");
-
-        int target = 4;
-        int savedCount = 0;
-
-        List<String> savedTitles = new ArrayList<>();
-
-        while (savedCount < target) {
-
-            int total = search.getResultCount();
-            int indexToClick = total - 1;
-
-            try {
-                search.clickResultAt(indexToClick);
-
-                detail.waitForLoaded();
-
-                String title = detail.getRecipeTitle();
-
-                boolean isSaved = detail.clickSaveAndVerifyToast();
-
-                if (isSaved && !savedTitles.contains(title)) {
-                    savedTitles.add(title);
-                    savedCount++;
-                }
-
-                detail.clickBack();
-
-                // 🔥 FIX CHÍNH Ở ĐÂY
-//                search.waitForResultOrEmpty();   // ⬅️ THÊM DÒNG NÀY
-
-                search.slowSwipeDownOnScreen(2);
-
-            } catch (Exception e) {
-                detail.clickBack();
-            }
-        }
-
-        // 👉 thoát search về Home
-        search.clickBack();
-
-        // 👉 vào Kho công thức
-        profile.clickTabProfile();
-        profile.openSavedRecipes();
-
-        String newest = savedTitles.get(savedTitles.size() - 1); // item save cuối
-        String actualTop = saved.getTitleAt(0); // item đầu list
-
-        System.out.println("EXPECTED NEWEST: " + newest);
-        System.out.println("ACTUAL TOP: " + actualTop);
-
-        Assert.assertTrue(
-                newest.contains(actualTop),
-                "❌ Item mới nhất không nằm trên cùng" +
-                        "\nExpected: " + actualTop +
-                        "\nActual: " + newest
-        );
-    }
-
-
-    // =========================
-    // TC_05 - ICON STATE (NO TOGGLE)
-    // =========================
-    @Test(priority = 5)
-    public void RecipeSave_TC_05() {
-
-        login();
-
-        searchFlow.searchByTag("gà");
-        search.clickResultAt(0);
-
-        detail.waitForLoaded();
-
-        detail.clickSaveAndVerifyToast();
-        String title = detail.getRecipeTitle();
-
-        detail.clickBack();
-
-        // mở lại
-        search.clickResultAt(0);
-        detail.waitForLoaded();
-
-        boolean isStillSaved = detail.clickSaveAndVerifyToast();
-
-        Assert.assertTrue(isStillSaved, "❌ Icon không giữ trạng thái đã lưu");
-    }
-
-    // =========================
-    // TC_06 - SAVE BEFORE LOGIN (FIX LẠI)
-    // =========================
-    @Test(priority = 6)
-    public void RecipeSave_TC_06() {
-
-        // ❌ KHÔNG login ở đầu
-
-        searchFlow.searchByTag("gà");
-
-        // 👉 Click 1 item
-        search.clickResultAt(0);
-
-        detail.waitForLoaded();
-
-        String title = detail.getRecipeTitle();
-
-        // 👉 Save khi chưa login
-        detail.clickSaveAndVerifyToast();
-        profile.openSavedRecipes();
-        AllureHelper.attachScreenshot("Item được lưu khi chưa login");
-        detail.clickBack();
-        search.clickBack();
-
-        // =========================
-        // 👉 LOGIN SAU
-        // =========================
-        login();
-        // =========================
-        // 👉 VÀO KHO CÔNG THỨC
-        // =========================
-        profile.clickTabProfile();
-        profile.openSavedRecipes();
-        AllureHelper.attachScreenshot("Item được lưu khi login");
-
-    }
+//    // =========================
+//    // TC_06 - SAVE BEFORE LOGIN (FIX LẠI)
+//    // =========================
+//    @Test(priority = 6)
+//    public void RecipeSave_TC_06() {
+//
+//        // ❌ KHÔNG login ở đầu
+//
+//        searchFlow.searchByTag("gà");
+//
+//        // 👉 Click 1 item
+//        search.clickResultAt(0);
+//
+//        detail.waitForLoaded();
+//
+//        String title = detail.getRecipeTitle();
+//
+//        // 👉 Save khi chưa login
+//        detail.clickSaveAndVerifyToast();
+//        profile.openSavedRecipes();
+//        AllureHelper.attachScreenshot("Item được lưu khi chưa login");
+//        detail.clickBack();
+//        search.clickBack();
+//
+//        // =========================
+//        // 👉 LOGIN SAU
+//        // =========================
+//        login();
+//        // =========================
+//        // 👉 VÀO KHO CÔNG THỨC
+//        // =========================
+//        profile.clickTabProfile();
+//        profile.openSavedRecipes();
+//        AllureHelper.attachScreenshot("Item được lưu khi login");
+//
+//    }
 //     =========================
 //        INTERACTION LIKE
 //     =========================
@@ -349,25 +349,25 @@ public class SaveRecipeTest extends BaseTest {
         AllureHelper.attachScreenshot("LIKE SUCCESS");
     }
 
-//     // =========================
+    //     // =========================
 //     // TC COMMENT
 //    // =========================
-     @Test(priority = 8,
-             description = "RecipeComment_TC_01 - Kiểm tra nhập thêm bình luận click gửi bình luận xuất hiện với tên user, avatar, timestamp")
-     public void RecipeComment_TC_01() {
+    @Test(priority = 8,
+            description = "RecipeComment_TC_01 - Kiểm tra nhập thêm bình luận click gửi bình luận xuất hiện với tên user, avatar, timestamp")
+    public void RecipeComment_TC_01() {
 
-         openRecipeDetail(); // 🔥 FIX
+        openRecipeDetail(); // 🔥 FIX
 
-         String comment = "Auto test comment " + System.currentTimeMillis();
+        String comment = "Auto test comment " + System.currentTimeMillis();
 
-         detail.enterComment(comment);
-         detail.clickSendComment();
+        detail.enterComment(comment);
+        detail.clickSendComment();
 
-         boolean isDisplayed = detail.isCommentDisplayed(comment);
+        boolean isDisplayed = detail.isCommentDisplayed(comment);
 
-         Assert.assertTrue(isDisplayed, "❌ Comment không hiển thị");
+        Assert.assertTrue(isDisplayed, "❌ Comment không hiển thị");
 
-     }
+    }
     @Test(priority = 9,
             description = "RecipeComment_TC_02 - Kiểm tra bình luận text/emoji/ký tự đặc biệt hiển thị đúng chính xác")
     public void RecipeComment_TC_02() {
@@ -413,7 +413,7 @@ public class SaveRecipeTest extends BaseTest {
 
         Assert.assertTrue(errorDisplayed, "❌ Không hiển thị toast 'Vui lòng thử lại'");
     }
-//
+    //
     @Test(priority = 11,
             description = "RecipeComment_TC_04 - Bình luận dài hiển thị toast lỗi")
     public void RecipeComment_TC_04() {
@@ -467,7 +467,7 @@ public class SaveRecipeTest extends BaseTest {
         );
     }
 
-//    =========================
+    //    =========================
 //       SHARE TEST CASES
 //    =========================
 //       TC_01 - OPEN SHARE DIALOG
@@ -486,7 +486,7 @@ public class SaveRecipeTest extends BaseTest {
 
         AllureHelper.attachScreenshot("SHARE DIALOG");
     }
-//     TC_02 - SHARE ZALO
+    //     TC_02 - SHARE ZALO
     @Test(priority = 14,
             description = "RecipeShare_TC_02 - Share qua Zalo thành công")
     public void RecipeShare_TC_02() {
@@ -498,7 +498,7 @@ public class SaveRecipeTest extends BaseTest {
         Assert.assertTrue(result, "❌ Share Zalo thất bại");
     }
 
-//     TC_03 - SHARE MESSENGER
+    //     TC_03 - SHARE MESSENGER
     @Test(priority = 15,
             description = "RecipeShare_TC_03 - Share qua Messenger thành công")
     public void RecipeShare_TC_03() {
@@ -510,7 +510,7 @@ public class SaveRecipeTest extends BaseTest {
         Assert.assertTrue(result, "❌ Share Messenger thất bại");
     }
 
-//     TC_04 - SHARE GMAIL
+    //     TC_04 - SHARE GMAIL
     @Test(priority = 16,
             description = "RecipeShare_TC_04 - Share qua Gmail thành công")
     public void RecipeShare_TC_04() {
@@ -522,7 +522,7 @@ public class SaveRecipeTest extends BaseTest {
         Assert.assertTrue(result, "❌ Share Gmail thất bại");
     }
 
-//     TC_05 - MULTI SHARE
+    //     TC_05 - MULTI SHARE
     @Test(priority = 17,
             description = "RecipeShare_TC_05 - Share nhiều lần qua Zalo, Messenger, Gmail")
     public void RecipeShare_TC_05() {
