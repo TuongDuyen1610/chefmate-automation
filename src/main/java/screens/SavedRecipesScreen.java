@@ -20,7 +20,7 @@ public class SavedRecipesScreen extends BaseScreen {
     private final By btnBack = By.xpath("//android.view.View[@content-desc='Quay lại']");
 
     private final By recipeItems =
-            By.xpath("//z0.h0/android.view.View/android.view.View[2]/android.view.View[1]");
+            By.xpath("//android.view.View[.//android.widget.TextView]");
 
     private final By title = By.xpath(".//android.widget.TextView[1]");
     private final By author = By.xpath(".//android.widget.TextView[2]");
@@ -130,7 +130,8 @@ public class SavedRecipesScreen extends BaseScreen {
             }
 
             scrollDown();
-
+//            slowSwipeDownOnScreen(1);
+//            WaitingHelper.sleepSeconds(1);
         }
 
         AllureHelper.attachScreenshot("NOT FOUND: " + expectedTitle);
@@ -155,7 +156,13 @@ public class SavedRecipesScreen extends BaseScreen {
         }
     }
     public void clickBack() {
+
+//        logStep("Click nút quay lại (UI)");
+
+//        WaitingHelper.waitForClickable(btnBack);
         click(btnBack);
+
+//        WaitingHelper.sleepSeconds(1);
     }
     public String getTitleAt(int index) {
 
@@ -165,6 +172,14 @@ public class SavedRecipesScreen extends BaseScreen {
 
         for (WebElement item : items) {
             try {
+                String text = item.findElement(title).getText();
+
+                // ❌ bỏ header
+                if (text.equalsIgnoreCase("Kho công thức")) continue;
+
+                // ❌ bỏ item rỗng
+                if (text.trim().isEmpty()) continue;
+
                 validItems.add(item);
 
             } catch (Exception ignored) {}
@@ -173,11 +188,13 @@ public class SavedRecipesScreen extends BaseScreen {
         if (index >= validItems.size()) {
             throw new RuntimeException("❌ Index vượt quá size: " + index);
         }
+
         String result = validItems.get(index)
+                .findElement(title)
                 .getText();
 
         System.out.println("👉 TITLE[" + index + "] = " + result);
-        AllureHelper.attachScreenshot("Kho công thức hiển thị");
+
         return result;
     }
     public void slowSwipeDownOnScreen(int times) {
@@ -197,14 +214,14 @@ public class SavedRecipesScreen extends BaseScreen {
             swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
             // “từ từ”: 900–1200ms là ổn
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(400), PointerInput.Origin.viewport(), x, endY));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(100), PointerInput.Origin.viewport(), x, endY));
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
             getDriver().perform(Collections.singletonList(swipe));
 
 
             // nếu chị muốn nhiều ảnh để demo rõ: bật dòng này
-//            AllureHelper.attachScreenshot("Swipe demo step " + i);
+            AllureHelper.attachScreenshot("Swipe demo step " + i);
         }
     }
 }
