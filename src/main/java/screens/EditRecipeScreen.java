@@ -35,7 +35,7 @@ public class EditRecipeScreen extends BaseScreen {
     private final By inputStep4 = By.xpath("//android.widget.ScrollView/android.view.View[1]/android.widget.EditText[2]");
     private final By inputStep5 = By.xpath("//android.widget.ScrollView/android.view.View[1]/android.widget.EditText[3]");
 
-            // ===== UPDATE BUTTON =====
+    // ===== UPDATE BUTTON =====
     private final By btnUpdate = By.xpath("//android.widget.TextView[@text='Cập nhật công thức']");
 
     // ===== INGREDIENT =====
@@ -239,7 +239,7 @@ public class EditRecipeScreen extends BaseScreen {
         click(avatar);
         logger.info("Click avatar");
     }
-//    public void switchToListView() {
+    //    public void switchToListView() {
 //        try {
 //            if (isDisplayed(btnListView)) {
 //                click(btnListView);
@@ -253,8 +253,8 @@ public class EditRecipeScreen extends BaseScreen {
     public void chooseImageFromGalleryReal() {
 
         // 👉 Bước 1: chuyển sang list view
-            click(btnListView);
-            logger.info("Switched to List View");
+        click(btnListView);
+        logger.info("Switched to List View");
 
         // 👉 Bước 2: chọn ảnh ưu tiên
         try {
