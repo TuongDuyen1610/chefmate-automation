@@ -5,6 +5,7 @@ import core.utils.WaitingHelper;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * BaseScreen.java - ĐÃ SỬA LỖI
@@ -19,14 +20,14 @@ public class BaseScreen {
     protected void click(By locator) {
         WaitingHelper.waitForClickable(locator);
         getDriver().findElement(locator).click();
-        WaitingHelper.sleep(800);           // Đợi UI phản hồi nhẹ
+//        WaitingHelper.sleep(800);           // Đợi UI phản hồi nhẹ
     }
 
     protected void type(By locator, String text) {
-        WaitingHelper.waitForVisible(locator);
+//        WaitingHelper.waitForVisible(locator);
         getDriver().findElement(locator).clear();
         getDriver().findElement(locator).sendKeys(text);
-        WaitingHelper.sleep(600);
+//        WaitingHelper.sleep(600);
     }
 
     protected String getText(By locator) {
@@ -70,5 +71,13 @@ public class BaseScreen {
                 .moveTo(io.appium.java_client.touch.offset.PointOption.point(startX, endY))
                 .release()
                 .perform();
+    }
+    public void hideKeyboardIfVisible() {
+        try {
+            getDriver().hideKeyboard();
+            logStep("Hide keyboard");
+        } catch (Exception ignored) {
+            // keyboard có thể không mở => bỏ qua
+        }
     }
 }
