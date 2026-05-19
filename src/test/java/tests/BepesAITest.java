@@ -13,7 +13,7 @@ import screens.BepesAIScreen;
 import screens.HomeScreen;
 
 /**
- * ✅ 36 testcases đúng ID: BepesAI_TC_01 ... BepesAI_TC_36
+ * ✅ 37 testcases đúng ID: BepesAI_TC_01 ... BepesAI_TC_37
  * ✅ Login giống SaveRecipeTest
  * ✅ Open Bepes bằng HomeScreen.openBepesAI()
  */
@@ -106,45 +106,45 @@ public class BepesAITest extends BaseTest {
         bepes.clickChooseDishByIndex(2);
         bepes.cancelChooseDishPopup();
     }
-// SỬA TÁI SỬ DỤNG
+    // SỬA TÁI SỬ DỤNG
     // ========== TC_06 ==========
-        @Test(priority = 6)
-        public void BepesAI_TC_06() {
+    @Test(priority = 6)
+    public void BepesAI_TC_06() {
 
-            login();
-            openBepes();
+        login();
+        openBepes();
 
-            // ===== MÓN 1 =====
-            bepes.openChooseDishSheetSmart();
-            bepes.slowSwipeDownOnScreen(1);
-            bepes.clickChooseDishByIndex(1);
-            bepes.confirmChooseDishPopup();
+        // ===== MÓN 1 =====
+        bepes.openChooseDishSheetSmart();
+        bepes.slowSwipeDownOnScreen(1);
+        bepes.clickChooseDishByIndex(1);
+        bepes.confirmChooseDishPopup();
 
-            // ===== MÓN 2 =====
-            bepes.openChooseDishSheetSmart();
-            bepes.slowSwipeDownOnScreen(2);
-            bepes.clickChooseDishByIndex(2);
-            bepes.confirmChooseDishPopup();
+        // ===== MÓN 2 =====
+        bepes.openChooseDishSheetSmart();
+        bepes.slowSwipeDownOnScreen(2);
+        bepes.clickChooseDishByIndex(2);
+        bepes.confirmChooseDishPopup();
 
-            // ===== MÓN 3 =====
-            bepes.openChooseDishSheetSmart();
-            bepes.slowSwipeDownOnScreen(3);
-            bepes.clickChooseDishByIndex(3);
-            bepes.confirmChooseDishPopup();
+        // ===== MÓN 3 =====
+        bepes.openChooseDishSheetSmart();
+        bepes.slowSwipeDownOnScreen(3);
+        bepes.clickChooseDishByIndex(3);
+        bepes.confirmChooseDishPopup();
 
-            // ===== MÓN 4 =====
-            bepes.openChooseDishSheetSmart();
-            bepes.slowSwipeDownOnScreen(4);
-            bepes.clickChooseDishByIndex(4);
-            bepes.confirmChooseDishPopup();
+        // ===== MÓN 4 =====
+        bepes.openChooseDishSheetSmart();
+        bepes.slowSwipeDownOnScreen(4);
+        bepes.clickChooseDishByIndex(4);
+        bepes.confirmChooseDishPopup();
 
-            // ===== MÓN 5 =====
-            bepes.openChooseDishSheetSmart();
-            bepes.slowSwipeDownOnScreen(4);
-            bepes.clickChooseDishByIndex(5);
-            bepes.confirmChooseDishPopup();
-            AllureHelper.attachScreenshot("Selected multiple dishes");
-        }
+        // ===== MÓN 5 =====
+        bepes.openChooseDishSheetSmart();
+        bepes.slowSwipeDownOnScreen(4);
+        bepes.clickChooseDishByIndex(5);
+        bepes.confirmChooseDishPopup();
+        AllureHelper.attachScreenshot("Selected multiple dishes");
+    }
     // ========== TC_07 ==========
     @Test(priority = 7)
     public void BepesAI_TC_07() {
@@ -408,7 +408,7 @@ public class BepesAITest extends BaseTest {
         AllureHelper.attachScreenshot("Tried save empty note");
     }
 
-//     ========== TC_24 ==========
+    //     ========== TC_24 ==========
     @Test(priority = 24)
     public void BepesAI_TC_24() {
         login();
