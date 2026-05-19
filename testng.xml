@@ -1,3 +1,0 @@
-<listeners>
-    <listener class-name="core.reporting.TestListener"/>
-</listeners>
