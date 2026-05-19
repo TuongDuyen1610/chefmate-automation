@@ -23,7 +23,8 @@ public class LogoutScreen extends BaseScreen {
 
     // ==================== CANCEL BUTTON LOCATORS ====================
     // Nút "X" để hủy đăng xuất tài khoản
-    private final By cancelButtonX = By.xpath("//android.widget.Button");
+//    private final By cancelButtonX = By.xpath("//android.widget.Button1");
+    private final By cancelButtonX = By.xpath("//android.view.View[@content-desc='Close sheet']");
     private final By cancelButtonImageView = By.xpath("//android.widget.ImageView[@content-desc='Account Logout']");
 
     // ==================== CONFIRM LOGOUT LOCATORS ====================
@@ -37,9 +38,6 @@ public class LogoutScreen extends BaseScreen {
 
     // ==================== ACTIONS ====================
 
-    /**
-     * ✅ Verify Logout Popup hiển thị
-     */
     public boolean isLogoutPopupDisplayed() {
         logStep("Verify: Kiem tra popup Logout hien thi");
         try {
@@ -51,94 +49,27 @@ public class LogoutScreen extends BaseScreen {
         }
     }
 
-    /**
-     * ✅ Click icon Logout trên Profile tab
-     */
     public void clickLogoutIcon() {
         logStep("Click icon Logout tren trang ca nhan");
-//        try {
             WaitingHelper.waitForClickable(logoutIcon);
             click(logoutIcon);
             logStep("✓ Da click icon Logout");
-//            WaitingHelper.sleepSeconds(2);
-//        } catch (Exception e) {
-//            logStep("❌ Khong click đuoc icon Logout: " + e.getMessage());
-//            throw e;
-//        }
     }
 
-    /**
-     * ✅ Click nút Đăng xuất để xác nhận
-     */
     public void confirmLogout() {
         logStep("Click nut Đang xuat đe xac nhan");
-//        try {
             WaitingHelper.waitForClickable(confirmLogoutButton);
             click(confirmLogoutButton);
             logStep("✓ Đa click nut Đang xuat");
-//            WaitingHelper.sleepSeconds(3);
-//        } catch (Exception e) {
-//            logStep("⚠️ Locator 1 thất bại, thử locator 2");
-//            try {
-//                click(confirmLogoutButtonAlt);
-//                logStep("✓ Đã click nút Đăng xuất (locator 2)");
-//                WaitingHelper.sleepSeconds(3);
-//            } catch (Exception e2) {
-//                logStep("❌ Không click được nút Đăng xuất");
-//                throw e2;
-//            }
-//        }
     }
 
-    /**
-     * ✅ Click nút X hoặc Hủy để không đăng xuất
-     */
     public void cancelLogout() {
         logStep("Click nut X hoac Huy đe huy đang xuat");
-////        try {
-////            // Try Close Sheet first
-////            try {
-//                WaitingHelper.waitForClickable(popupCloseSheet);
-//                click(popupCloseSheet);
-//                logStep("✓ Đa click Close Sheet");
-//                WaitingHelper.sleepSeconds(1);
-//                return;
-//            } catch (Exception e1) {
-//                logStep("⚠️ Close Sheet that bai, thu Button X");
-//            }
-
-//            // Try Button X
-//            try {
-                WaitingHelper.waitForClickable(cancelButtonX);
-                click(cancelButtonX);
-                logStep("✓ Đa click nut X");
-//                WaitingHelper.sleepSeconds(1);
-//                return;
-//            } catch (Exception e2) {
-//                logStep("⚠️ Button X thất bại, thử ImageView");
-//            }
-
-//            // Try ImageView
-//            try {
-//                WaitingHelper.waitForClickable(cancelButtonImageView);
-//                click(cancelButtonImageView);
-//                logStep("✓ Đã click ImageView");
-//                WaitingHelper.sleepSeconds(1);
-//                return;
-//            } catch (Exception e3) {
-                logStep("Da click duoc nut Huy");
-//                throw e3;
-//            }
-//
-//        } catch (Exception e) {
-//            logStep("❌ Hủy đăng xuất thất bại: " + e.getMessage());
-//            throw e;
-//        }
+        WaitingHelper.waitForClickable(cancelButtonX);
+        click(cancelButtonX);
+        logStep("Da click duoc nut Huy");
     }
 
-    /**
-     * ✅ Wrapper: Thực hiện logout hoàn chỉnh
-     */
     public void performLogout() {
         logStep("=== THUC HIEN ĐANG XUAT ===");
         clickLogoutIcon();
@@ -150,9 +81,6 @@ public class LogoutScreen extends BaseScreen {
         }
     }
 
-    /**
-     * ✅ Wrapper: Hủy logout
-     */
     public void cancelLogoutProcess() {
         logStep("=== HUY ĐANG XUAT ===");
         clickLogoutIcon();
