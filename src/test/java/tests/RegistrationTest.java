@@ -1,12 +1,11 @@
-package smoke;
+package tests;
 
 import core.base.BaseTest;
 import flows.AuthenticationFlow;
 import screens.RegistrationScreen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import core.data.LoginData;
-import core.utils.JsonHelper;
+
 /**
  * RegistrationTest.java
  * Test case đăng ký theo spec: 1 Happy + 11 Unhappy
@@ -18,11 +17,11 @@ public class RegistrationTest extends BaseTest {
     private final RegistrationScreen registration = new RegistrationScreen();
 
     // ==================== HAPPY CASE ====================
-// Chỉ dùng khi chưa có tài khoản, và chỉ chạy 1 lần sau đó disable, test sau sẽ chạy test login ko cần chạy registation
-    @Test(priority = 1, enabled = false, description = "DangKy_TC_01 - Đăng ký thành công")
-    public void DangKy_TC_01_RegisterSuccessfully() {
 
-        System.out.println("\n=== DangKy_TC_01 - ĐĂNG KÝ THÀNH CÔNG ===");
+    // TC_01 Chỉ dùng khi chưa đăng ký, và chỉ chạy 1 lần sau đó disable,
+    // test sau sẽ chạy test login ko cần chạy registation
+    @Test(priority = 1, enabled = false, description = "DangKy_TC_01 - Đăng ký thành công")
+    public void DangKy_TC_01() {
 
         String fullName = "Tuong Thi Duyen";
         String phone = "0900009999";
@@ -39,105 +38,94 @@ public class RegistrationTest extends BaseTest {
     }
 
     // ==================== UNHAPPY CASE ====================
-// //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
+    //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
     @Test(priority = 2, description = "DangKy_TC_02 - Để trống Họ và tên")
-    public void DangKy_TC_02_RegistrationEmptyFullName() {
-        System.out.println("\n=== DangKy_TC_02 - ĐỂ TRỐNG HỌ VÀ TÊN ===");
+    public void DangKy_TC_02() {
         authFlow.registerNewAccount("", "0912345678", "test02@gmail.com", "Pass@123", "Pass@123");
         Assert.assertTrue(authFlow.isFillAllInfoErrorDisplayed(),
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_02 PASS");
     }
-// //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
+    //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
     @Test(priority = 3, description = "DangKy_TC_03 - Để trống Số điện thoại")
-    public void DangKy_TC_03_RegistrationEmptyPhone() {
-        System.out.println("\n=== DangKy_TC_03 - ĐỂ TRỐNG SỐ ĐIỆN THOẠI ===");
+    public void DangKy_TC_03() {
         authFlow.registerNewAccount("Test User 03", "", "test03@gmail.com", "Pass@123", "Pass@123");
         Assert.assertTrue(authFlow.isFillAllInfoErrorDisplayed(),
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_03 PASS");
     }
-// //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
+
+    //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
     @Test(priority = 4, description = "DangKy_TC_04 - Để trống Email")
-    public void DangKy_TC_04_RegistrationEmptyEmail() {
-        System.out.println("\n=== DangKy_TC_04 - ĐỂ TRỐNG EMAIL ===");
+    public void DangKy_TC_04() {
         authFlow.registerNewAccount("Test User 04", "0912345604", "", "Pass@123", "Pass@123");
         Assert.assertTrue(authFlow.isFillAllInfoErrorDisplayed(),
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_04 PASS");
     }
-// //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
+    //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
     @Test(priority = 5, description = "DangKy_TC_05 - Để trống Mật khẩu")
-    public void DangKy_TC_05_RegistrationEmptyPassword() {
-        System.out.println("\n=== DangKy_TC_05 - ĐỂ TRỐNG MẬT KHẨU ===");
+    public void DangKy_TC_05() {
         authFlow.registerNewAccount("Test User 05", "0912345605", "test05@gmail.com", "", "Pass@123");
         Assert.assertTrue(authFlow.isFillAllInfoErrorDisplayed(),
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_05 PASS");
     }
-    // //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
+     //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
     @Test(priority = 6, description = "DangKy_TC_06 - Để trống Xác nhận mật khẩu")
-    public void DangKy_TC_06_RegistrationEmptyConfirmPassword() {
-        System.out.println("\n=== DangKy_TC_06 - ĐỂ TRỐNG XÁC NHẬN MẬT KHẨU ===");
+    public void DangKy_TC_06() {
         authFlow.registerNewAccount("Test User 06", "0912345606", "test06@gmail.com", "Pass@123", "");
         Assert.assertTrue(authFlow.isFillAllInfoErrorDisplayed(),
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_06 PASS");
     }
-    // //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
+     //android.widget.Toast[@text="Vui lòng điền đầy đủ thông tin"]
     @Test(priority = 7, description = "DangKy_TC_07 - Để trống tất cả field")
-    public void DangKy_TC_07_RegistrationAllFieldsEmpty() {
-        System.out.println("\n=== DangKy_TC_07 - ĐỂ TRỐNG TẤT CẢ FIELD ===");
+    public void DangKy_TC_07() {
         authFlow.registerNewAccount("", "", "", "", "");
         Assert.assertTrue(authFlow.isFillAllInfoErrorDisplayed(),
                 "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
         System.out.println("✅ DangKy_TC_07 PASS");
     }
-// //android.widget.Toast[@text="Mật khẩu không khớp"]
+ //android.widget.Toast[@text="Mật khẩu không khớp"]
     @Test(priority = 8, description = "DangKy_TC_08 - Mật khẩu ≠ Xác nhận mật khẩu")
-    public void DangKy_TC_08_RegistrationPasswordMismatch() {
-        System.out.println("\n=== DangKy_TC_08 - MẬT KHẨU KHÔNG TRÙNG KHỚP ===");
+    public void DangKy_TC_08() {
         authFlow.registerNewAccount("Test User 08", "0912345608", "test08@gmail.com", "Pass@123", "Pass@456");
         Assert.assertTrue(authFlow.isPasswordMismatchErrorDisplayed_MK(),
-                "❌ Phải hiển thị: Vui lòng điền đầy đủ thông tin");
+                "❌ Phải hiển thị: Mật khẩu không khớp");
         System.out.println("✅ DangKy_TC_08 PASS");
     }
-// //android.widget.Toast[@text="Vui lòng đồng ý với điều khoản dịch vụ"]
+ //android.widget.Toast[@text="Vui lòng đồng ý với điều khoản dịch vụ"]
     @Test(priority = 9, description = "DangKy_TC_09 - Không tick Điều khoản")
-    public void DangKy_TC_09_RegistrationNoTermsAgreement() {
-        System.out.println("\n=== DangKy_TC_09 - KHÔNG TICK ĐIỀU KHOẢN ===");
-
+    public void DangKy_TC_09() {
         authFlow.registerWithoutTermsAgreement("Test User 09", "123451000009", "test09@gmail.com", "00000");
         Assert.assertTrue(authFlow.isTermsRequiredErrorDisplayed_DK(),
-                "❌ Phải hiển thị: Vui lòng đồng ý điều khoản");
+                "❌ Phải hiển thị: Vui lòng đồng ý với điều khoản dịch vụ");
         System.out.println("✅ DangKy_TC_09 PASS");
     }
-// //android.widget.ProgressBar BUG backend
+ //android.widget.ProgressBar BUG backend
     @Test(priority = 10, description = "DangKy_TC_10 - Thông tin đã tồn tại")
-    public void DangKy_TC_10_RegistrationAccountExists() {
-        System.out.println("\n=== DangKy_TC_10 - THÔNG TIN ĐÃ TỒN TẠI ===");
+    public void DangKy_TC_10() {
         authFlow.registerNewAccount("Test User", "0000000000", "00000@gmail.com", "Pass@123", "Pass@123");
+
         System.out.println("⏳ TC10 - Hiện tại loading stuck (BUG: Backend không xử lý)");
     }
-// //android.widget.ProgressBar  BUG backend
+ //android.widget.ProgressBar  BUG backend
     @Test(priority = 11, description = "DangKy_TC_11 - Email đã tồn tại")
-    public void DangKy_TC_11_RegistrationEmailExists() {
-        System.out.println("\n=== DangKy_TC_11 - EMAIL ĐÃ TỒN TẠI ===");
+    public void DangKy_TC_11() {
         authFlow.registerNewAccount("Test User 11", "0912345611", "00000@gmail.com", "Pass@123", "Pass@123");
         System.out.println("⏳ TC11 - Hiện tại loading stuck (BUG: Backend không xử lý)");
     }
-// //android.widget.ProgressBar BUG backend
+ //android.widget.ProgressBar BUG backend
     @Test(priority = 12, description = "DangKy_TC_12 - SĐT đã tồn tại")
-    public void DangKy_TC_12_RegistrationPhoneExists() {
-        System.out.println("\n=== DangKy_TC_12 - SĐT ĐÃ TỒN TẠI ===");
+    public void DangKy_TC_12() {
         authFlow.registerNewAccount("Test User 12", "0000000000", "test12@gmail.com", "Pass@123", "Pass@123");
         System.out.println("⏳ TC12 - Hiện tại loading stuck (BUG: Backend không xử lý)");
     }
-// //android.widget.TextView[@text="Đăng nhập ngay"]
+ //android.widget.TextView[@text="Đăng nhập ngay"]
     @Test(priority = 13,
             description = "DangKy_TC_13 - Quay lại màn Đăng nhập từ màn Đăng ký")
-    public void DangKy_TC_13_BackToLoginFromRegistration() {
-        System.out.println("\n=== DangKy_TC_13 - QUAY LẠI MÀN LOGIN ===");
+    public void DangKy_TC_13() {
         authFlow.goBackToLoginFromRegistration();
         Assert.assertTrue(authFlow.isLoginScreenStillDisplayed(),
                 "❌ Không quay lại màn Login!");
