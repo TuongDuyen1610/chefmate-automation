@@ -1,5 +1,3 @@
-
-
 package screens;
 
 import core.base.BaseScreen;
@@ -523,39 +521,39 @@ public class BepesAIScreen extends BaseScreen {
         throw new RuntimeException("❌ Không tìm thấy nút Hiện thao tác");
     }
 
-        @Step("Open choose dish sheet smart")
-        public void openChooseDishSheetSmart() {
+    @Step("Open choose dish sheet smart")
+    public void openChooseDishSheetSmart() {
 
-            // nếu sheet đã mở
-            if (exists(sheetChooseDishTitle)) {
-                return;
-            }
-
-            // đảm bảo actions hiện
-            showActions_2();
-
-            // ưu tiên chọn món
-            if (exists(btnChooseDish)) {
-
-                getDriver().findElement(btnChooseDish).click();
-
-                WaitingHelper.sleepSeconds(1);
-
-                return;
-            }
-
-            // fallback món ăn
-            if (exists(btnFood)) {
-
-                getDriver().findElement(btnFood).click();
-
-                WaitingHelper.sleepSeconds(1);
-
-                return;
-            }
-
-            throw new RuntimeException("❌ Không mở được Choose Dish Sheet");
+        // nếu sheet đã mở
+        if (exists(sheetChooseDishTitle)) {
+            return;
         }
+
+        // đảm bảo actions hiện
+        showActions_2();
+
+        // ưu tiên chọn món
+        if (exists(btnChooseDish)) {
+
+            getDriver().findElement(btnChooseDish).click();
+
+            WaitingHelper.sleepSeconds(1);
+
+            return;
+        }
+
+        // fallback món ăn
+        if (exists(btnFood)) {
+
+            getDriver().findElement(btnFood).click();
+
+            WaitingHelper.sleepSeconds(1);
+
+            return;
+        }
+
+        throw new RuntimeException("❌ Không mở được Choose Dish Sheet");
+    }
     @Step("Swipe down on screen (times={times})")
     public void slowSwipeDownOnScreen(int times) {
         Dimension size = getDriver().manage().window().getSize();
