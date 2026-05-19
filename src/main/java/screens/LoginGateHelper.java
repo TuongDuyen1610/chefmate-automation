@@ -1,6 +1,7 @@
 package screens;
 
 import core.base.BaseScreen;
+import core.utils.AllureHelper;
 import core.utils.WaitingHelper;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
@@ -9,6 +10,7 @@ import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import java.time.Duration;
 import java.util.Arrays;
+import io.qameta.allure.Step;
 
 public class LoginGateHelper extends BaseScreen {
 
@@ -18,17 +20,15 @@ public class LoginGateHelper extends BaseScreen {
     private final By btnOpenLoginFormProfile = By.xpath("//android.widget.TextView[@text='Đăng nhập ngay']");
     public void triggerLoginByFridgeTab() {
         logStep("1. Click vao Tab Tu lanh");
-        WaitingHelper.waitForClickable(tabFridge);
         click(tabFridge);
-        WaitingHelper.waitForClickable(btnOpenLoginFormFridge);
+        AllureHelper.attachScreenshot("Clicked Fridge tab");
         click(btnOpenLoginFormFridge);
     }
 
     public void triggerLoginByProfileTab() {
         logStep("1. Click vao Tab Tai khoan");
-        WaitingHelper.waitForClickable(tabProfile);
         click(tabProfile);
-        WaitingHelper.waitForClickable(btnOpenLoginFormProfile);
+        AllureHelper.attachScreenshot("Clicked Profile tab");
         click(btnOpenLoginFormProfile);
     }
 
