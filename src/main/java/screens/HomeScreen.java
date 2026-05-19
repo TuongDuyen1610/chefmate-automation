@@ -379,7 +379,7 @@ public class HomeScreen extends BaseScreen {
             throw new RuntimeException("Recipe list failed to load", e);
         }
     }
-    public void backToHome2() { click(btnBack);}
+
     public void backToHome() {
 
         logStep("Back về Home thật");
@@ -397,7 +397,7 @@ public class HomeScreen extends BaseScreen {
             if (getDriver().findElements(btnBack).size() > 0) {
                 click(btnBack);
             } else {
-//                 fallback nếu không có nút
+                // fallback nếu không có nút
                 getDriver().navigate().back();
             }
 
