@@ -179,7 +179,6 @@ public class GoogleSheetTestListener implements ITestListener {
         try {
             String testId = getTestId(result);
 
-            logger.info("📊 [" + testId + "] START: Capturing screenshot (max " + MAX_SCREENSHOT_RETRY + " retries)...");
 
             /**
              * ✅ STEP 1: CHỤP ẢNH NGAY (SYNC) - CÓ RETRY
@@ -187,9 +186,7 @@ public class GoogleSheetTestListener implements ITestListener {
             String screenshotPath = captureScreenshotWithRetry(testId);
 
             if (screenshotPath != null) {
-                logger.info("✅ [" + testId + "] Screenshot captured: " + screenshotPath);
             } else {
-                logger.warn("⚠️ [" + testId + "] Screenshot capture FAILED after " + MAX_SCREENSHOT_RETRY + " retries");
             }
 
             String evidenceLink = "N/A";
@@ -198,14 +195,11 @@ public class GoogleSheetTestListener implements ITestListener {
              * ✅ STEP 2: UPLOAD ẢNH NGAY (SYNC - chỉ upload nếu có ảnh)
              */
             if (screenshotPath != null) {
-                logger.info("📤 [" + testId + "] START: Uploading to Cloudinary (max 60s)...");
                 evidenceLink = CloudinaryService.uploadScreenshot(
                         screenshotPath,
                         testId + "_" + System.currentTimeMillis()
                 );
-                logger.info("✅ [" + testId + "] Upload complete. Link: " + evidenceLink);
             } else {
-                logger.warn("⚠️ [" + testId + "] Skipped upload - no screenshot available");
             }
 
             /**
@@ -227,14 +221,10 @@ public class GoogleSheetTestListener implements ITestListener {
             /**
              * ✅ STEP 5: UPDATE GOOGLE SHEET NGAY (SYNC)
              */
-            logger.info("📝 [" + testId + "] START: Updating Google Sheet...");
             GoogleSheetService.updateTestResultById(data);
 
-            logger.info("✅ [" + testId + "] COMPLETE: Sheet Updated with Evidence: " + evidenceLink);
 
-//            logger.info("✅ [" + testId + "] COMPLETE: Attempted sheet update. Evidence: " + evidenceLink);
         } catch (Exception e) {
-            logger.error("❌ Error in sendToSheet: " + e.getMessage(), e);
         }
     }
 
@@ -245,28 +235,22 @@ public class GoogleSheetTestListener implements ITestListener {
     private String captureScreenshotWithRetry(String testId) {
         for (int attempt = 1; attempt <= MAX_SCREENSHOT_RETRY; attempt++) {
             try {
-                logger.info("⏳ [" + testId + "] Attempt " + attempt + "/" + MAX_SCREENSHOT_RETRY + ": Capturing...");
 
                 String path = ScreenshotUtil.captureScreenshot(testId);
 
                 if (path != null && !path.isEmpty()) {
-                    logger.info("✅ [" + testId + "] Attempt " + attempt + ": SUCCESS - " + path);
                     return path;
                 } else {
-                    logger.warn("⚠️ [" + testId + "] Attempt " + attempt + ": Returned null/empty");
                 }
 
             } catch (Exception e) {
-                logger.warn("⚠️ [" + testId + "] Attempt " + attempt + " failed: " + e.getClass().getSimpleName() + " - " + e.getMessage());
 
                 // Nếu không phải attempt cuối cùng, retry
                 if (attempt < MAX_SCREENSHOT_RETRY) {
-                    logger.info("🔄 [" + testId + "] Retrying... (Attempt " + (attempt + 1) + " after " + RETRY_DELAY_MS + "ms)");
                     try {
                         Thread.sleep(RETRY_DELAY_MS);
                     } catch (InterruptedException ie) {
                         Thread.currentThread().interrupt();
-                        logger.error("❌ [" + testId + "] Interrupted during retry delay");
                         break;
                     }
                 } else {
