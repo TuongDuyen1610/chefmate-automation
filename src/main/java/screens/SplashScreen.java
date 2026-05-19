@@ -36,8 +36,8 @@ public class SplashScreen extends BaseScreen {
     }
     public void waitUntilSplashDisappear() {
         logStep("Chờ Splash Screen biến mất");
-            WaitingHelper.waitForVisible(splashScreen);
-                WaitingHelper.sleepSeconds(2);
+        WaitingHelper.waitForVisible(splashScreen);
+        WaitingHelper.sleepSeconds(2);
         logStep("Splash Screen completed");
     }
 
