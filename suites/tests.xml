@@ -21,7 +21,7 @@
 <!--            <class name="tests.FridgeTest"/>-->
 <!--            <class name="tests.SaveRecipeTest"/>-->
 <!--            <class name="tests.EditRecipeTest"></class>-->
-<!--            <class name="tests.AddRecipeTest"></class>-->
+<!--            <class name="tes/ts.AddRecipeTest"></class>-->
 <!--             <class name="tests.ShoppingBuilderTest"></class>-->
 <!--            <class name="tests.ShoppingListTest"></class>-->
 <!--            <class name="tests.ShoppingHistoryTest"></class>-->
