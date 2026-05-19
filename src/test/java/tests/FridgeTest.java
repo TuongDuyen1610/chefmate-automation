@@ -1,4 +1,4 @@
-package smoke;
+package tests;
 
 import core.base.BaseTest;
 import flows.FridgeFlow;

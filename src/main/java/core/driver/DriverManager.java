@@ -10,7 +10,7 @@ import java.time.Duration;
 public class DriverManager {
 
     private static final ThreadLocal<AndroidDriver> driverThreadLocal = new ThreadLocal<>();
-    private static final int DRIVER_TIMEOUT_SECONDS = 10; // ⏱️ 60 GIÂY TIMEOUT
+    private static final int DRIVER_TIMEOUT_SECONDS = 8; //
     public static AndroidDriver getDriver() {
         return driverThreadLocal.get();
     }
@@ -24,7 +24,7 @@ public class DriverManager {
                     CapabilityConfig.getAndroidCapabilities()
             );
             // ✅ THÊM TIMEOUT 10 GIÂY
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 
             driverThreadLocal.set(driver);
 
