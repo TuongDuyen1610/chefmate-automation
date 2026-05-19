@@ -1,28 +1,61 @@
 package flows;
 
-import core.base.BaseFlow;
+import screens.ShoppingListScreen;
 
-/**
- * ShoppingListFlow.java
- *
- * MỤC ĐÍCH:
- * - Xử lý luồng "Lập danh sách mua sắm"
- * - Bao gồm thêm nguyên liệu thủ công và hoàn thành danh sách
- */
-public class ShoppingListFlow extends BaseFlow {
+public class ShoppingListFlow {
 
-    public void openShoppingList() {
-        logStep("Mở màn Lập danh sách mua sắm từ menu");
-        System.out.println("→ Mở Shopping List từ menu 3 gạch");
+    private final ShoppingListScreen list = new ShoppingListScreen();
+
+    public void verifyListUI() { list.verifyUI(); }
+
+    public void openAndCloseSupplementPopup() {
+        list.openSupplementPopup();
+        list.closeSupplementPopup();
+        list.verifyUI();
     }
 
-    public void addManualIngredient(String name) {
-        logStep("Thêm nguyên liệu thủ công: " + name);
-        System.out.println("→ Đã thêm nguyên liệu: " + name);
+    public void addSupplementIngredient(String name, String qty, String unit) {
+        list.addSupplementIngredient(name, qty, unit);
     }
 
-    public void completeList() {
-        logStep("Hoàn thành danh sách mua sắm");
-        System.out.println("→ Danh sách mua sắm đã hoàn thành");
+    public void toggleCheckboxAt(int index) { list.toggleCheckboxAt(index); }
+
+    public void clickComplete() { list.clickComplete(); }
+
+    public void clickBack() { list.clickBack(); }
+
+    public void verifyRecipeTabExists(String recipeTitle) { list.verifyRecipeTabExists(recipeTitle); }
+    public void verifyRecipeTabNotExists(String recipeTitle) { list.verifyRecipeTabNotExists(recipeTitle); }
+
+    public void verifyIngredientDisplayed(String text) { list.verifyIngredientDisplayed(text); }
+    public void verifyIngredientDisplayedIgnoreCase(String text) { list.verifyIngredientDisplayedIgnoreCase(text); }
+
+    // ===== EDIT =====
+    public void editIngredientNameAt(int index, String newName) {
+        list.openEditAt(index);
+        list.updateIngredientInEditPopup(newName, null, null);
     }
+
+    public void editIngredientQtyUnitAt(int index, String newQty, String newUnit) {
+        list.openEditAt(index);
+        list.updateIngredientInEditPopup(null, newQty, newUnit);
+    }
+    public void editIngredientAllAt(int index, String newName, String newQty, String newUnit) {
+        list.openEditAt(index);
+        list.updateIngredientInEditPopup(newName, newQty, newUnit);
+    }
+    public boolean isCheckboxCheckedAt(int index) { return list.isCheckboxCheckedAt(index); }
+
+    // ===== DELETE =====
+    public void clickDeleteByExactIndex(int index1Based) {
+        list.clickDeleteByExactIndex(index1Based);
+    }
+    public void clickDeleteByIngredientTextIgnoreCase(String ingredientText) {
+        list.clickDeleteByIngredientTextIgnoreCase(ingredientText);
+    }
+    public int getIngredientCount() { return list.getIngredientCount(); }
+
+    public String getIngredientTextAt(int index) { return list.getIngredientTextAt(index); }
+
+    public void swipeDown(int times) { list.slowSwipeDownOnScreen(times); }
 }
