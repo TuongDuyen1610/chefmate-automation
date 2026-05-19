@@ -59,7 +59,7 @@ public class EditProfileScreen extends BaseScreen {
     // Nút Đổi mật khẩu ở màn Edit Profile (để navigate)
     private final By btnChangePasswordNavigate = By.xpath("//android.widget.TextView[@text='Đổi mật khẩu']");
 
-//    private final By btnBackFromChangePassword = By.xpath("//android.widget.ScrollView/android.widget.Button");
+    //    private final By btnBackFromChangePassword = By.xpath("//android.widget.ScrollView/android.widget.Button");
     // ===== BUTTON =====
     // ✅ Nút Back DƯỚI (trong ScrollView) - Change Password -> Edit Profile
     private final By btnBackFromChangePassword = By.xpath("(//android.widget.ScrollView/android.widget.Button)[1]");
