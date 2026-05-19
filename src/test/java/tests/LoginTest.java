@@ -20,7 +20,7 @@ public class LoginTest extends BaseTest {
     String phoneOrEmail = loginData.login;
     String password = loginData.password;
 
-//     ==================== HAPPY CASE: PHONE ====================
+    //     ==================== HAPPY CASE: PHONE ====================
     @Test(priority = 1, description = "DangNhap_TC_01 - Đăng nhập Tủ lạnh")
     public void DangNhap_TC_01() {
         authFlow.loginFromFridgeTab(phoneOrEmail, password);
@@ -68,18 +68,18 @@ public class LoginTest extends BaseTest {
 
     @Test(priority = 6, description = "DangNhap_TC_06- Để trống Email")
     public void DangNhap_TC_06() {
-            String password = "000000";
-            authFlow.TC_06(password);
-            Assert.assertTrue(authFlow.isToastUpdateInfoDisplayed_TC0607(), "Error: Toast error khong hien thi");
-            logger.info("✅ DangNhap_TC_06 PASSED\n");
+        String password = "000000";
+        authFlow.TC_06(password);
+        Assert.assertTrue(authFlow.isToastUpdateInfoDisplayed_TC0607(), "Error: Toast error khong hien thi");
+        logger.info("✅ DangNhap_TC_06 PASSED\n");
     }
 
     @Test(priority = 7, description = "DangNhap_TC_07 - Để trống Mật khẩu")
     public void DangNhap_TC_07() {
-            String phoneOrEmail = "0000000000";
-            authFlow.TC_07(phoneOrEmail);
-            Assert.assertTrue(authFlow.isToastUpdateInfoDisplayed_TC0607(), "Loi: Toast error khong hien thi");
-            logger.info("✅ DangNhap_TC_07 PASSED\n");
+        String phoneOrEmail = "0000000000";
+        authFlow.TC_07(phoneOrEmail);
+        Assert.assertTrue(authFlow.isToastUpdateInfoDisplayed_TC0607(), "Loi: Toast error khong hien thi");
+        logger.info("✅ DangNhap_TC_07 PASSED\n");
 
     }
 }
