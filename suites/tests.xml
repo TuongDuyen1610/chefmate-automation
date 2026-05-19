@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ChefMate Smoke Tests" parallel="false" thread-count="1">
+
+    <!-- ✅ LISTENERS PHẢI CÓ -->
+    <listeners>
+        <listener class-name="core.listener.AllureTestListener"/>
+    </listeners>
+
+    <test name="Smoke Tests">
+        <classes>
+<!--            <class name="tests.LoginTest"/>-->
+<!--            <class name="tests.RegistrationTest"/>&ndash;&gt;-->
+<!--            <class name="tests.LogoutTest"/>-->
+<!--            <class name="tests.EditProfileTest"></class>-->
+<!--            <class name="tests.ChangePasswordTest"></class>-->
+<!--             <class name="tests.RecipeDisplayTest"/>-->
+<!--                 <class name="tests.SearchTest"/>-->
+<!--             <class name="tests.SaveRecipeTest"/>-->
+            <!-- <class name="tests.BepesAITest"/>-->
+<!--            <class name="tests.FridgeTest"/>-->
+<!--            <class name="tests.SaveRecipeTest"/>-->
+<!--            <class name="tests.EditRecipeTest"></class>-->
+<!--            <class name="tests.AddRecipeTest"></class>-->
+<!--             <class name="tests.ShoppingBuilderTest"></class>-->
+<!--            <class name="tests.ShoppingListTest"></class>-->
+<!--            <class name="tests.ShoppingHistoryTest"></class>-->
+            <!--<class name="tests.ProfileTest"/>-->
+<!--            <class name="tests.ShoppingListTest"/>-->
+        </classes>
+    </test>
+</suite>

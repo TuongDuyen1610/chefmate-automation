@@ -1,5 +1,6 @@
 package flows;
 
+import core.utils.AllureHelper;
 import screens.ProfileScreen;
 import screens.RecipeDetailScreen;
 import screens.SavedRecipesScreen;
@@ -34,6 +35,8 @@ public class SaveRecipeFlow {
 
         profile.clickTabProfile();
         profile.openSavedRecipes();
+        AllureHelper.attachScreenshot("Kho cong thuc hien thi");
+        saved.slowSwipeDownOnScreen(4);
         int total = saved.getTotalRecipes();
         saved.clickBack();
         profile.clickTabHome();
