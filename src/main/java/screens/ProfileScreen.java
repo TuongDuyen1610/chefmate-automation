@@ -74,7 +74,7 @@ public class ProfileScreen extends BaseScreen {
     }
 
     public boolean isProfileScreenDisplayed() {
-        logger.info("🔍 Kiểm tra màn Profile khi chưa login");
+        logger.info("🔍 Kiem tra man Profile khi chua login");
         AllureHelper.step("Verify Profile screen status (not logged in)");
 
         boolean isDisplayed = isDisplayed(sessionLogout);
@@ -93,7 +93,7 @@ public class ProfileScreen extends BaseScreen {
     // ==================== WAIT FOR PROFILE ====================
 
     public void waitForProfileScreen() {
-        logStep("Chờ màn Tài khoản hiển thị");
+        logStep("Cho man Tai khoan hien thi");
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated(userName));
     }
@@ -101,14 +101,14 @@ public class ProfileScreen extends BaseScreen {
     // ==================== PROFILE ACTIONS ====================
 
     public void clickEditProfile() {
-        logStep("Mở Chỉnh sửa hồ sơ");
+        logStep("Mo Chinh sua ho so");
         WaitingHelper.waitForClickable(btnEdit);
         click(btnEdit);
         WaitingHelper.sleepSeconds(2);
     }
 
     public void logout() {
-        logStep("Đăng xuất");
+        logStep("Đang xuat");
         WaitingHelper.waitForClickable(btnLogout);
         click(btnLogout);
         WaitingHelper.sleepSeconds(1);
@@ -118,7 +118,7 @@ public class ProfileScreen extends BaseScreen {
 
     public void clickLoginOnProfileGate() {
         By btnDangNhapNgay = By.xpath("//android.widget.TextView[@text='Đăng nhập ngay']");
-        logStep("Click nút Đăng nhập ngay trên Trang cá nhân");
+        logStep("Click nut Đang nhap ngay tren Trang ca nhan");
         WaitingHelper.waitForClickable(btnDangNhapNgay);
         click(btnDangNhapNgay);
         WaitingHelper.sleepSeconds(2);
@@ -127,7 +127,7 @@ public class ProfileScreen extends BaseScreen {
     // ==================== BOTTOM NAV PROFILE ====================
 
     public void clickBottomNavProfile() {
-        logStep("Click tab Tài khoản");
+        logStep("Click tab Tai khoan");
         click(bottomNavProfile);
     }
 
@@ -136,7 +136,7 @@ public class ProfileScreen extends BaseScreen {
         clickBottomNavProfile();
     }
     public void clickTabHome() {
-        logStep("Click tab Tài khoản");
+        logStep("Click tab Tai khoan");
         click(bottomNavHome);
     }
 
