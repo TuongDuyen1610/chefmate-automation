@@ -49,172 +49,172 @@ public class EditRecipeTest extends BaseTest {
 
         saved.clickEditAt(0);
     }
-    ////    private void saveMultipleRecipes(int count) {
-    ////
-    ////        authFlow.loginFromFridgeTab("duyentest@gmail.com", "123456");
-    ////
-    ////        searchFlow.searchByTag("cà phê");
-    ////
-    ////        for (int i = 0; i < count; i++) {
-    ////
-    ////            search.clickResultAt(i);
-    ////            detail.waitForLoaded();
-    ////
-    ////            boolean isSaved = detail.clickSaveAndVerifyToast();
-    ////            Assert.assertTrue(isSaved, "❌ Save thất bại tại index: " + i);
-    ////
-    ////            detail.clickBackToHome();
-    ////            home.backToHome();
-    ////        }
-    ////    }
+        private void saveMultipleRecipes(int count) {
+
+            authFlow.loginFromFridgeTab("duyentest@gmail.com", "123456");
+
+            searchFlow.searchByTag("cà phê");
+
+            for (int i = 0; i < count; i++) {
+
+                search.clickResultAt(i);
+                detail.waitForLoaded();
+
+                boolean isSaved = detail.clickSaveAndVerifyToast();
+                Assert.assertTrue(isSaved, "❌ Save thất bại tại index: " + i);
+
+                detail.clickBackToHome();
+                home.backToHome();
+            }
+        }
 //    // =========================
 //    // TC_01 - FORM LOAD
 //    // =========================
-//    @Test(priority = 1)
-//    public void RecipeEdit_TC_01() {
-//
-//        goToEditScreen();
-//
-//        Assert.assertTrue(edit.isDisplayed(), "❌ Không vào màn Edit");
-//
-//        Assert.assertTrue(
-//                editFlow.verifyFormLoaded(),
-//                "❌ Form không load đúng dữ liệu"
-//        );
-//    }
-//
-//    // =========================
-//    // TC_02 - UPDATE FULL DATA
-//    // =========================
-//    @Test(priority = 2)
-//    public void RecipeEdit_TC_02() {
-//
-//        goToEditScreen();
-//        // ===== AVATAR =====
-//        edit.clickAvatar();
-//        edit.chooseImageFromGalleryEmulator(2);
-//
-//        WaitingHelper.sleepSeconds(1);
-//
-//        // ===== TAG =====
-//        List<String> tags = Arrays.asList("Cá", "Kem", "Trứng");
-//
-//        edit.addMultipleTags(tags);
-//
-//        String newName = "Auto " + System.currentTimeMillis();
-//
-//        edit.clearName();
-//        edit.inputName(newName);
-//
-//        String newTime = "00: " + System.currentTimeMillis();
-//
-//        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-//        try {
-//            getDriver().hideKeyboard();
-//        } catch (Exception ignored) {}
-//
-//        edit.clearTime();
-//        edit.inputTime(newTime);
-//
-//        String newServing = "" + System.currentTimeMillis();
-//
-//        edit.clearServing();
-//        edit.inputServing(newServing);
-//
-//        edit.slowSwipeDownOnScreen(1);
-//        edit.deleteAllIngredients();
-//
-//        String newStep3 = "Auto_3" + System.currentTimeMillis();
-//        edit.inputStep3(newStep3);
-//        String newStep4 = "4" + System.currentTimeMillis();
-//        edit.inputStep4(newStep4);
-//        String newStep5 = "gam" + System.currentTimeMillis();
-//        edit.inputStep5(newStep5);
-//        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-//        try {
-//            getDriver().hideKeyboard();
-//        } catch (Exception ignored) {}
-//        edit.slowSwipeDownOnScreen(1);
-//        edit.deleteAllSteps();
-//
-//        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-//        try {
-//            getDriver().hideKeyboard();
-//        } catch (Exception ignored) {}
-//
-//        // 🔥 SCROLL 2 LẦN (đủ dùng)
-//        edit.clickUpdate(); // ✅ FIX
-//
-//        saved.clickBack();
-//        profile.clickTabProfile();
-//        profile.openSavedRecipes();
-//
-//        Assert.assertTrue(
-//                saved.isRecipeExist(newName, ""),
-//                "❌ Không update tên thành công"
-//        );
-//    }
-//
-//    // =========================
-//    // TC_03 - UPDATE STEP
-//    // =========================
-//    @Test(priority = 3)
-//    public void RecipeEdit_TC_03() {
-//
-//        goToEditScreen();
-//        edit.slowSwipeDownOnScreen(2);
-//        edit.deleteAllSteps();
-//
-//        edit.clickAddStep();
-//
-//        String newStep1 = "Auto_1_2 " + System.currentTimeMillis();
-//        edit.inputStep1(newStep1);
-//        String newStep2 = "Auto_2_ " + System.currentTimeMillis();
-//        edit.inputStep2(newStep2);
-//
-//        edit.slowSwipeDownOnScreen(1);
-//        edit.clickUpdate(); // ✅ FIX
-//
-//        Assert.assertFalse(
-//                editFlow.isInvalidToast(),
-//                "❌ Update step lỗi"
-//        );
-//    }
-//
-//    // =========================
-//    // TC_04 - UPDATE INGREDIENT
-//    // =========================
-//    @Test(priority = 4)
-//    public void RecipeEdit_TC_04() {
-//
-//        goToEditScreen();
-//        edit.slowSwipeDownOnScreen(1);
-//        edit.deleteAllIngredients();
-//
-//        String newStep3 = "Auto_3" + System.currentTimeMillis();
-//        edit.inputStep3(newStep3);
-//        String newStep4 = "4" + System.currentTimeMillis();
-//        edit.inputStep4(newStep4);
-//        String newStep5 = "gam" + System.currentTimeMillis();
-//        edit.inputStep5(newStep5);
-//
-//        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-//        try {
-//            getDriver().hideKeyboard();
-//        } catch (Exception ignored) {}
-//
-//        edit.slowSwipeDownOnScreen(1);
-//        edit.clickUpdate(); // ✅ FIX
-//
-//        Assert.assertFalse(
-//                editFlow.isInvalidToast(),
-//                "❌ Update ingredient lỗi"
-//        );
-//    }
-//
-//    // =========================
-//    // TC_05 - MULTI EDIT
-//    // =========================
+    @Test(priority = 1)
+    public void RecipeEdit_TC_01() {
+
+        goToEditScreen();
+
+        Assert.assertTrue(edit.isDisplayed(), "❌ Không vào màn Edit");
+
+        Assert.assertTrue(
+                editFlow.verifyFormLoaded(),
+                "❌ Form không load đúng dữ liệu"
+        );
+    }
+
+    // =========================
+    // TC_02 - UPDATE FULL DATA
+    // =========================
+    @Test(priority = 2)
+    public void RecipeEdit_TC_02() {
+
+        goToEditScreen();
+        // ===== AVATAR =====
+        edit.clickAvatar();
+        edit.chooseImageFromGalleryEmulator(2);
+
+        WaitingHelper.sleepSeconds(1);
+
+        // ===== TAG =====
+        List<String> tags = Arrays.asList("Cá", "Kem", "Trứng");
+
+        edit.addMultipleTags(tags);
+
+        String newName = "Auto " + System.currentTimeMillis();
+
+        edit.clearName();
+        edit.inputName(newName);
+
+        String newTime = "00: " + System.currentTimeMillis();
+
+        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
+        try {
+            getDriver().hideKeyboard();
+        } catch (Exception ignored) {}
+
+        edit.clearTime();
+        edit.inputTime(newTime);
+
+        String newServing = "" + System.currentTimeMillis();
+
+        edit.clearServing();
+        edit.inputServing(newServing);
+
+        edit.slowSwipeDownOnScreen(1);
+        edit.deleteAllIngredients();
+
+        String newStep3 = "Auto_3" + System.currentTimeMillis();
+        edit.inputStep3(newStep3);
+        String newStep4 = "4" + System.currentTimeMillis();
+        edit.inputStep4(newStep4);
+        String newStep5 = "gam" + System.currentTimeMillis();
+        edit.inputStep5(newStep5);
+        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
+        try {
+            getDriver().hideKeyboard();
+        } catch (Exception ignored) {}
+        edit.slowSwipeDownOnScreen(1);
+        edit.deleteAllSteps();
+
+        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
+        try {
+            getDriver().hideKeyboard();
+        } catch (Exception ignored) {}
+
+        // 🔥 SCROLL 2 LẦN (đủ dùng)
+        edit.clickUpdate(); // ✅ FIX
+
+        saved.clickBack();
+        profile.clickTabProfile();
+        profile.openSavedRecipes();
+
+        Assert.assertTrue(
+                saved.isRecipeExist(newName, ""),
+                "❌ Không update tên thành công"
+        );
+    }
+
+    // =========================
+    // TC_03 - UPDATE STEP
+    // =========================
+    @Test(priority = 3)
+    public void RecipeEdit_TC_03() {
+
+        goToEditScreen();
+        edit.slowSwipeDownOnScreen(2);
+        edit.deleteAllSteps();
+
+        edit.clickAddStep();
+
+        String newStep1 = "Auto_1_2 " + System.currentTimeMillis();
+        edit.inputStep1(newStep1);
+        String newStep2 = "Auto_2_ " + System.currentTimeMillis();
+        edit.inputStep2(newStep2);
+
+        edit.slowSwipeDownOnScreen(1);
+        edit.clickUpdate(); // ✅ FIX
+
+        Assert.assertFalse(
+                editFlow.isInvalidToast(),
+                "❌ Update step lỗi"
+        );
+    }
+
+    // =========================
+    // TC_04 - UPDATE INGREDIENT
+    // =========================
+    @Test(priority = 4)
+    public void RecipeEdit_TC_04() {
+
+        goToEditScreen();
+        edit.slowSwipeDownOnScreen(1);
+        edit.deleteAllIngredients();
+
+        String newStep3 = "Auto_3" + System.currentTimeMillis();
+        edit.inputStep3(newStep3);
+        String newStep4 = "4" + System.currentTimeMillis();
+        edit.inputStep4(newStep4);
+        String newStep5 = "gam" + System.currentTimeMillis();
+        edit.inputStep5(newStep5);
+
+        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
+        try {
+            getDriver().hideKeyboard();
+        } catch (Exception ignored) {}
+
+        edit.slowSwipeDownOnScreen(1);
+        edit.clickUpdate(); // ✅ FIX
+
+        Assert.assertFalse(
+                editFlow.isInvalidToast(),
+                "❌ Update ingredient lỗi"
+        );
+    }
+
+    // =========================
+    // TC_05 - MULTI EDIT
+    // =========================
     @Test(priority = 5)
     public void RecipeEdit_TC_05() {
 ////
