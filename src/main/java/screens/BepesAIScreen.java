@@ -152,8 +152,8 @@ public class BepesAIScreen extends BaseScreen {
     public void verifyBepesMainUI() {
 
         WaitingHelper.waitForVisible(headerBepes);
-        WaitingHelper.waitForVisible(txtSelectedDish);
-        WaitingHelper.waitForVisible(txtNotesInfo);
+        WaitingHelper.waitForVisible(btnSend);
+        WaitingHelper.waitForVisible(chatInput);
 
         // app có thể đang hiện hoặc ẩn actions
         if (!isDisplayed(toggleHideActions)
