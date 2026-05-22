@@ -1,4 +1,7 @@
 package screens;
+import org.openqa.selenium.remote.RemoteWebElement;
+import java.util.HashSet;
+import java.util.Set;
 
 import core.base.BaseScreen;
 import core.utils.AllureHelper;
@@ -22,6 +25,10 @@ public class SavedRecipesScreen extends BaseScreen {
     private final By recipeItems =
             By.xpath("//z0.h0/android.view.View/android.view.View[2]/android.view.View[1]");
 
+    private final By recipeTimes =
+            By.xpath(
+                    "//android.widget.TextView[contains(@text,'phút') or contains(@text,'giờ')]"
+            );
     private final By title = By.xpath(".//android.widget.TextView[1]");
     private final By author = By.xpath(".//android.widget.TextView[2]");
 
@@ -29,7 +36,7 @@ public class SavedRecipesScreen extends BaseScreen {
 
     // 👉 Nút "Xóa" trong từng item
     private final By btnDeleteInItem =
-            By.xpath(".//android.widget.TextView[@text='Xóa']");
+            By.xpath("//android.widget.TextView[@text='Xóa']");
 
     // 👉 Popup title
     private final By popupDeleteTitle =
@@ -46,6 +53,11 @@ public class SavedRecipesScreen extends BaseScreen {
     private final By btnEdit =
             By.xpath(".//android.widget.TextView[@text='Sửa']");
 
+    private By recipeTitle(String recipeName){
+        return By.xpath(
+                "//android.widget.TextView[@text='" + recipeName + "']"
+        );
+    }
 
     public void clickEditAt(int index) {
 
@@ -55,6 +67,47 @@ public class SavedRecipesScreen extends BaseScreen {
 
         item.findElement(btnEdit).click();
     }
+    public int getVisibleRecipeCount(int scrollRounds) {
+
+        WaitingHelper.waitForVisible(header);
+
+        if (isEmptyRecipe()) return 0;
+
+        Set<String> seen = new HashSet<>();
+
+        for (int round = 0; round <= scrollRounds; round++) {
+
+            List<WebElement> times = getDriver().findElements(recipeTimes);
+
+            for (WebElement el : times) {
+                try {
+                    String id = ((RemoteWebElement) el).getId();
+                    String text = el.getText();
+                    seen.add(id + "|" + text);
+                } catch (Exception e) {
+                    // fallback
+                    seen.add(el.getText() + "|" + el.getLocation());
+                }
+            }
+
+            if (round < scrollRounds) {
+                slowSwipeDownOnScreen(1);
+                WaitingHelper.sleepSeconds(1);
+            }
+        }
+
+        AllureHelper.attachLog("Total unique recipeTimes counted=" + seen.size());
+        AllureHelper.attachScreenshot("After counting total recipes by scrolling");
+
+        return seen.size();
+    }
+    public boolean isEmptyRecipe() {
+
+        return !getDriver().findElements(
+                By.xpath("//android.widget.TextView[@text='Chưa có công thức nào.']")
+        ).isEmpty();
+    }
+
     public boolean isDeletePopupDisplayed() {
         return isDisplayed(popupDeleteTitle);
     }
@@ -82,15 +135,14 @@ public class SavedRecipesScreen extends BaseScreen {
 
         logStep("Click Xóa tại item index: " + index);
 
-        List<WebElement> items = getDriver().findElements(recipeItems);
+        List<WebElement> deleteButtons =
+                getDriver().findElements(btnDeleteInItem);
 
-        WebElement item = items.get(index);
+        deleteButtons.get(index).click();
 
-        WebElement deleteBtn = item.findElement(btnDeleteInItem);
-
-        deleteBtn.click();
-
-        AllureHelper.attachScreenshot("CLICK DELETE ITEM " + index);
+        AllureHelper.attachScreenshot(
+                "CLICK DELETE ITEM " + index
+        );
     }
     // ===== VERIFY =====
 
@@ -105,6 +157,7 @@ public class SavedRecipesScreen extends BaseScreen {
     public boolean isRecipeExist(String expectedTitle, String expectedAuthor) {
 
         logStep("Verify recipe exist: " + expectedTitle);
+
 
         String expected = normalizeText(expectedTitle);
 
@@ -129,8 +182,6 @@ public class SavedRecipesScreen extends BaseScreen {
                 } catch (Exception ignored) {}
             }
 
-            scrollDown();
-
         }
 
         AllureHelper.attachScreenshot("NOT FOUND: " + expectedTitle);
@@ -154,6 +205,11 @@ public class SavedRecipesScreen extends BaseScreen {
             return false;
         }
     }
+    public boolean isRecipeDisplayed(String recipeName){
+        return !getDriver()
+                .findElements(recipeTitle(recipeName))
+                .isEmpty();
+    }
     public void clickBack() {
         click(btnBack);
     }
@@ -161,23 +217,20 @@ public class SavedRecipesScreen extends BaseScreen {
 
         List<WebElement> items = getDriver().findElements(recipeItems);
 
-        List<WebElement> validItems = new java.util.ArrayList<>();
-
-        for (WebElement item : items) {
-            try {
-                validItems.add(item);
-
-            } catch (Exception ignored) {}
+        if (index >= items.size()) {
+            throw new RuntimeException(
+                    "❌ Index vượt quá số lượng item"
+            );
         }
 
-        if (index >= validItems.size()) {
-            throw new RuntimeException("❌ Index vượt quá size: " + index);
-        }
-        String result = validItems.get(index)
+        String result = items.get(index)
+                .findElement(title)
                 .getText();
 
-        System.out.println("👉 TITLE[" + index + "] = " + result);
-        AllureHelper.attachScreenshot("Kho công thức hiển thị");
+        System.out.println(
+                "👉 TITLE[" + index + "] = " + result
+        );
+
         return result;
     }
     public void slowSwipeDownOnScreen(int times) {
