@@ -83,7 +83,7 @@ public class BepesAITest extends BaseTest {
         bepes.verifyFinishPopupUI();
         bepes.completeFinishPopup("finish session");
         for (int i = 0; i < 3; i++) {
-            bepes.openChooseDishSheet();
+            bepes.openChooseDishSheetSmart();
             // close sheet: back (sheet này không thấy Close sheet trong locator chị đưa)
             driver.navigate().back();
             WaitingHelper.sleepSeconds(1);
@@ -416,8 +416,8 @@ public class BepesAITest extends BaseTest {
 
         // precondition: chọn 1 món để mở công thức
         bepes.openChooseDishSheetSmart();
-        bepes.slowSwipeDownOnScreen(1);
-        bepes.clickChooseDishByIndex(1);
+        bepes.slowSwipeDownOnScreen(5);
+        bepes.clickChooseDishByIndex(5);
         bepes.confirmChooseDishPopup();
 
         for (int i = 0; i < 3; i++) {
@@ -555,9 +555,21 @@ public class BepesAITest extends BaseTest {
         Assert.assertFalse(bepes.isHeaderCompleteIconVisible(), "❌ Icon Hoàn thành KHÔNG nên hiển thị khi chưa chat");
         AllureHelper.attachScreenshot("Icon complete hidden as expected");
     }
-
-    // ========== TC_33 ==========
+    // Xóa các món đã chọn trước khi ChatAI
     @Test(priority = 33)
+    public void BepesAI_TC_DacBiet() {
+        login();
+        openBepes();
+        bepes.openChooseDishSheetSmart();
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        driver.navigate().back();
+    }
+    // ========== TC_33 ==========
+    @Test(priority = 34)
     public void BepesAI_TC_33() {
         login();
         openBepes();
@@ -572,14 +584,14 @@ public class BepesAITest extends BaseTest {
     }
 
     // ========== TC_34 ==========
-    @Test(priority = 34)
+    @Test(priority = 35)
     public void BepesAI_TC_34() {
         login();
         openBepes();
 //         precondition: chọn 1 món để mở công thức
         bepes.openChooseDishSheetSmart();
-        bepes.slowSwipeDownOnScreen(2);
-        bepes.clickChooseDishByIndex(3);
+        bepes.slowSwipeDownOnScreen(5);
+        bepes.clickChooseDishByIndex(5);
         bepes.confirmChooseDishPopup();
         String[] msgs = {
                 "Công thức này ngon không?",
@@ -603,14 +615,16 @@ public class BepesAITest extends BaseTest {
     }
 
     // ========== TC_35 ==========
-    @Test(priority = 35)
+    @Test(priority = 36)
     public void BepesAI_TC_35() {
         login();
         openBepes();
 
         bepes.openChooseDishSheetSmart();
-        bepes.slowSwipeDownOnScreen(2);
-        bepes.clickChooseDishByIndex(1);
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        bepes.slowSwipeDownOnScreen(3);
+        bepes.clickChooseDishByIndex(3);
         bepes.confirmChooseDishPopup();
 
         bepes.sendMessage("Món này nấu trong bao lâu?");
@@ -618,7 +632,7 @@ public class BepesAITest extends BaseTest {
     }
 
     // ========== TC_36 ==========
-    @Test(priority = 36)
+    @Test(priority = 37)
     public void BepesAI_TC_36() {
         login();
         openBepes();
@@ -639,7 +653,7 @@ public class BepesAITest extends BaseTest {
     }
 
     // ========== TC_37 ==========
-    @Test(priority = 37)
+    @Test(priority = 38)
     public void BepesAI_TC_37() {
         login();
         openBepes();
