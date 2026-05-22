@@ -1,6 +1,7 @@
 package flows;
 
 import core.utils.AllureHelper;
+import core.utils.WaitingHelper;
 import screens.ProfileScreen;
 import screens.RecipeDetailScreen;
 import screens.SavedRecipesScreen;
@@ -31,15 +32,34 @@ public class SaveRecipeFlow {
 
         return savedOk && exist && isTop;
     }
-    public int getSavedCount() {
+//    public int getSavedCount() {
+//
+//        profile.clickTabProfile();
+//        profile.openSavedRecipes();
+//        AllureHelper.attachScreenshot("Kho cong thuc hien thi");
+//        saved.slowSwipeDownOnScreen(5);
+//        int total = saved.getTotalRecipes();
+////        saved.clickBack();
+////        profile.clickTabHome();
+//        return total;
+//    }
+public int getSavedCount() {
 
-        profile.clickTabProfile();
-        profile.openSavedRecipes();
-        AllureHelper.attachScreenshot("Kho cong thuc hien thi");
-        saved.slowSwipeDownOnScreen(4);
-        int total = saved.getTotalRecipes();
-        saved.clickBack();
-        profile.clickTabHome();
-        return total;
+    profile.clickTabProfile();
+    profile.openSavedRecipes();
+
+    AllureHelper.attachScreenshot("Kho công thức hien thi");
+
+    int total;
+    if (saved.isEmptyRecipe()) {
+        total = 0;
+    } else {
+        total = saved.getVisibleRecipeCount(9); //  vòng scroll, chỉnh tuỳ kho dài //3 là lý tưởng
     }
+
+    saved.clickBack();
+    profile.clickTabHome();
+
+    return total;
+}
 }
