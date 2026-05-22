@@ -10,14 +10,15 @@
     <test name="Smoke Tests">
         <classes>
 <!--            <class name="tests.LoginTest"/>-->
-<!--            <class name="tests.RegistrationTest"/>&ndash;&gt;-->
+<!--            <class name="tests.RegistrationTest"/>-->
+<!--            //Device real-->
 <!--            <class name="tests.LogoutTest"/>-->
-<!--            <class name="tests.EditProfileTest"></class>-->
-<!--            <class name="tests.ChangePasswordTest"></class>-->
+<!--            <class name="tests.EditProfileTest"/>-->
+<!--            <class name="tests.ChangePasswordTest"/>-->
 <!--             <class name="tests.RecipeDisplayTest"/>-->
-<!--                 <class name="tests.SearchTest"/>-->
-<!--             <class name="tests.SaveRecipeTest"/>-->
-            <!-- <class name="tests.BepesAITest"/>-->
+<!--            <class name="tests.SearchTest"/>-->
+             <class name="tests.SaveRecipeTest"/>
+<!--             <class name="tests.BepesAITest"/>-->
 <!--            <class name="tests.FridgeTest"/>-->
 <!--            <class name="tests.SaveRecipeTest"/>-->
 <!--            <class name="tests.EditRecipeTest"></class>-->
