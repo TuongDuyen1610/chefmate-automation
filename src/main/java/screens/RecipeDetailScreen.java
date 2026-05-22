@@ -104,10 +104,10 @@ public class RecipeDetailScreen extends BaseScreen {
             By.xpath("//android.widget.AutoCompleteTextView[@text='Tưởng Duyên']");
 
     private final By fbSendBtn =
-            By.xpath("//android.widget.Button[contains(@text,'GỬI')]");
+            By.xpath("(//android.view.ViewGroup[@content-desc='GỬI'])[1]");
 
     private final By fbSentStatus =
-            By.xpath("//android.widget.Button[contains(@text,'Đã gửi')]");
+            By.xpath("//android.view.ViewGroup[@content-desc='Đã gửi']");
 
     // ===== SHARE Zalo =====
     private final By toastShared =
