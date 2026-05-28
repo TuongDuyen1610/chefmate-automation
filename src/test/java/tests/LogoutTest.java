@@ -38,8 +38,6 @@ public class LogoutTest extends BaseTest {
         Assert.assertTrue(authFlow.isLogoutSuccessful(), " Quay lai man Profile o trang thai chua dang nhap");
     }
 
-//     ==================== UNHAPPY CASE ====================
-
     @Test(priority = 2, description = "DangXuat_TC_02 - Hủy đăng xuất")
     public void DangXuat_TC_02() {
 
@@ -54,5 +52,37 @@ public class LogoutTest extends BaseTest {
         Assert.assertTrue(profileFlow.isProfileDisplayed(), "❌ Error: Van phai o Profile!");
 
         System.out.println("✅ DangXuat_TC_02 PASS");
+    }
+    //     ==================== UNHAPPY CASE ====================
+    @Test(priority = 3, description = "DangXuat_TC_03 - Đăng xuất khi chưa đăng nhập")
+    public void DangXuat_TC_03() {
+        System.out.println("\n=== DangXuat_TC_03 - ĐANG XUAT KHI CHUA LOGIN ===");
+
+        // 1. Không login
+
+        // 2. Đăng xuất
+        authFlow.performLogout();
+
+        // 3. Verify: Quay lại Màn Profile
+        Assert.assertTrue(authFlow.isLogoutNotLogin(),
+                "❌ Error: Không báo lỗi khi đang ở trạng thái chưa đăng nhập mà nhấn logout.");
+    }
+
+    @Test(priority = 4, description = "DangXuat_TC_04 - Đang xuat re-login")
+    public void DangXuat_TC_04() {
+        System.out.println("\n=== DangXuat_TC_04- ĐANG XUAT RE-LOGIN ===");
+
+        // 1. Login trước
+        authFlow.loginFromFridgeTab(phoneOrEmail, password);
+        Assert.assertTrue(authFlow.isLoggedInSuccessfully(), "Đang nhap thanh cong!");
+
+        // 2. Đăng xuất
+        authFlow.performLogout();
+
+        // 3. Verify: Quay lại Màn Profile
+        Assert.assertTrue(authFlow.isLogoutSuccessful(), " Quay lai man Profile o trang thai chua dang nhap");
+
+        authFlow.loginFromFridgeTab(phoneOrEmail, password);
+        Assert.assertTrue(authFlow.isLoggedInSuccessfully(), "❌ Không login lại được sau khi đã logout");
     }
 }
