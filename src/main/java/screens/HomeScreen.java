@@ -68,11 +68,23 @@ public class HomeScreen extends BaseScreen {
 //    }
     public boolean isHomeDisplayed() {
 
+//        try {
+//            return getDriver().findElements(lblTopTrendingRecipes).size() > 0;
+//        } catch (Exception e) {
+//            return false;
+//        }
         try {
-            return getDriver().findElements(lblTopTrendingRecipes).size() > 0;
+            boolean result = isDisplayed(lblTopTrendingRecipes);
+            if (result) {
+                AllureHelper.attachScreenshot("✅ Home screen displayed");
+            }
+            return result;
         } catch (Exception e) {
+            logger.error("Home Screen not displayed", e);
+            AllureHelper.attachErrorMessage("Home screen error: " + e.getMessage());
             return false;
         }
+
     }
 
     /**
