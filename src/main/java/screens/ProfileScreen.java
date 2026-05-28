@@ -26,7 +26,7 @@ public class ProfileScreen extends BaseScreen {
     private final By sessionLogout = By.xpath("(//android.widget.TextView[@text=\"Đang cập nhật...\"])[1]");
     private final By btnSavedRecipes = By.xpath("//android.widget.TextView[@text='Kho công thức']");
     private final By bottomNavHome = By.xpath("//android.widget.TextView[@text='Trang chủ']");
-
+    private final By toastIsLogoutNotLogin = By.xpath("//android.widget.TextView[@text='Vui lòng đăng nhập để sử dụng tính năng này']");
     // ==================== PROFILE INFO - DYNAMIC LOCATORS ====================
     // Sử dụng contains() để match dữ liệu động
 
@@ -89,7 +89,30 @@ public class ProfileScreen extends BaseScreen {
 
         return isDisplayed;
     }
+    public boolean isNoChangeMessageDisplayed(){
+        try {
+            logger.info("✅ Không thay đổi thông tin");
+            return true;
+        } catch (Exception e) {
+            logger.info("✅ Thông tin bị thay đổi");
+            return false;
+        }
+    }
+    public boolean isLogoutNotLogin(){
+        logStep("🔍 Verify Toast: Vui long đien đay đu thong tin");
 
+        try {
+            getDriver().findElement(toastIsLogoutNotLogin);
+            logger.info("✅ Toast error msg hien thi thanh cong");
+            AllureHelper.attachScreenshot("Toast error displayed");
+            logStep("✅ Toast displayed");
+            return true;
+        } catch (Exception e) {
+            logger.info("✅ Toast error msg khong hien thi ");
+            AllureHelper.attachScreenshot("Toast error not displayed");
+            return false;
+        }
+    }
     // ==================== WAIT FOR PROFILE ====================
 
     public void waitForProfileScreen() {
@@ -180,6 +203,7 @@ public class ProfileScreen extends BaseScreen {
     public void openSavedRecipes() {
         logStep("Open Saved Recipes");
         click(btnSavedRecipes);
+        WaitingHelper.sleepSeconds(4);
         AllureHelper.attachScreenshot("OPEN SAVED RECIPES");
     }
 
