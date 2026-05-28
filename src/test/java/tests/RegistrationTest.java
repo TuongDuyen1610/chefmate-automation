@@ -2,6 +2,7 @@ package tests;
 
 import core.base.BaseTest;
 import flows.AuthenticationFlow;
+import screens.ProfileScreen;
 import screens.RegistrationScreen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,7 +16,15 @@ public class RegistrationTest extends BaseTest {
 
     private final AuthenticationFlow authFlow = new AuthenticationFlow();
     private final RegistrationScreen registration = new RegistrationScreen();
-
+    private final ProfileScreen profile = new ProfileScreen();
+    //        Assert.assertTrue(condition, message);
+//        condition	Điều kiện cần đúng
+//        message	Nội dung lỗi nếu điều kiện sai
+//        Assert.assertFail(message); Assert.fail() không cần condition
+//vì nó dùng để ép testcase FAIL ngay lập tức.
+//        message   Nội dung lỗi luôn luôn được đánh dấu FAIL
+//    ko hiển thị toast, ko đki thành coong
+    // Không nên assert toast nếu app không hiện toast/xpath.
     // ==================== HAPPY CASE ====================
 
     // TC_01 Chỉ dùng khi chưa đăng ký, và chỉ chạy 1 lần sau đó disable,
@@ -130,5 +139,105 @@ public class RegistrationTest extends BaseTest {
         Assert.assertTrue(authFlow.isLoginScreenStillDisplayed(),
                 "❌ Không quay lại màn Login!");
         System.out.println("✅ DangKy_TC_13 PASS");
+    }
+
+    @Test(priority = 14, description = "DangKy_TC_14 - Email sai định dạng ")
+    public void DangKy_TC_14() {
+        authFlow.registerNewAccount("Tuong Duyen 05", "0912345242", "test03@.com", "Pass@123", "Pass@123");
+        Assert.assertTrue(authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+    }
+
+
+    @Test(priority = 15, description = "DangKy_TC_15 - Email có dấu tiếng Việt, ký tự Unicode")
+    public void DangKy_TC_15() {
+        String fullName = "Tuong Duyen 05";
+        String phone = "0900009996";
+        String email = "TưởngDuyên05@gmail.com";
+        String password = "Pass@123";
+
+        authFlow.registerNewAccount(fullName, phone, email, password, password);
+        Assert.assertTrue(authFlow.isRegistrationSuccessful(), "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+        System.out.println("✅ DangKy_TC_15 PASS");
+    }
+
+    @Test(priority = 16, description = "DangKy_TC_16 - SĐT sai định dạng")
+    public void DangKy_TC_16() {
+        authFlow.registerNewAccount("Tuong Duyen 06", "09123abcdsfe", "test06@gmail.com", "Pass@123", "Pass@123");
+        Assert.assertTrue(authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+    }
+
+    @Test(priority = 17, description = "DangKy_TC_17 - Họ tên chứa số/ký tự đặc biệt")
+    public void DangKy_TC_17() {
+        authFlow.registerNewAccount("Duyentest07&%@%@$", "0952335345", "test07@gmail.com", "Pass@123", "Pass@123");
+        Assert.assertTrue(authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+    }
+
+    @Test(priority = 18, description = "DangKy_TC_18 - Mật khẩu ký tự dưới min/không đủ ký tự")
+    public void DangKy_TC_18() {
+        authFlow.registerNewAccount("Duyentest14", "0912285409", "test14@gmail.com", "23", "23");
+        Assert.assertTrue(authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+    }
+
+    @Test(priority = 19, description = "DangKy_TC_19 - Mật khẩu có khoảng trắng, ký tự đặc biệt")
+    public void DangKy_TC_19() {
+        authFlow.registerNewAccount("Duyentest09", "0912325321", "test09@gmail.com", "2***3 ", "2***3 ");
+        Assert.assertTrue(authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+    }
+
+    @Test(priority = 20, description = "DangKy_TC_20 - Dữ liệu all trường max ký tự (vượt quá)")
+    public void DangKy_TC_20() {
+        String maxName = "Test".repeat(200);
+        String maxPhone = "09".repeat(200);
+        String maxEmail = "test".repeat(200) + "@mail.com";
+        String maxPassword = "test".repeat(200);
+        authFlow.registerNewAccount(maxName, maxPhone, maxEmail, maxPassword, maxPassword);
+        // Nếu app không chuyển sang màn Home/Profile, mà vẫn ở đăng ký:
+        Assert.assertTrue(authFlow.isRegistrationScreenDisplayed(), "App hiện tại KHÔNG đăng ký thành công, vẫn ở đăng ký, không toast/error.");
+        System.out.println("✅ TC20 PASS - App hiện tại không cho đăng ký với dữ liệu vượt max, nhưng không báo lỗi rõ ràng.");
+    }
+
+    @Test(priority = 21, description = "DangKy_TC_21 - Đăng ký nhiều lần liên tục với cùng dữ liệu (2 lần)")
+    public void DangKy_TC_21() {
+        String name = "Duyentest12";
+        String phone = "0912344131";
+        String email = "testduyen12@gmail.com";
+        String pass = "testduyen12";
+        authFlow.registerNewAccount(name, phone, email, pass, pass);
+        Assert.assertTrue(
+                authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+        authFlow.performLogout();
+        authFlow.registerNewAccount(name, phone, email, pass, pass);
+        Assert.assertTrue(authFlow.isRegistrationScreenDisplayed(), "App hiện tại KHÔNG đăng ký thành công, vẫn ở đăng ký, không toast/error.");
+    }
+
+    @Test(priority = 22, description = "DangKy_TC_22 - Nhập all field toàn chữ hoa/thường")
+    public void DangKy_TC_22() {
+        authFlow.registerNewAccount("TEST DUYEN D", "TESTDUYEN D", "TESTDUYEND@gmail", "TESTDUYENN", "TESTDUYENN");
+        Assert.assertTrue(
+                authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
+    }
+
+    @Test(priority = 23, description = "DangKy_TC_23 - Kiểm tra Đăng ký Nhập khoảng trắng đầu/cuối từng field")
+    public void DangKy_TC_23() {
+        authFlow.registerNewAccount(" TEST DUYEN 13 ", " TESTDUYEN 13 ", " TESTDUYEN13@gmail ", " TESTDUYEN13 ", " TESTDUYEN13 ");
+        Assert.assertTrue(
+                authFlow.isRegistrationSuccessful(),
+                "❌ Lỗi: Đăng ký thất bại, không vào được Home!"
+        );
     }
 }
