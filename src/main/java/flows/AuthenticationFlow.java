@@ -1,5 +1,3 @@
-
-
 package flows;
 
 import core.base.BaseFlow;
@@ -22,7 +20,7 @@ public class AuthenticationFlow extends BaseFlow {
     private final HomeScreen home = new HomeScreen();
     private final LoginScreen login = new LoginScreen();
     private final LoginGateHelper gateHelper = new LoginGateHelper();
-    private final FridgeScreen fridge = new FridgeScreen();
+    //    private final FridgeScreen fridge = new FridgeScreen();
     private final ProfileScreen profile = new ProfileScreen();
     private final RegistrationScreen registration = new RegistrationScreen();
     private final LogoutScreen logout = new LogoutScreen();
@@ -97,7 +95,15 @@ public class AuthenticationFlow extends BaseFlow {
         AllureHelper.step("Verify error toast message");
         return login.isToastUpdateInfoDisplayed_TC0607();
     }
-
+    @Step("✅ Verify error toast displayed")
+    public boolean isToastLoginFail() {
+        AllureHelper.step("Verify error toast message");
+        return login.isToastLoginFail();
+    }
+    public boolean isWrongCurrentPasswordErrorDisplayed(){
+        AllureHelper.step("Verify error toast message");
+        return edit.isWrongCurrentPasswordErrorDisplayed();
+    }
     public void TC_06(String password) {
         splash.waitUntilSplashDisappear();
         gateHelper.triggerLoginByProfileTab();
@@ -187,7 +193,10 @@ public class AuthenticationFlow extends BaseFlow {
         logStep("Verify: Still LoggedIn (Van o Home)");
         return home.isHomeDisplayed();
     }
-
+    public boolean isLogoutNotLogin(){
+        logStep("Verify: Still Profile session not login");
+        return profile.isLogoutNotLogin();
+    }
     public void goBackToLoginFromRegistration() {
         logStep("Quay lai man dang nhap tu man dang ky");
         splash.waitUntilSplashDisappear();
@@ -240,7 +249,13 @@ public class AuthenticationFlow extends BaseFlow {
         edit.enterPhone(phone);
         edit.clickSave();
     }
-
+    public void updateAllInfo2(String name, String email, String phone) {
+        profile.clickBottomNavProfile();
+        edit.openEditProfileScreen();
+        edit.enterFullName(name);
+        edit.enterEmail(email);
+        edit.enterPhone(phone);
+    }
     public void saveAndBackProfile() {
         edit.clickSave();
         edit.clickBack();
@@ -333,7 +348,7 @@ public class AuthenticationFlow extends BaseFlow {
         edit.enterNewPassword(newPassword);
         edit.enterConfirmPassword(confirmPassword);
 
-        edit.clickConfirmChangePassword();
+//        edit.clickConfirmChangePassword();
     }
     public void changePassword2(String currentPassword, String newPassword, String confirmPassword) {
         logStep("Thuc hien doi mat khau");
@@ -372,5 +387,12 @@ public class AuthenticationFlow extends BaseFlow {
         logStep("Quay lai tu man Doi mat khau");
         edit.clickBackFromChangePassword();
         WaitingHelper.sleepSeconds(2);
+    }
+    public boolean isChangePasswordSuccessDisplayed(){
+        return edit.isChangePasswordSuccessDisplayed();}
+
+    public void checkShowHidePasswordIconAllFields(){
+        logStep("Thuc hien click icon show/hide doi mat khau");
+        edit.checkShowHidePasswordIconAllFields();
     }
 }
