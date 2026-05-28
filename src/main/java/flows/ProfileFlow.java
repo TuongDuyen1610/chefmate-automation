@@ -25,4 +25,7 @@ public class ProfileFlow extends BaseFlow {
     public void clickProfileDisplayed() {
         profile.clickBottomNavProfile();
     }
+    public boolean isNoChangeMessageDisplayed() {
+        return profile.isNoChangeMessageDisplayed();
+    }
 }
