@@ -73,7 +73,10 @@ public class EditProfileScreen extends BaseScreen {
     private final By toastChangePasswordSuccess = By.xpath("//android.widget.Toast[@text='Đổi mật khẩu thành công']");
     private final By toastChangePasswordError = By.xpath("//android.widget.Toast[@text='Mật khẩu mới không được trùng với mật khẩu hiện tại']");
     private final By toastChangePasswordError2 = By.xpath("//android.widget.Toast[@text='Mật khẩu mới và xác nhận mật khẩu không khớp']");
-
+    private final By iconShowHideChangePassword1 = By.xpath("//android.widget.ScrollView/android.widget.EditText[1]/android.widget.Button");
+    private final By iconShowHideChangePassword2 = By.xpath("//android.widget.ScrollView/android.widget.EditText[2]/android.widget.Button");
+    private final By iconShowHideChangePassword3 = By.xpath("//android.widget.ScrollView/android.widget.EditText[3]/android.widget.Button");
+    private final By errorToastPasswordCurentIncorrect = By.xpath("//android.widget.Toast[@text='Current password is incorrect']");
     // ==================== EDIT PROFILE ACTIONS ====================
 
     public void openEditProfileScreen() {
@@ -139,7 +142,17 @@ public class EditProfileScreen extends BaseScreen {
 
         return isDisplayed;
     }
+    public String getFullNameFieldValue() {
+        return getDriver().findElement(inputFullName).getText();
+    }
 
+    public String getEmailFieldValue() {
+        return getDriver().findElement(inputEmail).getText();
+    }
+
+    public String getPhoneFieldValue() {
+        return getDriver().findElement(inputPhone).getText();
+    }
     // ==================== PASSWORD INPUT METHODS ====================
 
     public void enterCurrentPassword(String password) {
@@ -189,20 +202,20 @@ public class EditProfileScreen extends BaseScreen {
     // ==================== CONFIRM & BACK ====================
 
     public void clickConfirmChangePassword() {
-        logStep("Click nut Doi mat khau confirm");
+        logStep("Click nut Doi mat khau cuoi cung");
         click(btnConfirmChangePassword);
-        WaitingHelper.sleepSeconds(1);
-
-        try {
-            getDriver().findElement(toastChangePasswordSuccess);
-            logger.info("Toast update success displayed");
-            AllureHelper.attachScreenshot("Toast Update Success Displayed");
-        } catch (Exception e) {
-            logger.error("Toast update success NOT displayed" + e.getMessage());
-            AllureHelper.attachScreenshot("Change Password Success Toast NOT Found");
-            throw new AssertionError("Toast doi mat khau khong hien thi");
-        }
     }
+
+//    public boolean istoastChangePasswordSuccess(){
+//        try {
+//        getDriver().findElement(toastChangePasswordSuccess);
+//        logger.info("Toast update success displayed");
+//        AllureHelper.attachScreenshot("Toast Update Success Displayed");
+//    } catch (Exception e) {
+//        logger.error("Toast update success NOT displayed" + e.getMessage());
+//        AllureHelper.attachScreenshot("Change Password Success Toast NOT Found");
+//        throw new AssertionError("Toast doi mat khau khong hien thi");
+//    }
 
     public void clickBackFromChangePassword() {
         logStep("Click Back tu man Doi mat khau");
@@ -213,19 +226,19 @@ public class EditProfileScreen extends BaseScreen {
 
     // ==================== TOAST VERIFICATION =====
 
-//    public boolean isChangePasswordSuccessDisplayed() {
-//        click(btnChangePassword);
-//        WaitingHelper.sleepSeconds(1);
-//        try {
-//            getDriver().findElement(toastChangePasswordSuccess);
-//            logger.info("Toast error displayed");
-//            AllureHelper.attachScreenshot("Toast Error Displayed");
-//            return true;
-//        } catch (Exception e) {
-//            logger.error("Toast error NOT displayed");
-//            return false;
-//        }
-//    }
+    public boolean isChangePasswordSuccessDisplayed() {
+        click(btnConfirmChangePassword);
+        WaitingHelper.sleepSeconds(1);
+        try {
+            getDriver().findElement(toastChangePasswordSuccess);
+            logger.info("Toast error displayed");
+            AllureHelper.attachScreenshot("Toast Error Displayed");
+            return true;
+        } catch (Exception e) {
+            logger.error("Toast error NOT displayed");
+            return false;
+        }
+    }
 
     public boolean isChangePasswordErrorDisplayed() {
         click(btnChangePassword);
@@ -246,6 +259,19 @@ public class EditProfileScreen extends BaseScreen {
         WaitingHelper.sleepSeconds(1);
         try {
             getDriver().findElement(toastChangePasswordError2);
+            logger.info("Toast error displayed");
+            AllureHelper.attachScreenshot("Toast Error Displayed");
+            return true;
+        } catch (Exception e) {
+            logger.error("Toast error NOT displayed");
+            return false;
+        }
+    }
+    public boolean isWrongCurrentPasswordErrorDisplayed() {
+        click(btnChangePassword);
+        WaitingHelper.sleepSeconds(1);
+        try {
+            getDriver().findElement(errorToastPasswordCurentIncorrect);
             logger.info("Toast error displayed");
             AllureHelper.attachScreenshot("Toast Error Displayed");
             return true;
@@ -299,6 +325,13 @@ public class EditProfileScreen extends BaseScreen {
             return false;
         }
     }
+    public void checkShowHidePasswordIconAllFields(){
+        click(iconShowHideChangePassword1);
+        click(iconShowHideChangePassword2);
+        click(iconShowHideChangePassword3);
+        AllureHelper.attachScreenshot("Icon show password ");
+    }
+
 
     // ==================== HELPER METHOD - XOA TEXT FIELD =====
 
