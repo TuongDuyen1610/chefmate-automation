@@ -1,14 +1,14 @@
-2026-05-22 23:05:37 [main] INFO  core.base.BaseTest - ======================================================
-2026-05-22 23:05:37 [main] INFO  core.base.BaseTest - 🚀 KHỞI ĐỘNG SUITE KIỂM THỬ: CHUẨN BỊ MÔI TRƯỜNG
-2026-05-22 23:05:37 [main] INFO  core.base.BaseTest - ======================================================
-2026-05-22 23:05:37 [main] INFO  core.base.BaseTest - --- 🔄 BẮT ĐẦU TEST CASE ---
-2026-05-22 23:05:37 [main] INFO  core.base.BaseTest - 📱 Đang cấu hình thiết bị: DefaultDevice (Phiên bản: DefaultVersion)
-2026-05-22 23:05:40 [main] INFO  core.base.BaseTest - ✅ Appium Driver đã sẵn sàng. Session ID: 2f9b85e8-4ff0-4d61-b54f-f227139f2cdc
-2026-05-22 23:05:40 [main] INFO  core.base.BaseTest - 📊 Đã kết nối Allure Helper để theo dõi các bước test.
-2026-05-22 23:06:20 [main] INFO  core.base.BaseTest - --- 🛑 KẾT THÚC TEST CASE ---
-2026-05-22 23:06:20 [main] INFO  core.base.BaseTest - 🧹 Đang đóng ứng dụng và giải phóng tài nguyên Driver...
-2026-05-22 23:06:20 [main] INFO  core.base.BaseTest - ✅ Đã dọn dẹp driver thành công.
-2026-05-22 23:06:20 [main] INFO  core.base.BaseTest - ======================================================
-2026-05-22 23:06:20 [main] INFO  core.base.BaseTest - 🏁 TẤT CẢ TEST CASES ĐÃ HOÀN THÀNH
-2026-05-22 23:06:20 [main] INFO  core.base.BaseTest - 📊 Vui lòng kiểm tra Allure Report và Google Sheets để xem kết quả.
-2026-05-22 23:06:20 [main] INFO  core.base.BaseTest - ======================================================
+2026-06-01 12:03:38 [main] INFO  core.base.BaseTest - ======================================================
+2026-06-01 12:03:38 [main] INFO  core.base.BaseTest - 🚀 KHỞI ĐỘNG SUITE KIỂM THỬ: CHUẨN BỊ MÔI TRƯỜNG
+2026-06-01 12:03:38 [main] INFO  core.base.BaseTest - ======================================================
+2026-06-01 12:03:38 [main] INFO  core.base.BaseTest - --- 🔄 BẮT ĐẦU TEST CASE ---
+2026-06-01 12:03:38 [main] INFO  core.base.BaseTest - 📱 Đang cấu hình thiết bị: DefaultDevice (Phiên bản: DefaultVersion)
+2026-06-01 12:03:43 [main] INFO  core.base.BaseTest - ✅ Appium Driver đã sẵn sàng. Session ID: 39f76ee6-1ef3-4c68-ba09-200b5c38189a
+2026-06-01 12:03:43 [main] INFO  core.base.BaseTest - 📊 Đã kết nối Allure Helper để theo dõi các bước test.
+2026-06-01 12:04:00 [main] INFO  core.base.BaseTest - --- 🛑 KẾT THÚC TEST CASE ---
+2026-06-01 12:04:00 [main] INFO  core.base.BaseTest - 🧹 Đang đóng ứng dụng và giải phóng tài nguyên Driver...
+2026-06-01 12:04:00 [main] INFO  core.base.BaseTest - ✅ Đã dọn dẹp driver thành công.
+2026-06-01 12:04:00 [main] INFO  core.base.BaseTest - ======================================================
+2026-06-01 12:04:00 [main] INFO  core.base.BaseTest - 🏁 TẤT CẢ TEST CASES ĐÃ HOÀN THÀNH
+2026-06-01 12:04:00 [main] INFO  core.base.BaseTest - 📊 Vui lòng kiểm tra Allure Report và Google Sheets để xem kết quả.
+2026-06-01 12:04:00 [main] INFO  core.base.BaseTest - ======================================================
