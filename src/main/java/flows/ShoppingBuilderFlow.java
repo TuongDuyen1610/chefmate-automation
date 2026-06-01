@@ -30,7 +30,6 @@ public class ShoppingBuilderFlow {
 
     public void login(String email, String password) {
         authFlow.loginFromFridgeTab(email, password);
-//        WaitingHelper.sleepSeconds(2);
         if (!authFlow.isLoggedInSuccessfully()) {
             AllureHelper.attachScreenshot("LOGIN FAILED");
             throw new AssertionError("❌ Login failed");
