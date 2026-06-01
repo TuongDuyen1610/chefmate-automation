@@ -1,22 +1,30 @@
 package flows;
 
-import core.base.BaseFlow;
-import screens.FridgeScreen;
-import screens.HomeScreen;
+import core.utils.AllureHelper;
+import screens.*;
 
-public class FridgeFlow extends BaseFlow {
 
-    private final HomeScreen home = new HomeScreen();
+public class FridgeFlow {
+
+    private final AuthenticationFlow authFlow = new AuthenticationFlow();
+
     private final FridgeScreen fridge = new FridgeScreen();
 
-    public void openFridge() {
-        logStep("Từ Home mở Tủ lạnh");
-        // Sử dụng Bottom Navigation (sẽ có NavigationFlow hỗ trợ)
-        home.openGoiYTuTuLanh(); // hoặc click bottom nav
+    public void login(String email, String password) {
+        authFlow.loginFromFridgeTab(email, password);
+        if (!authFlow.isLoggedInSuccessfully()) {
+            AllureHelper.attachScreenshot("LOGIN FAILED");
+            throw new AssertionError("❌ Login failed");
+        }
+        AllureHelper.attachScreenshot("LOGIN SUCCESS");
     }
 
-    public void addIngredient(String name, String qty, String unit) {
-        logStep("Thêm nguyên liệu vào tủ lạnh");
-        fridge.addIngredient(name, qty, unit);
+    public void openFridge() {
+        fridge.openFridgeScreen();
+        fridge.verifyInitialUI();
+    }
+
+    public void addManualIngredient(String name, String qty, String unit, String dueDate) {
+        fridge.addManualIngredient(name, qty, unit, dueDate);
     }
 }
