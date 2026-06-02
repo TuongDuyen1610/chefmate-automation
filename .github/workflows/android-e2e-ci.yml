@@ -31,10 +31,10 @@ jobs:
           npm install -g appium
           appium driver install uiautomator2
 
-      # 4️⃣ Bước 4: Khởi động Appium Server chạy ngầm
+      # 4️⃣ Bước 4: Khởi động Appium Server chạy ngầm (Đã sửa lỗi cú pháp dòng 37)
       - name: Run Appium Server
         run: appium --log appium.log &
-        no-output-timeout: 5m
+        timeout-minutes: 5
 
       # 5️⃣ Bước 5: Tạo máy ảo Android, bật lên và chạy lệnh test Maven
       - name: Run Android Emulator and Execute Tests
