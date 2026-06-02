@@ -2,6 +2,7 @@ package config;
 
 import io.appium.java_client.android.options.UiAutomator2Options;
 
+import java.io.File;
 import java.time.Duration;
 
 public class CapabilityConfig {
@@ -13,8 +14,25 @@ public class CapabilityConfig {
         options.setDeviceName(EnvironmentConfig.get("deviceName"));
         options.setAutomationName(EnvironmentConfig.get("automationName"));
 
-        options.setAppPackage(EnvironmentConfig.get("appPackage"));
-        options.setAppActivity(EnvironmentConfig.get("appActivity"));
+//        options.setAppPackage(EnvironmentConfig.get("appPackage"));
+//        options.setAppActivity(EnvironmentConfig.get("appActivity"));
+
+        // 🎯 ĐIỂM MẤU CHỐT: Cấu hình đường dẫn tuyệt đối động cho file APK
+        // System.getProperty("user.dir") giúp lấy thư mục gốc của project dù chạy ở máy chị hay máy ảo GitHub
+        String appPath = System.getProperty("user.dir") + File.separator + "src"
+                + File.separator + "test" + File.separator + "resources"
+                + File.separator + "chefmate-app.debug.apk";
+
+        File apkFile = new File(appPath);
+        if (apkFile.exists()) {
+            options.setApp(apkFile.getAbsolutePath());
+            System.out.println("📦 [CAPABILITY] Đã tìm thấy và cấu hình nạp file APK: " + apkFile.getAbsolutePath());
+        } else {
+            System.out.println("⚠️ [CAPABILITY] Không thấy file APK tại resources, thử chạy bằng Package/Activity có sẵn...");
+            options.setAppPackage(EnvironmentConfig.get("appPackage"));
+            options.setAppActivity(EnvironmentConfig.get("appActivity"));
+        }
+
         // Tối ưu cho automation
         options.setNoReset(false);
         options.setFullReset(false);
