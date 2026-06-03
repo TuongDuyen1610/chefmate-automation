@@ -26,14 +26,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          
-      - name: Cache Android Emulator 
-        uses: actions/cache@v4 
-        with: 
-          path: | 
-              ~/.android/avd 
-              ~/.android/adb* 
-              key: avd-${{ runner.os }}-api30
               
       # 3️⃣ Bước 3: Cài đặt NodeJS và Appium Server
       - name: Install NodeJS & Appium
