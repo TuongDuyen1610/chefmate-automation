@@ -26,7 +26,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-
+          
+      - name: Cache Android Emulator 
+        uses: actions/cache@v4 
+        with: 
+          path: | 
+              ~/.android/avd 
+              ~/.android/adb* 
+              key: avd-${{ runner.os }}-api30
+              
       # 3️⃣ Bước 3: Cài đặt NodeJS và Appium Server
       - name: Install NodeJS & Appium
         run: |
@@ -46,7 +54,7 @@ jobs:
           api-level: 30
           target: default
           arch: x86_64
-          force-avd-creation: false
+          force-avd-creation: true
           emulator-options: -no-window -no-audio -no-boot-anim -camera-back none  -camera-front none -gpu swiftshader_indirect
           disable-animations: true
           script: mvn clean test -DsuiteXmlFile=suites/testng-e2e-integration.xml
@@ -77,9 +85,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-history
 
-    #
-      - name: AVD Cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.android/avd
-          key: avd-${{ runner.os }}-api30
+    
