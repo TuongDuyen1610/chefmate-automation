@@ -1,4 +1,4 @@
-name: Test Runner
+name: test
 
 on:
   workflow_dispatch:
@@ -8,5 +8,15 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Check Runner
-        run: hostname
+      - uses: actions/checkout@v4
+
+      - name: Check Java
+        run: java -version
+
+      - name: Check ADB
+        run: adb devices
+
+      - name: Check Emulator
+        run: |
+          adb wait-for-device
+          adb shell getprop sys.boot_completed
