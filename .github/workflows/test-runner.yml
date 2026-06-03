@@ -18,4 +18,5 @@ jobs:
         run: mvn -version
 
       - name: Appium Version
-        run: appium -v
+        shell: cmd
+        run: C:\Users\HOANG\AppData\Roaming\npm\appium.cmd -v
