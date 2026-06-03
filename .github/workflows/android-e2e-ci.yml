@@ -35,18 +35,19 @@ jobs:
 
       # 4️⃣ Bước 4: Khởi động Appium Server chạy ngầm
       - name: Run Appium Server
-        run: appium --log appium.log &
+        run: appium --log appium.log > appium.out 2>&1 & sleep 15
         timeout-minutes: 5
 
       # 5️⃣ Bước 5: Tạo máy ảo Android và chạy lệnh test Maven
       - name: Run Android Emulator and Execute Tests
+        timeout-minutes: 40
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 33
-          target: google_apis
+          api-level: 30
+          target: default
           arch: x86_64
           force-avd-creation: false
-          emulator-options: -no-window -no-audio -no-boot-anim -camera-back none
+          emulator-options: -no-window -no-audio -no-boot-anim -camera-back none  -camera-front none -gpu swiftshader_indirect
           disable-animations: true
           script: mvn clean test -DsuiteXmlFile=suites/testng-e2e-integration.xml
 
@@ -75,3 +76,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-history
+
+    #
+      - name: AVD Cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/avd
+          key: avd-${{ runner.os }}-api30
