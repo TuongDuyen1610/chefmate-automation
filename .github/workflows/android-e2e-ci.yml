@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   android-e2e-test:
-    runs-on: macos-13
+    runs-on: ubuntu-latest
 
     steps:
       # 1️⃣ Bước 1: Kéo code mới nhất từ GitHub về máy ảo
