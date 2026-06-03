@@ -59,30 +59,5 @@ jobs:
           disable-animations: true
           script: mvn clean test -DsuiteXmlFile=suites/testng-e2e-integration.xml
 
-      # 6️⃣ Bước 6: Lấy lịch sử Allure cũ để vẽ biểu đồ xu hướng (Trend)
-      - name: Get Allure history
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      # 7️⃣ Bước 7: Tự động biên dịch Allure Results thành giao diện Web tinh chỉnh
-      - name: Build Allure Report Giao Diện Web
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        with:
-          allure_results: target/allure-results
-          allure_history: allure-history
-          keep_reports: 20
-
-      # 8️⃣ Bước 8: Đăng thẳng giao diện Allure lên link GitHub Pages công khai của chị
-      - name: Deploy Allure Report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        if: always()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-history
-
+    
     
