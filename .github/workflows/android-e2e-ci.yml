@@ -33,11 +33,6 @@ jobs:
           npm install -g appium
           appium driver install uiautomator2
 
-      # 4️⃣ Bước 4: Khởi động Appium Server chạy ngầm
-      - name: Run Appium Server
-        run: appium --log appium.log > appium.out 2>&1 & sleep 15
-        timeout-minutes: 5
-
       # 5️⃣ Bước 5: Tạo máy ảo Android và chạy lệnh test Maven
       - name: Run Android Emulator and Execute Tests
         timeout-minutes: 40
@@ -49,7 +44,9 @@ jobs:
           force-avd-creation: true
           emulator-options: -no-window -no-audio -no-boot-anim -camera-back none -camera-front none -gpu swiftshader_indirect -accel off -no-snapshot
           disable-animations: true
-          script:  adb devices mvn clean test -DsuiteXmlFile=suites/testng-e2e-integration.xml
-
+          script: |
+            adb wait-for-device
+            adb devices
+            mvn clean test -DsuiteXmlFile=suites/testng-e2e-integration.xml
     
     
