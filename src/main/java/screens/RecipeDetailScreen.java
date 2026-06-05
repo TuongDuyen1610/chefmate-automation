@@ -526,7 +526,8 @@ public class RecipeDetailScreen extends BaseScreen {
 
             // click lần 2 để trigger toast
             click(btnSave);
-
+            click(btnSave);
+            click(btnSave);
             // 🔥 QUAN TRỌNG: delay NGẮN để toast kịp render
             WaitingHelper.sleepSeconds(1);
 
