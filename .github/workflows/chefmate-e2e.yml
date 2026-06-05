@@ -68,7 +68,7 @@ jobs:
         shell: powershell
         run: |
           Get-ChildItem target/allure-results -Recurse `
-            -Include *.tmp,*.log,*.png,*.mp4 |
+            -Include *.tmp,*.log |
             Remove-Item -Force -ErrorAction SilentlyContinue
           # Remove large video/screenshot files if not needed
           Get-ChildItem target/allure-results -Recurse |
