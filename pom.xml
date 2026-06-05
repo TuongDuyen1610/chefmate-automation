@@ -20,7 +20,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <https.protocols>TLSv1.2</https.protocols>
-
+        <suiteXmlFile>suites/tests.xml</suiteXmlFile>
     </properties>
 
     <dependencies>
@@ -37,7 +37,7 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
-<!--            <scope>test</scope>-->
+            <!--            <scope>test</scope>-->
         </dependency>
 
         <!-- ==================== ALLURE ==================== -->
@@ -111,11 +111,11 @@
             <artifactId>google-auth-library-oauth2-http</artifactId>
             <version>1.23.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-simple</artifactId>-->
-<!--            <version>1.7.32</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.slf4j</groupId>-->
+        <!--            <artifactId>slf4j-simple</artifactId>-->
+        <!--            <version>1.7.32</version>-->
+        <!--        </dependency>-->
 
         <!-- ================== Cloudinary ===================== -->
         <dependency>
@@ -130,7 +130,7 @@
             <version>2.17.0</version>
         </dependency>
 
-<!--=================== LOG4J  ===================-->
+        <!--=================== LOG4J  ===================-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -164,24 +164,25 @@
                 <version>3.2.5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>suites/tests.xml</suiteXmlFile>
+                        <!--<suiteXmlFile>suites/tests.xml</suiteXmlFile>-->
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
-<!--                    <argLine>-->
-<!--                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"-->
-<!--                        -Dfile.encoding=UTF-8-->
-<!--                    </argLine>-->
                     <systemPropertyVariables>
                         <file.encoding>UTF-8</file.encoding>
                         <allure.results.directory>target/allure-results</allure.results.directory>
                     </systemPropertyVariables>
+                    <argLine>
+                        -Djavax.net.ssl.trustStoreType=Windows-ROOT
+                        -Dhttps.protocols=TLSv1.2
+                    </argLine>
                 </configuration>
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>org.aspectj</groupId>-->
-<!--                        <artifactId>aspectjweaver</artifactId>-->
-<!--                        <version>1.9.19</version>-->
-<!--                    </dependency>-->
-<!--                </dependencies>-->
+                <!--                <dependencies>-->
+                <!--                    <dependency>-->
+                <!--                        <groupId>org.aspectj</groupId>-->
+                <!--                        <artifactId>aspectjweaver</artifactId>-->
+                <!--                        <version>1.9.19</version>-->
+                <!--                    </dependency>-->
+                <!--                </dependencies>-->
             </plugin>
 
             <!-- Allure Maven Plugin -->
@@ -202,18 +203,6 @@
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
-                <configuration>
-                    <argLine>
-                        -Djavax.net.ssl.trustStoreType=Windows-ROOT
-                        -Dhttps.protocols=TLSv1.2
-                    </argLine>
                 </configuration>
             </plugin>
         </plugins>
