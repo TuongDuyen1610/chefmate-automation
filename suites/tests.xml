@@ -19,7 +19,7 @@
 <!--            <class name="tests.SearchTest"/>-->
 <!--             <class name="tests.SaveRecipeTest"/>-->
 <!--             <class name="tests.BepesAITest"/>-->
-            <class name="tests.FridgeTest"/>
+            <!--<class name="tests.FridgeTest"/>-->
 <!--            <class name="tests.SaveRecipeTest"/>-->
 <!--            <class name="tests.EditRecipeTest"></class>-->
 <!--            <class name="tes/ts.AddRecipeTest"></class>-->

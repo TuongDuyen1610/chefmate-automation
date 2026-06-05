@@ -5,7 +5,10 @@
         testng-e2e-integration.xml
         Suite kiểm thử tích hợp E2E — ChefMate Android
         Chạy: mvn test -DsuiteXmlFile=suites/testng-e2e-integration.xml
+                allure serve target/allure-results
+          Chu thich hay dung : Ctrl + Shift + / or Ctrl + /
 -->
+
     <!-- ✅ LISTENERS PHẢI CÓ -->
     <listeners>
         <listener class-name="core.listener.AllureTestListener"/>
@@ -143,8 +146,6 @@
             </class>
         </classes>
     </test>
-
-<!-- Chu thich hay dung : Ctrl + Shift + / or Ctrl + /-->
 
     <!-- ════════════════════════════════════════════════
          GROUP 8: LUỒNG E2E TÍCH HỢP ĐẦU CUỐI
