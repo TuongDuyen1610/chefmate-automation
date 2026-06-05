@@ -1,4 +1,4 @@
-name: Test Self Hosted Runner
+name: ChefMate E2E
 
 on:
   workflow_dispatch:
@@ -8,15 +8,19 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Machine Info
-        run: hostname
+      - uses: actions/checkout@v4
 
-      - name: Java Version
+      - name: Check Java
         run: java -version
 
-      - name: Maven Version
+      - name: Check Maven
         run: mvn -version
 
-      - name: Appium Version
+      - name: Check Appium
         shell: cmd
-        run: C:\Users\HOANG\AppData\Roaming\npm\appium.cmd -v
+        run: |
+          "C:\Users\HOANG\AppData\Roaming\npm\appium.cmd" -v
+
+      - name: Check Emulator
+        run: |
+          adb devices
