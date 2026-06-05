@@ -6,12 +6,12 @@ on:
   push:
     branches:
       - master
-
+      
 permissions:
   contents: read
   pages: write
   id-token: write
-
+  
 jobs:
 
   test:
@@ -23,43 +23,21 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Verify Environment
-        shell: cmd
         run: |
           java -version
           mvn -version
-          adb version
           adb devices
 
-      - name: Verify Emulator Ready
-        shell: cmd
-        run: |
-          adb wait-for-device
-          adb shell getprop sys.boot_completed
-
-      - name: Kill Existing Appium
-        shell: cmd
-        continue-on-error: true
-        run: |
-          taskkill /F /IM node.exe
-
       - name: Start Appium
-        shell: powershell
+        shell: cmd
         run: |
-          Start-Process `
-            -FilePath "cmd.exe" `
-            -ArgumentList "/c appium --address 127.0.0.1 --port 4723" `
-            -WindowStyle Hidden
-      
+          start /B appium
+
       - name: Wait Appium
         shell: powershell
         run: |
-          Start-Sleep -Seconds 20
-      
-      - name: Verify Appium
-        shell: cmd
-        run: |
-          netstat -ano | findstr :4723
-          
+          Start-Sleep -Seconds 15
+
       - name: Run E2E Tests
         shell: cmd
         run: |
@@ -71,7 +49,7 @@ jobs:
         with:
           name: allure-results
           path: target/allure-results
-
+          
   allure:
 
     needs: test
@@ -111,4 +89,5 @@ jobs:
       name: github-pages
 
     steps:
+
       - uses: actions/deploy-pages@v4
