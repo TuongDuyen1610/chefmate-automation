@@ -592,8 +592,8 @@ public class E2EIntegrationTest extends BaseTest {
     public void E2E_TC_10_UpdateProfilePersistAfterRelogin() {
 
         logger.info("▶ E2E_10 START");
-
-        String targetName  = "Tưởng Thị Duyên";
+        String targetNameOld  = "Tưởng Thị Duyên" ;
+        String targetName  = "Tưởng Thị Duyên Test_Edit" ;
         String targetEmail = email;
         String targetPhone = "0900009999";
 
@@ -635,6 +635,15 @@ public class E2EIntegrationTest extends BaseTest {
                 "❌ [S6] Dữ liệu Profile bị mất sau khi đăng nhập lại");
         AllureHelper.attachScreenshot("[S6] Profile data vẫn đúng sau re-login ✅");
 
+        //Edit tên gốc
+        editProfile.openEditProfileScreen();
+        editProfile.enterFullName(targetNameOld);
+        editProfile.enterEmail(targetEmail);
+        editProfile.enterPhone(targetPhone);
+        editProfile.clickSave();
+        Assert.assertTrue(authFlow.isToastUpdateInfoDisplayed(),
+                "❌ [S2] Toast cập nhật thành công không hiển thị");
+        AllureHelper.attachScreenshot("[S2] Cập nhật Profile thành công");
         logger.info("✅ E2E_10 PASSED");
     }
 }
