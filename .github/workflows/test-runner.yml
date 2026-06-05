@@ -28,5 +28,6 @@ jobs:
           Start-Sleep -Seconds 15
 
       - name: Run E2E Tests
+        shell: cmd
         run: |
-          mvn clean test -DsuiteXmlFile=suites/testng-e2e-integration.xml
+          mvn clean test "-DsuiteXmlFile=suites/testng-e2e-integration.xml"l
