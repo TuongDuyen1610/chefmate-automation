@@ -23,9 +23,9 @@ jobs:
           start /B appium
 
       - name: Wait Appium
-        shell: cmd
+        shell: powershell
         run: |
-          timeout /t 15
+          Start-Sleep -Seconds 15
 
       - name: Run E2E Tests
         run: |
