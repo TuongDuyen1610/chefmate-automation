@@ -234,7 +234,7 @@ public class E2EIntegrationTest extends BaseTest {
         saved.clickDeleteAt(0);
         Assert.assertTrue(saved.isDeletePopupDisplayed(), "❌ [S6] Popup xóa không hiển thị");
         saved.confirmDelete();
-        WaitingHelper.sleepSeconds(2); // bắt buộc phải có waitting !
+        WaitingHelper.sleepSeconds(4); // bắt buộc phải có waitting !
         Assert.assertFalse(saved.isRecipeDisplayed(title),
                 "❌ [S6] CT vẫn còn trong Kho sau khi xóa");
         AllureHelper.attachScreenshot("[S6] Xóa CT khỏi Kho thành công");
