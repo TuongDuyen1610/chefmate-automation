@@ -70,10 +70,6 @@ jobs:
           Get-ChildItem target/allure-results -Recurse `
             -Include *.tmp,*.log |
             Remove-Item -Force -ErrorAction SilentlyContinue
-              # Remove large video/screenshot files if not needed
-          Get-ChildItem target/allure-results -Recurse |
-            Where-Object {$_.Length -gt 10MB} |
-            Remove-Item -Force -ErrorAction SilentlyContinue
             
       - name: Upload Allure Results
         if: always()
