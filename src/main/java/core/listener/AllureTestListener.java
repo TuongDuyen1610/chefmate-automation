@@ -7,11 +7,11 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-/ **
-* AllureTestListener.java
-* ✅ Tự động capture screenshot khi test fail
-* ✅ Record test status và thời gian
-*/
+// / **
+// * AllureTestListener.java
+// * ✅ Tự động capture screenshot khi test fail
+// * ✅ Record test status và thời gian
+// */
 public class AllureTestListener implements ITestListener {
    private static final Logger logger = LoggerFactory.getLogger(AllureTestListener.class);
 
