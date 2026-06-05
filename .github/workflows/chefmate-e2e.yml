@@ -43,9 +43,12 @@ jobs:
           taskkill /F /IM node.exe
 
       - name: Start Appium
-        shell: cmd
+        shell: powershell
         run: |
-          start "" /B appium
+          Start-Process `
+            -FilePath "cmd.exe" `
+            -ArgumentList "/c appium --address 127.0.0.1 --port 4723" `
+            -WindowStyle Hidden
       
       - name: Wait Appium
         shell: powershell
