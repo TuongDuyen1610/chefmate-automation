@@ -172,7 +172,7 @@ public class E2EIntegrationTest extends BaseTest {
         authFlow.loginFromProfileTab(email, password);
         Assert.assertTrue(authFlow.isToastLoginFail(), "❌ [S5] Login bằng MK cũ phải thất bại sau khi đổi");
         AllureHelper.attachScreenshot("[S5] Login MK cũ đúng thất bại như kỳ vọng");
-//        WaitingHelper.sleepSeconds(2);
+        WaitingHelper.sleepSeconds(2); // bắt buộc phải có
 
         // STEP 6: Revert — đổi ngược về mật khẩu gốc
         login.performLogin(email, newPassword);

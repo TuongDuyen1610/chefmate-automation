@@ -124,7 +124,7 @@ public class LoginScreen extends BaseScreen {
 
         try {
             logger.info("⏳ Waiting for toast to appear (2 seconds)...");
-            Thread.sleep(0000); // chờ toast xuất hiện
+            Thread.sleep(1000); // chờ toast xuất hiện
 
             // ✅ LOGIC CŨ CỦA CHỊ
             getDriver().findElement(errorToastLoginFail);
