@@ -232,6 +232,7 @@ public class E2EIntegrationTest extends BaseTest {
         saved.clickDeleteAt(0);
         Assert.assertTrue(saved.isDeletePopupDisplayed(), "❌ [S6] Popup xóa không hiển thị");
         saved.confirmDelete();
+        WaitingHelper.sleepSeconds(2); // bắt buộc phải có waitting !
         Assert.assertFalse(saved.isRecipeDisplayed(title),
                 "❌ [S6] CT vẫn còn trong Kho sau khi xóa");
         AllureHelper.attachScreenshot("[S6] Xóa CT khỏi Kho thành công");
@@ -331,6 +332,7 @@ public class E2EIntegrationTest extends BaseTest {
         search.clickResultAt(0);
         detail.waitForLoaded();
         boolean savedOk = detail.clickSaveAndVerifyToast();
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         Assert.assertTrue(savedOk, "❌ [S2] Lưu CT thất bại");
         detail.clickBackToHome();
         AllureHelper.attachScreenshot("[S2] Lưu CT thành công");
@@ -347,7 +349,7 @@ public class E2EIntegrationTest extends BaseTest {
         editScreen.clearName();
         editScreen.inputName(newName);
         try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
-        editScreen.slowSwipeDownOnScreen(2);
+        editScreen.slowSwipeDownOnScreen(3);
         editScreen.clickUpdate();
         WaitingHelper.sleepSeconds(2);
         AllureHelper.attachScreenshot("[S4] Sau khi update tên: " + newName);
