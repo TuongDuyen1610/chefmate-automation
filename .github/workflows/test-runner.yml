@@ -35,3 +35,7 @@ jobs:
         shell: cmd
         run: |
           mvn clean test -DsuiteXmlFile="suites/testng-e2e-integration.xml"
+
+      - name: Generate Allure Report
+        run: |
+          allure generate target/allure-results
