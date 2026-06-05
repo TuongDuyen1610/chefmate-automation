@@ -62,14 +62,6 @@ jobs:
         continue-on-error: true
         run: |
           mvn clean test -DsuiteXmlFile="suites/testng-e2e-integration.xml"
-
-      - name: Cleanup Allure Temp Files
-        if: always()
-        shell: powershell
-        run: |
-          Get-ChildItem target/allure-results -Recurse `
-            -Include *.tmp,*.log |
-            Remove-Item -Force -ErrorAction SilentlyContinue
             
       - name: Upload Allure Results
         if: always()
