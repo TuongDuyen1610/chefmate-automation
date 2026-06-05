@@ -43,18 +43,20 @@ jobs:
           taskkill /F /IM node.exe
 
       - name: Start Appium
-        shell: powershell
+        shell: cmd
         run: |
-          Start-Process appium
-
+          start "" /B appium
+      
       - name: Wait Appium
         shell: powershell
         run: |
           Start-Sleep -Seconds 20
+      
       - name: Verify Appium
         shell: cmd
         run: |
           netstat -ano | findstr :4723
+          
       - name: Run E2E Tests
         shell: cmd
         run: |
