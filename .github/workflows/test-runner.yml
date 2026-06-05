@@ -30,4 +30,4 @@ jobs:
       - name: Run E2E Tests
         shell: cmd
         run: |
-          mvn clean test "-DsuiteXmlFile=suites/testng-e2e-integration.xml"l
+          mvn clean test "-DsuiteXmlFile=suites/testng-e2e-integration.xml"
