@@ -61,19 +61,7 @@ jobs:
         shell: cmd
         continue-on-error: true
         run: |
-          mvn clean test -DsuiteXmlFile="suites/testng-e2e-integration.xml"
-      
-      - name: Cleanup Before Upload
-        if: always()
-        shell: powershell
-        run: |
-          Get-ChildItem target/allure-results -Recurse `
-            -Include *.tmp,*.log |
-            Remove-Item -Force -ErrorAction SilentlyContinue
-          # Remove large video/screenshot files if not needed
-          Get-ChildItem target/allure-results -Recurse |
-            Where-Object {$_.Length -gt 5MB} |
-            Remove-Item -Force -ErrorAction SilentlyContinue            
+          mvn clean test -DsuiteXmlFile="suites/testng-e2e-integration.xml"         
       
       - name: Upload Allure Results
         if: always()
@@ -81,7 +69,6 @@ jobs:
         with:
           name: allure-results
           path: target/allure-results
-          retention-days: 30
 
   allure:
 
