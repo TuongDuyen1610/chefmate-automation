@@ -22,6 +22,7 @@ import java.util.List;
 
 import static core.driver.DriverManager.getDriver;
 
+// 10 LUỒNG NGHIỆP VỤ TÍCH HỢP QUAN TRỌNG
 /**
  * ════════════════════════════════════════════════════════════════════════════
  *  E2EIntegrationTest.java
