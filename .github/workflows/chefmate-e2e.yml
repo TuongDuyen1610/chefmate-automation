@@ -27,11 +27,14 @@ jobs:
           java -version
           mvn -version
           adb devices
-        
+          
+      - name: Kill Appium
+        run: |
+            taskkill /F /IM node.exe
+            
       - name: Start Appium
         shell: cmd
         run: |
-          taskkill /F /IM node.exe
           start /B appium
 
       - name: Wait Appium
