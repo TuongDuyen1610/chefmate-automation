@@ -8,19 +8,25 @@ jobs:
     runs-on: self-hosted
 
     steps:
+
       - uses: actions/checkout@v4
 
-      - name: Check Java
-        run: java -version
+      - name: Verify Environment
+        run: |
+          java -version
+          mvn -version
+          adb devices
 
-      - name: Check Maven
-        run: mvn -version
-
-      - name: Check Appium
+      - name: Start Appium
         shell: cmd
         run: |
-          "C:\Users\HOANG\AppData\Roaming\npm\appium.cmd" -v
+          start /B appium
 
-      - name: Check Emulator
+      - name: Wait Appium
+        shell: cmd
         run: |
-          adb devices
+          timeout /t 15
+
+      - name: Run E2E Tests
+        run: |
+          mvn clean test -DsuiteXmlFile=suites/testng-e2e-integration.xml
