@@ -77,7 +77,6 @@ jobs:
         with:
           name: allure-results
           path: target/allure-results
-          compression-level: 9
 
   allure:
 
