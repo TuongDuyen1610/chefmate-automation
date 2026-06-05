@@ -223,6 +223,7 @@ public class E2EIntegrationTest extends BaseTest {
 
         // STEP 5: Back → vào Kho
         detail.clickBackToHome();
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         profile.clickTabProfile();
         profile.openSavedRecipes();
         Assert.assertTrue(saved.isRecipeExist(title, author),
