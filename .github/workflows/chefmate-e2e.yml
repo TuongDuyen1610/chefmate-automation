@@ -62,6 +62,7 @@ jobs:
         continue-on-error: true
         run: |
           mvn clean test -DsuiteXmlFile="suites/testng-e2e-integration.xml"
+      
       - name: Cleanup Before Upload
         if: always()
         shell: powershell
@@ -70,9 +71,10 @@ jobs:
             -Include *.tmp,*.log,*.png,*.mp4 |
             Remove-Item -Force -ErrorAction SilentlyContinue
           # Remove large video/screenshot files if not needed
-          Get-ChildItem target/allure-results -Recurse `
-            -Where {$_.Length -gt 10MB} |
+          Get-ChildItem target/allure-results -Recurse |
+            Where-Object {$_.Length -gt 10MB} |
             Remove-Item -Force -ErrorAction SilentlyContinue            
+      
       - name: Upload Allure Results
         if: always()
         uses: actions/upload-artifact@v4
