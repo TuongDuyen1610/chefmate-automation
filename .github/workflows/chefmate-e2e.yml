@@ -72,7 +72,7 @@ jobs:
             Remove-Item -Force -ErrorAction SilentlyContinue
           # Remove large video/screenshot files if not needed
           Get-ChildItem target/allure-results -Recurse |
-            Where-Object {$_.Length -gt 10MB} |
+            Where-Object {$_.Length -gt 5MB} |
             Remove-Item -Force -ErrorAction SilentlyContinue            
       
       - name: Upload Allure Results
@@ -81,6 +81,7 @@ jobs:
         with:
           name: allure-results
           path: target/allure-results
+          retention-days: 30
 
   allure:
 
