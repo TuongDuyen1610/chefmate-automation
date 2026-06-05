@@ -40,22 +40,17 @@ jobs:
         shell: cmd
         continue-on-error: true
         run: |
-          for /f "tokens=5" %%a in ('netstat -ano ^| findstr :4723') do taskkill /PID %%a /F
+          taskkill /F /IM node.exe
 
       - name: Start Appium
-        shell: cmd
+        shell: powershell
         run: |
-          start /B appium
+          Start-Process appium
 
       - name: Wait Appium
         shell: powershell
         run: |
-          Start-Sleep -Seconds 15
-
-      - name: Verify Appium Running
-        shell: cmd
-        run: |
-          netstat -ano | findstr :4723
+          Start-Sleep -Seconds 20
 
       - name: Run E2E Tests
         shell: cmd
