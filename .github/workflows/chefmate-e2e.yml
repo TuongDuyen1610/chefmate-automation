@@ -14,12 +14,10 @@ permissions:
 
 jobs:
 
-  test-and-report:
+  test:
 
     runs-on: self-hosted
-    
-    environment:
-          name: github-pages
+
     steps:
 
       - uses: actions/checkout@v4
@@ -36,13 +34,11 @@ jobs:
         run: |
           adb wait-for-device
           adb shell getprop sys.boot_completed
-          
       - name: Kill Existing Appium
         shell: cmd
         continue-on-error: true
         run: |
           taskkill /F /IM node.exe
-          
       - name: Start Appium
         shell: powershell
         run: |
@@ -65,25 +61,64 @@ jobs:
         shell: cmd
         continue-on-error: true
         run: |
-          mvn clean test -DsuiteXmlFile="suites/testng-e2e-integration.xml"  
-          
-      # Bước mới: Tự tạo Allure Report thành trang HTML tĩnh ngay trên máy của chị luôn (Không lo bị nghẽn mạng)
-      - name: Generate Allure Report Locally
+          mvn clean test -DsuiteXmlFile="suites/testng-e2e-integration.xml"
+
+      - name: Cleanup Allure Temp Files
         if: always()
-        uses: simple-elf/allure-report-action@v1.9
+        shell: powershell
+        run: |
+          Get-ChildItem target/allure-results -Recurse `
+            -Include *.tmp,*.log |
+            Remove-Item -Force -ErrorAction SilentlyContinue
+            
+      - name: Upload Allure Results
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          allure_results: target/allure-results
+          name: allure-results
+          path: target/allure-results
+
+  allure:
+
+    needs: test
+
+    if: always()
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Download Allure Results
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: allure-results
           allure_report: allure-report
 
-      # Bước mới: Gom toàn bộ trang báo cáo đã tạo thành 1 file độc nhất để đẩy thẳng lên GitHub Pages
       - name: Upload Pages Artifact
-        if: always()
         uses: actions/upload-pages-artifact@v3
         with:
           path: allure-report
 
-      # Bước cuối: Kích hoạt Deploy thẳng lên link GitHub Pages
-      - name: Deploy to GitHub Pages
-        if: always()
-        uses: actions/deploy-pages@v4
-      
+  deploy:
+
+    needs: allure
+
+    if: always()
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+
+    steps:
+      - uses: actions/deploy-pages@v4
