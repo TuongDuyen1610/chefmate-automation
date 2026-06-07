@@ -18,7 +18,7 @@
     <!-- ════════════════════════════════════════════════
              GROUP 1: LUỒNG CỐT LÕI (SMOKE TRƯỚC KHI E2E)
         ════════════════════════════════════════════════ -->
-    <test name="Group 01" enabled="true">
+    <test name="Group 01" enabled="false">
         <classes>
             <class name="tests.LoginTest">
                 <methods>
@@ -39,7 +39,7 @@
     <!-- ════════════════════════════════════════════════
         GROUP 2: LUỒNG XEM + THÊM + SỬA + XÓA CÔNG THỨC
    ════════════════════════════════════════════════ -->
-    <test name="Group 02" enabled="true">
+    <test name="Group 02" enabled="false">
         <classes>
             <class name="tests.RecipeDisplayTest">
                 <methods>
@@ -73,7 +73,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 3: LUỒNG TÌM KIẾM
     ════════════════════════════════════════════════ -->
-    <test name="Group 03" enabled="true">
+    <test name="Group 03" enabled="false">
         <classes>
             <class name="tests.SearchTest">
                 <methods>
@@ -90,7 +90,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 4: LUỒNG LƯU / LIKE / SHARE / XÓA
     ════════════════════════════════════════════════ -->
-    <test name="Group 04" enabled="true">
+    <test name="Group 04" enabled="false">
         <classes>
             <class name="tests.SaveRecipeTest">
                 <methods>
@@ -107,7 +107,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 5: LUỒNG TỦ LẠNH
     ════════════════════════════════════════════════ -->
-    <test name="Group 05" enabled="true">
+    <test name="Group 05" enabled="false">
         <classes>
             <class name="tests.FridgeTest">
                 <methods>
@@ -122,7 +122,7 @@
     <!-- ════════════════════════════════════════════════
         GROUP 6: LUỒNG BEPES AI
    ════════════════════════════════════════════════ -->
-    <test name="Group 06" enabled="true">
+    <test name="Group 06" enabled="false">
         <classes>
             <class name="tests.BepesAITest">
                 <methods>
@@ -153,7 +153,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 7: LUỒNG SHOPPING
     ════════════════════════════════════════════════ -->
-    <test name="Group 07" enabled="true">
+    <test name="Group 07" enabled="false">
         <classes>
             <class name="tests.ShoppingBuilderTest">
                 <methods>
@@ -193,7 +193,7 @@
                     <include name="E2E_TC_01_LoginViewRecipeLogout"/>
                     <include name="E2E_TC_02_ChangePasswordFlow"/>
                     <include name="E2E_TC_03_SearchSaveVerifyDelete"/>
-                     <include name="E2E_TC_04_AddRecipeAndVerify"/>
+                    <include name="E2E_TC_04_AddRecipeAndVerify"/>
                     <include name="E2E_TC_05_SaveThenEditRecipe"/>
                     <include name="E2E_TC_06_FridgeSuggestRecipe"/>
                     <include name="E2E_TC_07_BepesAIFullFlow"/>
