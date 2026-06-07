@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="E2E Integration Suite" verbose="1" parallel="none">
+    <!--
+            testng-e2e-integration.xml
+            Suite Regression Testing (Kiểm thử hồi quy) — ChefMate Android
+            Chạy: mvn test -DsuiteXmlFile=suites/testng-bepes-regression.xml
+                   allure serve target/allure-results ==> cũ
+                   allure open target/allure-report ==> hay dùng mở thủ công
+              Chu thich hay dung : Ctrl + Shift + / or Ctrl + /
+    -->
+
+    <!-- ✅ LISTENERS PHẢI CÓ -->
+    <listeners>
+        <listener class-name="core.listener.AllureTestListener"/>
+    </listeners>
+
+    <!-- ════════════════════════════════════════════════
+             GROUP 1: LUỒNG CỐT LÕI (SMOKE TRƯỚC KHI E2E)
+        ════════════════════════════════════════════════ -->
+    <test name="Group 01" enabled="false">
+        <classes>
+<!--            Validation Đăng nhập:-->
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="DangNhap_TC_07"/>
+                    <include name="DangNhap_TC_08"/>
+                    <include name="DangNhap_TC_09"/>
+                    <include name="DangNhap_TC_11"/>
+                    <include name="DangNhap_TC_12"/>
+                    <include name="DangNhap_TC_13"/>
+                    <include name="DangNhap_TC_14"/>
+                </methods>
+            </class>
+<!--            Validation Đăng ký:-->
+            <class name="tests.RegistrationTest">
+                <methods>
+                    <include name="DangKy_TC_08"/>
+                    <include name="DangKy_TC_09"/>
+                    <include name="DangKy_TC_10"/>
+                    <include name="DangKy_TC_11"/>
+                    <include name="DangKy_TC_12"/>
+                    <include name="DangKy_TC_18"/>
+                    <include name="DangKy_TC_20"/>
+                </methods>
+            </class>
+            <!--            Validation Đăng xuat:-->
+            <class name="tests.LogoutTest">
+                <methods>
+                    <include name="DangXuat_TC_01"/>
+                </methods>
+            </class>
+            <!--Quản lý Tài khoản & Đổi mật khẩu &:-->
+            <class name="tests.EditProfileTest">
+                <methods>
+                    <include name="Edit_TC_06"/>
+                </methods>
+            </class>
+            <class name="tests.ChangePasswordTest">
+            </class>
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════
+        GROUP 2: LUỒNG XEM + THÊM + SỬA + XÓA CÔNG THỨC
+   ════════════════════════════════════════════════ -->
+    <test name="Group 02" enabled="false">
+        <classes>
+            <class name="tests.RecipeDisplayTest">
+                <methods>
+                    <include name="RecipeDisplay_TC_01"/>
+                    <include name="RecipeDisplay_TC_02"/>
+                    <include name="RecipeDisplay_TC_03"/>
+                </methods>
+            </class>
+            <class name="tests.AddRecipeTest">
+                <methods>
+                    <include name="RecipeCreate_TC_03"/>
+                    <include name="RecipeCreate_TC_04"/>
+                    <include name="RecipeCreate_TC_05"/>
+                    <include name="RecipeCreate_TC_06"/>
+                </methods>
+            </class>
+            <class name="tests.EditRecipeTest">
+                <methods>
+                    <include name="RecipeEdit_TC_05"/>
+                    <include name="RecipeEdit_TC_10"/>
+                    <include name="RecipeEdit_TC_11"/>
+                    <include name="RecipeEdit_TC_12"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════
+         GROUP 6: LUỒNG BEPES AI
+    ════════════════════════════════════════════════ -->
+    <test name="Group 06" enabled="false">
+        <classes>
+            <class name="tests.BepesAITest">
+                <methods>
+                    <include name="BepesAI_TC_21"/>
+                    <include name="BepesAI_TC_34"/>
+                    <include name="BepesAI_TC_36"/>
+                    <include name="BepesAI_TC_37"/>
+                    <include name="BepesAI_TC_DacBiet"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════
+         GROUP 7: LUỒNG SHOPPING
+    ════════════════════════════════════════════════ -->
+    <test name="Group 07" enabled="true">
+        <classes>
+            <class name="tests.ShoppingBuilderTest">
+                <methods>
+                    <include name="RecipeShopping_TC_10"/>
+                    <include name="RecipeShopping_TC_11"/>
+                    <include name="RecipeShopping_TC_12"/>
+                    <include name="RecipeShopping_TC_08"/>
+                </methods>
+            </class>
+            <class name="tests.ShoppingListTest">
+                <methods>
+                    <include name="RecipeShoppingManage_TC_10"/>
+                    <include name="RecipeShoppingManage_TC_11"/>
+                    <include name="RecipeShoppingManage_TC_12"/>
+                    <include name="RecipeShoppingManage_TC_14"/>
+                    <include name="RecipeShoppingManage_TC_15"/>
+                </methods>
+            </class>
+            <class name="tests.ShoppingHistoryTest">
+                <methods>
+                    <include name="RecipeHistoryShopping_TC_01"/>
+                    <include name="RecipeHistoryShopping_TC_02"/>
+                    <include name="RecipeHistoryShopping_TC_05"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
