@@ -226,6 +226,7 @@ public class ShoppingListScreen extends BaseScreen {
     // ================= INGREDIENT VERIFY =================
     //CÁCH 1 CHO TESTCASE DỄ PASS BAN ĐẦU
     public void verifyIngredientDisplayed(String text) {
+        slowSwipeDownOnScreen(2);
         WaitingHelper.waitForVisible(ingredientTextExact(text));
         AllureHelper.attachScreenshot("Ingredient exact OK: " + text);
     }

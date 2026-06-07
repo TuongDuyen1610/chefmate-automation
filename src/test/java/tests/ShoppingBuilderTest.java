@@ -13,6 +13,7 @@ import screens.HomeScreen;
 import screens.RecipeDetailScreen;
 import screens.SearchScreen;
 import screens.ShoppingBuilderScreen;
+import static core.driver.DriverManager.getDriver;
 
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class ShoppingBuilderTest extends BaseTest {
 
     @Test(priority = 1)
     public void RecipeShopping_TC_01() {
-        seedSavedRecipes(3);
+        builderFlow.login(email, password);
         openBuilder();
         // verify UI đã nằm trong openShoppingBuilderFromMenu()
     }

@@ -6,6 +6,7 @@ import screens.HomeScreen;
 import screens.RecipeDetailScreen;
 import screens.SearchScreen;
 import screens.ShoppingBuilderScreen;
+import static core.driver.DriverManager.getDriver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class ShoppingBuilderFlow {
         List<String> titles = new ArrayList<>();
 
         searchFlow.searchByTag(tagOrKeyword);
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
 
         int guard = 0;
         while (titles.size() < target && guard < 20) {

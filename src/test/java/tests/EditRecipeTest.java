@@ -34,13 +34,13 @@ public class EditRecipeTest extends BaseTest {
         authFlow.loginFromFridgeTab("duyentest@gmail.com", "123456");
 
         searchFlow.searchByTag("cà phê");
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         search.clickResultAt(0);
-
         detail.waitForLoaded();
 
         boolean isSaved = detail.clickSaveAndVerifyToast();
         Assert.assertTrue(isSaved, "❌ Save thất bại");
-
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         detail.clickBackToHome();
         home.backToHome();
 
@@ -108,11 +108,7 @@ public class EditRecipeTest extends BaseTest {
 
         String newTime = "00: " + System.currentTimeMillis();
 
-        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-        try {
-            getDriver().hideKeyboard();
-        } catch (Exception ignored) {}
-
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         edit.clearTime();
         edit.inputTime(newTime);
 
@@ -131,17 +127,10 @@ public class EditRecipeTest extends BaseTest {
         String newStep5 = "gam" + System.currentTimeMillis();
         edit.inputStep5(newStep5);
         // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-        try {
-            getDriver().hideKeyboard();
-        } catch (Exception ignored) {}
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         edit.slowSwipeDownOnScreen(1);
         edit.deleteAllSteps();
-
-        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-        try {
-            getDriver().hideKeyboard();
-        } catch (Exception ignored) {}
-
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         // 🔥 SCROLL 2 LẦN (đủ dùng)
         edit.clickUpdate(); // ✅ FIX
 

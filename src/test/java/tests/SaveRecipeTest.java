@@ -9,6 +9,7 @@ import flows.AuthenticationFlow;
 import flows.SaveRecipeFlow;
 import flows.SearchFlow;
 import flows.ShareFlow;
+import java.util.Random;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
@@ -81,57 +82,59 @@ public class SaveRecipeTest extends BaseTest {
         );
     }
 
-//    // =========================
-//    // TC_01 - SAVE SUCCESS (TOAST)
-//    // =========================
-//    @Test(priority = 1)
-//    public void RecipeSave_TC_01() {
-//
-//        login();
-//
-//        searchFlow.searchByTag("nước sốt");
-//        search.clickResultAt(0);
-//
-//        detail.waitForLoaded();
-//
-//        boolean savedOk = detail.clickSaveAndVerifyToast();
-//
-//        Assert.assertTrue(savedOk, "❌ Không hiển thị toast 'Đã lưu'");
-//    }
-//
-////     =========================
-////     TC_02 - VERIFY IN SAVED LIST
-////     =========================
-//    @Test(priority = 2)
-//    public void RecipeSave_TC_02() {
-//
-//        login();
-//
-//        searchFlow.searchByTag("KIM CHI");
-//        search.clickResultAt(0);
-//
-//        detail.waitForLoaded();
-//
-//        String title = detail.getRecipeTitle();
-//        String author = detail.getRecipeAuthor();
-//
-//        detail.clickSaveAndVerifyToast();
-//        WaitingHelper.sleepSeconds(1);
-//        detail.clickBackToHome();
-//
-//        // 🔥 VERIFY HOME TRƯỚC KHI CLICK
-////        home.backToHome2();
-//
-////        Assert.assertTrue(home.isHomeDisplayed(), "❌ Chưa về Home thật");
-//
-//        profile.clickTabProfile();
-//        profile.openSavedRecipes();
-//
-//        Assert.assertTrue(
-//                saved.isRecipeExist(title, author),
-//                "❌ Công thức không xuất hiện trong Kho công thức"
-//        );
-//    }
+    // =========================
+    // TC_01 - SAVE SUCCESS (TOAST)
+    // =========================
+    @Test(priority = 1)
+    public void RecipeSave_TC_01() {
+
+        login();
+
+        searchFlow.searchByTag("nước sốt");
+        search.clickResultAt(0);
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
+
+        detail.waitForLoaded();
+
+        boolean savedOk = detail.clickSaveAndVerifyToast();
+
+        Assert.assertTrue(savedOk, "❌ Không hiển thị toast 'Đã lưu'");
+    }
+
+//     =========================
+//     TC_02 - VERIFY IN SAVED LIST
+//     =========================
+    @Test(priority = 2)
+    public void RecipeSave_TC_02() {
+
+        login();
+
+        searchFlow.searchByTag("KIM CHI");
+        search.clickResultAt(0);
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
+
+        detail.waitForLoaded();
+
+        String title = detail.getRecipeTitle();
+        String author = detail.getRecipeAuthor();
+
+        detail.clickSaveAndVerifyToast();
+        WaitingHelper.sleepSeconds(1);
+        detail.clickBackToHome();
+
+        // 🔥 VERIFY HOME TRƯỚC KHI CLICK
+//        home.backToHome2();
+
+//        Assert.assertTrue(home.isHomeDisplayed(), "❌ Chưa về Home thật");
+
+        profile.clickTabProfile();
+        profile.openSavedRecipes();
+
+        Assert.assertTrue(
+                saved.isRecipeExist(title, author),
+                "❌ Công thức không xuất hiện trong Kho công thức"
+        );
+    }
 //
 ////     =========================
 ////     TC_03 - MULTI SAVE + COUNT
@@ -318,59 +321,70 @@ public class SaveRecipeTest extends BaseTest {
 //        AllureHelper.attachScreenshot("Item được lưu khi login");
 //
 //    }
-////     =========================
-////        INTERACTION LIKE
-////     =========================
-//    @Test(priority = 7,
-//            description = "RecipeLike_TC_01 - Click like -> icon đổi trạng thái + số like tăng")
-//    public void RecipeLike_TC_01() {
-//
-//        login();
-//
-//        // 👉 mở 1 công thức ---> Nhớ khi test phải đổi món kêywword
+//     =========================
+//        INTERACTION LIKE
+//     =========================
+    @Test(priority = 7,
+            description = "RecipeLike_TC_01 - Click like -> icon đổi trạng thái + số like tăng")
+    public void RecipeLike_TC_01() {
+
+        login();
+        // 👉 Khai báo danh sách các keyword sẵn có
+        String[] keywords = {"Bánh", "Phở", "Cơm", "Gà", "Lẩu", "Bánh", "Thịt bò", "Xúc xích", "Cà Phê"};
+        // Bốc ngẫu nhiên 1 index trong mảng
+        String randomKeyword = keywords[new Random().nextInt(keywords.length)];
+
+        // Sử dụng keyword ngẫu nhiên vừa bốc được
+        searchFlow.searchByTag(randomKeyword);
+        try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
+
+        // 👉 mở 1 công thức ---> Nhớ khi test phải đổi món kêywword
 //        searchFlow.searchByTag("Bánh mỳ");
-//        search.clickResultAt(0);
-//
-//        detail.waitForLoaded();
-//
-//        int before = detail.getLikeCount();
-//
-//        detail.clickLike();
-//
-//        int after = before;
-//
-//        for (int i = 0; i < 5; i++) {
-//            WaitingHelper.sleepSeconds(1);
-//            after = detail.getLikeCount();
-//            if (after > before) break;
-//        }
-//
-//        Assert.assertTrue(
-//                after > before,
-//                "❌ Like không tăng | Before: " + before + " | After: " + after
-//        );
-//        AllureHelper.attachScreenshot("LIKE SUCCESS");
-//    }
-//
-////     // =========================
-////     // TC COMMENT
-////    // =========================
-//     @Test(priority = 8,
-//             description = "RecipeComment_TC_01 - Kiểm tra nhập thêm bình luận click gửi bình luận xuất hiện với tên user, avatar, timestamp")
-//     public void RecipeComment_TC_01() {
-//
-//         openRecipeDetail(); // 🔥 FIX
-//
-//         String comment = "Auto test comment " + System.currentTimeMillis();
-//
-//         detail.enterComment(comment);
-//         detail.clickSendComment();
-//
-//         boolean isDisplayed = detail.isCommentDisplayed(comment);
-//
-//         Assert.assertTrue(isDisplayed, "❌ Comment không hiển thị");
-//
-//     }
+
+        search.clickResultAt(1 );
+
+        detail.waitForLoaded();
+
+        int before = detail.getLikeCount();
+
+        detail.clickLike();
+
+        int after = before;
+
+        for (int i = 0; i < 5; i++) {
+            WaitingHelper.sleepSeconds(1);
+            after = detail.getLikeCount();
+            if (after > before) break;
+        }
+
+        Assert.assertTrue(
+                after > before,
+                "❌ Like không tăng | Before: " + before + " | After: " + after
+        );
+        AllureHelper.attachScreenshot("LIKE SUCCESS");
+        detail.clickLike();
+
+    }
+
+//     // =========================
+//     // TC COMMENT
+//    // =========================
+     @Test(priority = 8,
+             description = "RecipeComment_TC_01 - Kiểm tra nhập thêm bình luận click gửi bình luận xuất hiện với tên user, avatar, timestamp")
+     public void RecipeComment_TC_01() {
+
+         openRecipeDetail(); // 🔥 FIX
+
+         String comment = "Auto test comment " + System.currentTimeMillis();
+
+         detail.enterComment(comment);
+         detail.clickSendComment();
+
+         boolean isDisplayed = detail.isCommentDisplayed(comment);
+
+         Assert.assertTrue(isDisplayed, "❌ Comment không hiển thị");
+
+     }
 //    @Test(priority = 9,
 //            description = "RecipeComment_TC_02 - Kiểm tra bình luận text/emoji/ký tự đặc biệt hiển thị đúng chính xác")
 //    public void RecipeComment_TC_02() {
@@ -597,44 +611,44 @@ public class SaveRecipeTest extends BaseTest {
 //        );
 //    }
 //
-//    @Test(priority = 19,
-//            description = "RecipeDelete_TC_01 - Xóa công thức thành công")
-//    public void RecipeDelete_TC_01() {
-//
-//        openRecipeDetail();
-//
-//        String title = detail.getRecipeTitle();
-//
-//        detail.clickSaveAndVerifyToast();
-//        detail.clickBackToHome();
-//
-//    //        home.backToHome(); emulator thừa
-//
-//        profile.clickTabProfile();
-//        profile.openSavedRecipes();
-//
-//        // ✅ verify tồn tại
-//        Assert.assertTrue(
-//                saved.isRecipeDisplayed(title),
-//                "❌ Recipe không tồn tại trong kho công thức"
-//        );
-//
-//        saved.clickDeleteAt(0);
-//
-//        Assert.assertTrue(
-//                saved.isDeletePopupDisplayed(),
-//                "❌ Không hiển thị popup xóa"
-//        );
-//
-//        saved.confirmDelete();
-//
-//        // ===== VERIFY RECIPE REMOVED =====
-//
-//        Assert.assertFalse(
-//                saved.isRecipeDisplayed(title),
-//                "❌ Recipe vẫn còn tồn tại sau khi xóa"
-//        );
-//    }
+    @Test(priority = 19,
+            description = "RecipeDelete_TC_01 - Xóa công thức thành công")
+    public void RecipeDelete_TC_01() {
+
+        openRecipeDetail();
+
+        String title = detail.getRecipeTitle();
+
+        detail.clickSaveAndVerifyToast();
+        detail.clickBackToHome();
+
+    //        home.backToHome(); emulator thừa
+
+        profile.clickTabProfile();
+        profile.openSavedRecipes();
+
+        // ✅ verify tồn tại
+        Assert.assertTrue(
+                saved.isRecipeDisplayed(title),
+                "❌ Recipe không tồn tại trong kho công thức"
+        );
+
+        saved.clickDeleteAt(0);
+
+        Assert.assertTrue(
+                saved.isDeletePopupDisplayed(),
+                "❌ Không hiển thị popup xóa"
+        );
+
+        saved.confirmDelete();
+
+        // ===== VERIFY RECIPE REMOVED =====
+
+        Assert.assertFalse(
+                saved.isRecipeDisplayed(title),
+                "❌ Recipe vẫn còn tồn tại sau khi xóa"
+        );
+    }
      // ======  RecipeDelete_TC_02  =======
     @Test(priority = 20, description = "RecipeDelete_TC_02 - Hủy xóa công thức")
     public void RecipeDelete_TC_02() {
