@@ -29,16 +29,19 @@ jobs:
           mvn -version
           adb version
           adb devices
+
       - name: Verify Emulator Ready
         shell: cmd
         run: |
           adb wait-for-device
           adb shell getprop sys.boot_completed
+
       - name: Kill Existing Appium
         shell: cmd
         continue-on-error: true
         run: |
           taskkill /F /IM node.exe
+
       - name: Start Appium
         shell: powershell
         run: |
