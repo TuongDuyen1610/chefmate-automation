@@ -65,7 +65,6 @@ jobs:
         continue-on-error: true
         run: |
           mvn clean test -DsuiteXmlFile="suites/testng-e2e-integration.xml"
-
       - name: Cleanup Allure Temp Files
         if: always()
         shell: powershell

@@ -35,7 +35,6 @@ jobs:
         run: |
           adb wait-for-device
           adb shell getprop sys.boot_completed
-
       - name: Kill Existing Appium
         shell: cmd
         continue-on-error: true

@@ -113,7 +113,6 @@ jobs:
           gh_pages: gh-pages
           allure_history: allure-history
           keep_reports: 20
-
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
