@@ -1,4 +1,4 @@
-name: ChefMate E2E
+name: ChefMate Regression Testing
 
 on:
   workflow_dispatch:

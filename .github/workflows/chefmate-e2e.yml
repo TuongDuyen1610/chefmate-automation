@@ -1,4 +1,4 @@
-name: ChefMate E2E
+name: ChefMate E2E Integration
 
 on:
   workflow_dispatch:

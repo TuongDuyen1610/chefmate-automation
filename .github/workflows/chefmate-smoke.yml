@@ -1,4 +1,4 @@
-name: ChefMate E2E
+name: ChefMate Smoke Testing
 
 on:
   workflow_dispatch:
