@@ -14,7 +14,7 @@
         <listener class-name="core.listener.AllureTestListener"/>
     </listeners>
 
-    <test name="Smoke Tests">
+    <test name="Tests">
         <classes>
                 <!--<class name="tests.LoginTest"/>
                 <class name="tests.RegistrationTest"/>

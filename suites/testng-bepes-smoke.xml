@@ -18,7 +18,7 @@
     <!-- ════════════════════════════════════════════════
              GROUP 1: LUỒNG CỐT LÕI (SMOKE TRƯỚC KHI E2E)
         ════════════════════════════════════════════════ -->
-    <test name="Group 01" enabled="false">
+    <test name="Group 01" enabled="true">
         <classes>
             <class name="tests.LoginTest">
                 <methods>
@@ -73,7 +73,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 3: LUỒNG TÌM KIẾM
     ════════════════════════════════════════════════ -->
-    <test name="Group 03" enabled="false">
+    <test name="Group 03" enabled="true">
         <classes>
             <class name="tests.SearchTest">
                 <methods>
@@ -90,7 +90,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 4: LUỒNG LƯU / LIKE / SHARE / XÓA
     ════════════════════════════════════════════════ -->
-    <test name="Group 04" enabled="false">
+    <test name="Group 04" enabled="true">
         <classes>
             <class name="tests.SaveRecipeTest">
                 <methods>
@@ -107,7 +107,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 5: LUỒNG TỦ LẠNH
     ════════════════════════════════════════════════ -->
-    <test name="Group 05" enabled="false">
+    <test name="Group 05" enabled="true">
         <classes>
             <class name="tests.FridgeTest">
                 <methods>
@@ -122,7 +122,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 6: LUỒNG BEPES AI
     ════════════════════════════════════════════════ -->
-    <test name="Group 06" enabled="false">
+    <test name="Group 06" enabled="true">
         <classes>
             <class name="tests.BepesAITest">
                 <methods>
@@ -153,7 +153,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 7: LUỒNG SHOPPING
     ════════════════════════════════════════════════ -->
-    <test name="Group 07" enabled="false">
+    <test name="Group 07" enabled="true">
         <classes>
             <class name="tests.ShoppingBuilderTest">
                 <methods>

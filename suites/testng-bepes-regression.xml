@@ -18,7 +18,7 @@
     <!-- ════════════════════════════════════════════════
              GROUP 1: LUỒNG CỐT LÕI (SMOKE TRƯỚC KHI E2E)
         ════════════════════════════════════════════════ -->
-    <test name="Group 01" enabled="false">
+    <test name="Group 01" enabled="true">
         <classes>
 <!--            Validation Đăng nhập:-->
             <class name="tests.LoginTest">
@@ -64,7 +64,7 @@
     <!-- ════════════════════════════════════════════════
         GROUP 2: LUỒNG XEM + THÊM + SỬA + XÓA CÔNG THỨC
    ════════════════════════════════════════════════ -->
-    <test name="Group 02" enabled="false">
+    <test name="Group 02" enabled="true">
         <classes>
             <class name="tests.RecipeDisplayTest">
                 <methods>
@@ -95,7 +95,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 6: LUỒNG BEPES AI
     ════════════════════════════════════════════════ -->
-    <test name="Group 06" enabled="false">
+    <test name="Group 06" enabled="true">
         <classes>
             <class name="tests.BepesAITest">
                 <methods>
