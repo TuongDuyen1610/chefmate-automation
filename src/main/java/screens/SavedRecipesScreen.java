@@ -21,6 +21,7 @@ public class SavedRecipesScreen extends BaseScreen {
     // ===== LOCATOR =====
     private final By header = By.xpath("//android.widget.TextView[@text='Kho công thức']");
     private final By btnBack = By.xpath("//android.view.View[@content-desc='Quay lại']");
+    private final By btnBack2 = By.xpath("//android.widget.ImageButton[@content-desc='Quay lại']");
 
     private final By recipeItems =
             By.xpath("//z0.h0/android.view.View/android.view.View[2]/android.view.View[1]");
@@ -212,6 +213,9 @@ public class SavedRecipesScreen extends BaseScreen {
     }
     public void clickBack() {
         click(btnBack);
+    }
+    public void clickBack2() {
+        click(btnBack2);
     }
     public String getTitleAt(int index) {
 
