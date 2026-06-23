@@ -29,12 +29,12 @@ public class EditRecipeScreen extends BaseScreen {
     private final By inputName = By.xpath("//android.widget.ScrollView/android.widget.EditText[1]");
     private final By inputTime = By.xpath("//android.widget.ScrollView/android.widget.EditText[2]");
     private final By inputServing = By.xpath("//android.widget.ScrollView/android.widget.EditText[4]");
-    private final By inputStep1 = By.xpath("//android.widget.TextView[@text='Các bước nấu']/following::android.widget.EditText[1]");
-    private final By inputStep2 = By.xpath("//android.widget.ScrollView/android.widget.EditText[2]");
+    private final By inputStep1 = By.xpath("//android.widget.ScrollView/android.widget.EditText[5]");
+    private final By inputStep2 = By.xpath("//android.widget.ScrollView/android.widget.EditText[6]");
     private final By inputStep3 = By.xpath("//android.widget.ScrollView/android.view.View[1]/android.widget.EditText[1]");
     private final By inputStep4 = By.xpath("//android.widget.ScrollView/android.view.View[1]/android.widget.EditText[2]");
     private final By inputStep5 = By.xpath("//android.widget.ScrollView/android.view.View[1]/android.widget.EditText[3]");
-
+////android.widget.TextView[@text="Bước 1"]
     // ===== UPDATE BUTTON =====
     private final By btnUpdate = By.xpath("//android.widget.TextView[@text='Cập nhật công thức']");
 
@@ -140,6 +140,7 @@ public class EditRecipeScreen extends BaseScreen {
     public void clearTime() {type(inputTime, "");}
     public void clearServing() {type(inputServing, "");}
     public void clearInput1() {type(inputStep1, "");}
+    public void clearInput2() {type(inputStep2, "");}
     public void clearInput3() {type(inputStep3, "");}
     public void clearInput4() {type(inputStep4, "");}
     public void clearInput5() {type(inputStep5, "");}
@@ -236,6 +237,7 @@ public class EditRecipeScreen extends BaseScreen {
     // ================= AVATAR =================
 
     public void clickAvatar() {
+        WaitingHelper.sleepSeconds(2);
         click(avatar);
         logger.info("Click avatar");
     }
