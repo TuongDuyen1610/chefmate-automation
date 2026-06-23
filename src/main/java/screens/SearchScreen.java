@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -127,7 +129,13 @@ public class SearchScreen extends BaseScreen {
             throw new RuntimeException("Cannot submit search via IME search", e);
         }
     }
+    public void submitSearchByEnter() {
 
+        click(searchField);
+
+        ((io.appium.java_client.android.AndroidDriver) getDriver())
+                .pressKey(new KeyEvent(AndroidKey.ENTER));
+    }
     @Step("Wait for result list OR no-result message (fast & robust)")
     public void waitForResultOrEmpty() {
         AllureHelper.step("Wait result stable (improved)");
