@@ -566,7 +566,7 @@ public class BepesAITest extends BaseTest {
         bepes.clickDeleteDishFirst();
         bepes.clickDeleteDishFirst();
         bepes.clickDeleteDishFirst();
-        driver.navigate().back();
+//        driver.navigate().back();
     }
     // ========== TC_33 ==========
     @Test(priority = 34)
