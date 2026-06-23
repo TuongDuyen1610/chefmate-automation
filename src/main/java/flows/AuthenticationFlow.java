@@ -195,7 +195,7 @@ public class AuthenticationFlow extends BaseFlow {
     }
     public boolean isLogoutNotLogin(){
         logStep("Verify: Still Profile session not login");
-        return profile.isLogoutNotLogin();
+        return logout.isLogoutNotLogin();
     }
     public void goBackToLoginFromRegistration() {
         logStep("Quay lai man dang nhap tu man dang ky");
