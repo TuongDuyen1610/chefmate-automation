@@ -139,5 +139,23 @@ public class LoginScreen extends BaseScreen {
             return false;
         }
     }
+    public boolean isToastLoginFail2() {
+        click(loginButton);
+        WaitingHelper.sleepSeconds(1);
+        try {
+            logger.info("⏳ Waiting for toast to appear (2 seconds)...");
 
+            // ✅ LOGIC CŨ CỦA CHỊ
+            getDriver().findElement(errorToastLoginFail);
+
+            logger.info("✅ Toast displayed successfully");
+            AllureHelper.attachScreenshot("✅ Toast Message Found");
+            return true;
+        } catch (Exception e) {
+            logger.error("❌ Toast NOT displayed: " + e.getMessage());
+            AllureHelper.attachScreenshot("❌ Toast NOT Found");
+            AllureHelper.attachErrorMessage("Toast not found: " + e.getMessage());
+            return false;
+        }
+    }
 }
