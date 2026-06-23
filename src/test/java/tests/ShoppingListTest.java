@@ -148,7 +148,7 @@ public class ShoppingListTest extends BaseTest {
         listFlow.editIngredientQtyUnitAt(0, newQty, newUnit);
 
         // verify theo pattern hiển thị thực tế trong app (thường "... - 99 G")
-        listFlow.verifyIngredientDisplayedIgnoreCase(" - 99 Ml");
+        listFlow.verifyIngredientDisplayedIgnoreCase(" - 99 G");
         AllureHelper.attachScreenshot("RecipeShoppingManage_TC_08 PASSED");
     }
 
@@ -214,7 +214,7 @@ public class ShoppingListTest extends BaseTest {
         listFlow.verifyListUI();
     }
 
-    //    @Test(priority = 13)
+    @Test(priority = 13)
     public void RecipeShoppingManage_TC_13() {
 
         seedAndGoToShoppingListWithOneRecipeSelected();
