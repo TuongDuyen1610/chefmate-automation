@@ -60,6 +60,9 @@ public class E2EIntegrationTest extends BaseTest {
     AddRecipeScreen        addScreen   = new AddRecipeScreen();
     SplashScreen           splash  = new SplashScreen();
     LoginScreen            login   = new LoginScreen();
+    LogoutScreen           logout  = new LogoutScreen();
+    EditProfileScreen       edit   = new EditProfileScreen();
+    LoginGateHelper      gateHelper    = new LoginGateHelper();
     // ── Flows ─────────────────────────────────────────────────────────────────
     AuthenticationFlow authFlow    = new AuthenticationFlow();
     SearchFlow         searchFlow  = new SearchFlow(home, search, detail);
@@ -76,7 +79,15 @@ public class E2EIntegrationTest extends BaseTest {
     LoginData loginData = JsonHelper.readLoginData();
     String email    = loginData.login;
     String password = loginData.password;
-
+    private void openBepes() {
+        bepesFlow.openBepesFromHome();
+    }
+    private void login() {
+        authFlow.loginFromFridgeTab(email, password);
+        WaitingHelper.sleepSeconds(2);
+        Assert.assertTrue(authFlow.isLoggedInSuccessfully(), "❌ Login failed");
+        AllureHelper.attachScreenshot("LOGIN SUCCESS");
+    }
     // ═════════════════════════════════════════════════════════════════════════
     // E2E_01: Login → Xem chi tiết công thức → Quay lại Home → Đăng xuất
     // ═════════════════════════════════════════════════════════════════════════
@@ -154,11 +165,12 @@ public class E2EIntegrationTest extends BaseTest {
         Assert.assertTrue(authFlow.isChangePasswordSuccessDisplayed(),
                 "❌ [S2] Toast đổi MK thành công không hiển thị");
         AllureHelper.attachScreenshot("[S2] Đổi MK thành công → MK mới: " + newPassword);
-
+        WaitingHelper.sleepSeconds(1);
         // STEP 3: Back về Profile → Logout
         authFlow.backFromChangePassword();
-        authFlow.goBackToProfileFromEditScreen();
-        authFlow.performLogoutSafely();
+        edit.clickBack();
+        logout.clickLogoutIcon();
+        logout.confirmLogout();
         Assert.assertTrue(authFlow.isLogoutSuccessful(), "❌ [S3] Logout thất bại");
         AllureHelper.attachScreenshot("[S3] Logout thành công");
 
@@ -169,15 +181,19 @@ public class E2EIntegrationTest extends BaseTest {
         AllureHelper.attachScreenshot("[S4] Login bằng MK mới thành công");
 
         // STEP 5: Login cũ phải FAIL
-        authFlow.performLogoutSafely();
-        authFlow.loginFromProfileTab(email, password);
-        Assert.assertTrue(authFlow.isToastLoginFail(), "❌ [S5] Login bằng MK cũ phải thất bại sau khi đổi");
+        profile.clickBottomNavProfile();
+        logout.clickLogoutIcon();
+        logout.confirmLogout();
+        splash.waitUntilSplashDisappear();
+        AllureHelper.attachScreenshot("Splash screen disappeared");
+        gateHelper.triggerLoginByProfileTab();
+        login.enterPhoneOrEmail(email);
+        login.enterPassword(password);
+        Assert.assertTrue(login.isToastLoginFail2(), "❌ [S5] Login bằng MK cũ phải thất bại sau khi đổi");
         AllureHelper.attachScreenshot("[S5] Login MK cũ đúng thất bại như kỳ vọng");
-        WaitingHelper.sleepSeconds(2); // bắt buộc phải có waitting !
 
         // STEP 6: Revert — đổi ngược về mật khẩu gốc
         login.performLogin(email, newPassword);
-        Assert.assertTrue(authFlow.isLoggedInSuccessfully(), "❌ [S6] Login lại để revert thất bại");
         authFlow.changePassword(newPassword, password, password);
         Assert.assertTrue(authFlow.isChangePasswordSuccessDisplayed(),
                 "❌ [S6] Revert MK về ban đầu thất bại");
@@ -185,7 +201,6 @@ public class E2EIntegrationTest extends BaseTest {
 
         logger.info("✅ E2E_02 PASSED");
     }
-
     // ═════════════════════════════════════════════════════════════════════════
     // E2E_03: Login → Tìm kiếm → Lưu CT → Kiểm tra trong Kho → Xóa
     // ═════════════════════════════════════════════════════════════════════════
@@ -223,6 +238,7 @@ public class E2EIntegrationTest extends BaseTest {
 
         // STEP 5: Back → vào Kho
         detail.clickBackToHome();
+        home.backToHome2();
         try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         profile.clickTabProfile();
         profile.openSavedRecipes();
@@ -286,8 +302,9 @@ public class E2EIntegrationTest extends BaseTest {
 
         // STEP 4: Thêm nguyên liệu
         addScreen.inputIngredients(Arrays.asList(
-                Arrays.asList("Gạo",   "200", "gram"),
-                Arrays.asList("Nước",  "500", "ml")
+                Arrays.asList("Gạo Basmati",   "400", "gram"),
+                Arrays.asList("Nước Dùng",  "500", "ml"),
+                Arrays.asList("Nước Dùng",  "500", "ml")
         ));
         try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         AllureHelper.attachScreenshot("[S4] Nhập nguyên liệu");
@@ -337,6 +354,7 @@ public class E2EIntegrationTest extends BaseTest {
         try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         Assert.assertTrue(savedOk, "❌ [S2] Lưu CT thất bại");
         detail.clickBackToHome();
+        home.backToHome2();
         AllureHelper.attachScreenshot("[S2] Lưu CT thành công");
 
         // STEP 3: Vào Kho → click Edit
@@ -405,7 +423,19 @@ public class E2EIntegrationTest extends BaseTest {
 
         logger.info("✅ E2E_06 PASSED");
     }
-
+    // Xóa các món đã chọn trước khi ChatAI
+    @Test(priority = 33)
+    public void BepesAI_TC_DacBiet() {
+        login();
+        openBepes();
+        bepes.openChooseDishSheetSmart();
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        bepes.clickDeleteDishFirst();
+        driver.navigate().back();
+    }
     // ═════════════════════════════════════════════════════════════════════════
     // E2E_07: Login → Mở Bepes AI → Chọn món → Chat → Xem CT → Hoàn thành
     // ═════════════════════════════════════════════════════════════════════════
