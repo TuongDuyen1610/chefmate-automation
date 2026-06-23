@@ -63,7 +63,18 @@ public class SearchFlow {
         searchScreen.waitForResultOrEmpty();
         AllureHelper.attachScreenshot("Result - Tag | " + keyword);
     }
+    @Step("Search by 'Tag' with keyword: {keyword}")
+    public void searchByTag2(String keyword) {
+        focusSearchOnHome();
 
+        searchScreen.clearKeyword();
+        searchScreen.enterKeyword(keyword);
+        searchScreen.selectTabTag();
+
+        searchScreen.submitSearchByEnter();
+        searchScreen.waitForResultOrEmpty();
+        AllureHelper.attachScreenshot("Result - Tag | " + keyword);
+    }
     @Step("Verify keyword exists in Ingredients on detail: {keyword}")
     public boolean verifyKeywordInIngredients(String keyword) {
         try {
