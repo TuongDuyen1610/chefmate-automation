@@ -42,7 +42,7 @@ public class EditRecipeTest extends BaseTest {
         Assert.assertTrue(isSaved, "❌ Save thất bại");
         try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         detail.clickBackToHome();
-        home.backToHome();
+        home.backToHome2();
 
         profile.clickTabProfile();
         profile.openSavedRecipes();
@@ -67,9 +67,9 @@ public class EditRecipeTest extends BaseTest {
                 home.backToHome();
             }
         }
-//    // =========================
-//    // TC_01 - FORM LOAD
-//    // =========================
+    // =========================
+    // TC_01 - FORM LOAD
+    // =========================
     @Test(priority = 1)
     public void RecipeEdit_TC_01() {
 
@@ -102,18 +102,15 @@ public class EditRecipeTest extends BaseTest {
         edit.addMultipleTags(tags);
 
         String newName = "Auto " + System.currentTimeMillis();
-
         edit.clearName();
         edit.inputName(newName);
 
         String newTime = "00: " + System.currentTimeMillis();
-
         try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
         edit.clearTime();
         edit.inputTime(newTime);
 
         String newServing = "" + System.currentTimeMillis();
-
         edit.clearServing();
         edit.inputServing(newServing);
 
@@ -121,10 +118,13 @@ public class EditRecipeTest extends BaseTest {
         edit.deleteAllIngredients();
 
         String newStep3 = "Auto_3" + System.currentTimeMillis();
+        edit.clearInput3();
         edit.inputStep3(newStep3);
         String newStep4 = "4" + System.currentTimeMillis();
+        edit.clearInput4();
         edit.inputStep4(newStep4);
         String newStep5 = "gam" + System.currentTimeMillis();
+        edit.clearInput5();
         edit.inputStep5(newStep5);
         // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
         try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
@@ -151,17 +151,8 @@ public class EditRecipeTest extends BaseTest {
     public void RecipeEdit_TC_03() {
 
         goToEditScreen();
-        edit.slowSwipeDownOnScreen(2);
+        edit.slowSwipeDownOnScreen(3);
         edit.deleteAllSteps();
-
-        edit.clickAddStep();
-
-        String newStep1 = "Auto_1_2 " + System.currentTimeMillis();
-        edit.inputStep1(newStep1);
-        String newStep2 = "Auto_2_ " + System.currentTimeMillis();
-        edit.inputStep2(newStep2);
-
-        edit.slowSwipeDownOnScreen(1);
         edit.clickUpdate(); // ✅ FIX
 
         Assert.assertFalse(
@@ -179,19 +170,6 @@ public class EditRecipeTest extends BaseTest {
         goToEditScreen();
         edit.slowSwipeDownOnScreen(1);
         edit.deleteAllIngredients();
-
-        String newStep3 = "Auto_3" + System.currentTimeMillis();
-        edit.inputStep3(newStep3);
-        String newStep4 = "4" + System.currentTimeMillis();
-        edit.inputStep4(newStep4);
-        String newStep5 = "gam" + System.currentTimeMillis();
-        edit.inputStep5(newStep5);
-
-        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-        try {
-            getDriver().hideKeyboard();
-        } catch (Exception ignored) {}
-
         edit.slowSwipeDownOnScreen(1);
         edit.clickUpdate(); // ✅ FIX
 
@@ -206,38 +184,9 @@ public class EditRecipeTest extends BaseTest {
     // =========================
     @Test(priority = 5)
     public void RecipeEdit_TC_05() {
-////
-////        authFlow.loginFromFridgeTab("duyentest@gmail.com", "123456");
-////
-////        profile.clickTabProfile();
-////        profile.openSavedRecipes();
-////
-////        int total = saved.getTotalRecipes();
-////        int editCount = Math.min(3, total);
-////
-////        for (int i = 0; i < editCount; i++) {
-////
-////            saved.clickEditAt(i);
-////
-////            String newName = "Multi " + i + System.currentTimeMillis();
-////
-////            edit.clearName();
-////            edit.inputName(newName);
-////
-////            edit.clickUpdate(); // ✅ FIX
-////
-////            WaitingHelper.sleepSeconds(1);
-////
-////            // ✅ FIX: quay lại list
-////            profile.clickTabProfile();
-////            profile.openSavedRecipes();
-////        }
-////
-////        Assert.assertTrue(true, "✅ Multi edit done");
-////    }
 
         // ===== DATA =====
-        List<String> keywords = Arrays.asList("cà phê", "trà", "bánh", "cơm", "cháo", "xúc xích");
+        List<String> keywords = Arrays.asList("cháo", "xúc xích");
 
         // ===== LOGIN =====
         authFlow.loginFromFridgeTab("duyentest@gmail.com", "123456");
@@ -254,7 +203,7 @@ public class EditRecipeTest extends BaseTest {
             Assert.assertTrue(isSaved, "❌ Save thất bại với keyword: " + keyword);
 
             detail.clickBackToHome();
-            home.backToHome();
+            home.backToHome2();
         }
 
         // ===== VÀO KHO =====
@@ -292,42 +241,21 @@ public class EditRecipeTest extends BaseTest {
             edit.slowSwipeDownOnScreen(1);
             edit.deleteAllIngredients();
 
-            String ing1 = "Nguyên liệu " + i;
-            String ing2 = "" + (i + 2);
-            String ing3 = "gram";
-
-            edit.inputStep3(ing1);
-            edit.inputStep4(ing2);
-            edit.inputStep5(ing3);
-
             // ===== STEP =====
-            try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
-
             edit.slowSwipeDownOnScreen(1);
             edit.deleteAllSteps();
 
-            edit.clickAddStep();
-
-            String step1 = "Step 1 - " + i;
-            String step2 = "Step 2 - " + i;
-
-            edit.inputStep1(step1);
-            edit.inputStep2(step2);
-
             // ===== UPDATE =====
-            try { getDriver().hideKeyboard(); } catch (Exception ignored) {}
 
             edit.slowSwipeDownOnScreen(2);
             edit.clickUpdate();
-
-            WaitingHelper.sleepSeconds(2);
 
             // ===== VERIFY =====
             Assert.assertTrue(
                     saved.isRecipeExist(newName, ""),
                     "❌ Update thất bại tại vòng: " + i
             );
-
+            saved.clickBack();
             // 👉 quay lại list
             profile.clickTabProfile();
             profile.openSavedRecipes();
@@ -345,7 +273,7 @@ public class EditRecipeTest extends BaseTest {
 //        edit.chooseImageFromGalleryReal(); // auto update UI REAL
         edit.chooseImageFromGalleryEmulator(1); // auto update UI EMULATOR
 
-        edit.slowSwipeDownOnScreen(2);
+        edit.slowSwipeDownOnScreen(3);
         edit.clickUpdate();
 
         saved.clickBack();
@@ -466,15 +394,9 @@ public class EditRecipeTest extends BaseTest {
 
         edit.slowSwipeDownOnScreen(1);
 
-        editFlow.clearAllIngredients();
-        edit.clearInput3();
-        edit.clearInput4();
-        edit.clearInput5();
-
-        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-        try {
-            getDriver().hideKeyboard();
-        } catch (Exception ignored) {}
+        edit.deleteAllIngredients();
+        edit.clickAddIngredient();
+        edit.deleteAllIngredients();
 
         edit.slowSwipeDownOnScreen(1);
 
@@ -495,10 +417,9 @@ public class EditRecipeTest extends BaseTest {
         goToEditScreen();
 
         edit.slowSwipeDownOnScreen(2);
-        editFlow.clearAllSteps();
-
-        edit.clearInput1();
-
+        edit.deleteAllSteps();
+        edit.clickAddStep();
+        edit.deleteAllSteps();
         edit.clickUpdate();
 
         Assert.assertTrue(
