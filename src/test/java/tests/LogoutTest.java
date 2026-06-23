@@ -8,6 +8,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import core.data.LoginData;
 import core.utils.JsonHelper;
+import screens.ProfileScreen;
+
+
 /**
  * LogoutTest.java
  * ✅ Updated: Test case đăng xuất
@@ -18,6 +21,7 @@ public class LogoutTest extends BaseTest {
     private final AuthenticationFlow authFlow = new AuthenticationFlow();
     private final LogoutScreen logout = new LogoutScreen();
     private final LoginData loginData = JsonHelper.readLoginData();
+    private final ProfileScreen profile = new ProfileScreen();
 
     String phoneOrEmail = loginData.login;
     String password = loginData.password;
@@ -61,10 +65,11 @@ public class LogoutTest extends BaseTest {
         // 1. Không login
 
         // 2. Đăng xuất
-        authFlow.performLogout();
+        System.out.println("=== THUC HIEN DANG XUAT ===");
+        profile.clickBottomNavProfile();
 
         // 3. Verify: Quay lại Màn Profile
-        Assert.assertTrue(authFlow.isLogoutNotLogin(),
+        Assert.assertTrue(logout.isLogoutNotLogin(),
                 "❌ Error: Không báo lỗi khi đang ở trạng thái chưa đăng nhập mà nhấn logout.");
     }
 
