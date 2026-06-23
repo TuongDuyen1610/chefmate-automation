@@ -109,7 +109,7 @@ public class AddRecipeScreen extends BaseScreen {
 
     // ===== TOAST =====
     private final By toastRequired =
-            By.xpath("//android.widget.Toast[@text='Cần ít nhất 1 nguyên liệu và 1 bước nấu hợp lệ']");
+            By.xpath("//android.widget.Toast[@text='Vui lòng điền đầy đủ thông tin']");
 
     private final By toastInvalid =
             By.xpath("//android.widget.Toast[@text='Cần ít nhất 1 nguyên liệu và 1 bước nấu hợp lệ']");
@@ -295,6 +295,7 @@ public class AddRecipeScreen extends BaseScreen {
     // ================= TOAST =================
 
     public boolean isRequiredToastDisplayed() {
+        click(btnPost);
         try {
             getDriver().findElement(toastRequired);
             logger.info("Toast error displayed");
