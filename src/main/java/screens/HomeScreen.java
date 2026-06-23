@@ -391,7 +391,10 @@ public class HomeScreen extends BaseScreen {
             throw new RuntimeException("Recipe list failed to load", e);
         }
     }
-    public void backToHome2() { click(btnBack);}
+    public void backToHome2() {
+        WaitingHelper.sleepSeconds(2);
+        click(btnBack);
+    }
     public void backToHome() {
 
         logStep("Back về Home thật");
