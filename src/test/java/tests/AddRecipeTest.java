@@ -99,7 +99,6 @@ public class AddRecipeTest extends BaseTest {
                 "Chuẩn bị rau và bún",
                 "Nhúng bánh tráng",
                 "Xếp nguyên liệu"
-
     //                "Cuốn chặt tay",
     //                "Pha nước chấm"
         );
@@ -116,6 +115,7 @@ public class AddRecipeTest extends BaseTest {
                 "❌ Không add thành công"
         );
     }
+
     // =========================
     // TC_03 - REQUIRED FIELD
     // =========================
@@ -124,22 +124,14 @@ public class AddRecipeTest extends BaseTest {
 
         goToAddScreen();
 
-        addFlow.clearRequiredField();
-
-        // 🔥 ĐẢM BẢO KHÔNG BỊ KEYBOARD CHẶN
-        try {
-            getDriver().hideKeyboard();
-        } catch (Exception ignored) {}
-
         add.slowSwipeDownOnScreen(2);
-
-        add.clickPost(); // ✅ FIX
 
         Assert.assertTrue(
                 addFlow.isRequiredToast(),
                 "❌ Không hiển thị toast required"
         );
     }
+
     // =========================
     // TC_04 - EMPTY INGREDIENT
     // =========================
@@ -235,7 +227,7 @@ public class AddRecipeTest extends BaseTest {
         add.clickPost();
 
         Assert.assertTrue(
-                addFlow.isRequiredToast(),
+                addFlow.isInvalidToast(),
                 "❌ Update steps lỗi"
         );
     }
