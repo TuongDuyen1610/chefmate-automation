@@ -64,7 +64,7 @@ public class RecipeDetailScreen extends BaseScreen {
 
     private final By commentsSection = By.xpath("//android.widget.TextView[@text='Bình luận']");
     private final By loginMessage = By.xpath("//android.widget.TextView[@text='Vui lòng đăng nhập để bình luận công thức này.']");
-
+    //android.view.View[@content-desc="Quay lại"]
     // ===== LOCATORS SaveRecipe =====
     private final By btnSave = By.xpath("//android.view.View[@content-desc='Mark']");
     private final By toastSaved = By.xpath("//android.widget.Toast[@text='Đã lưu']");
@@ -82,16 +82,23 @@ public class RecipeDetailScreen extends BaseScreen {
 
     // ===== SHARE TARGET =====
     private final By shareSheetTitle =
-            By.xpath("//android.widget.TextView[@text='Chia sẻ văn bản']");
+            By.xpath("//android.widget.TextView[@text='Chia sẻ qua OPPO Share']");
 
-    private final By shareMessenger =
-            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Messenger')]");
+//    private final By shareMessenger =
+//            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Messenger')]");
 
+//    private final By shareZalo =
+//            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Zalo')]");
+//    private final By shareGmail =
+//            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Gmail')]");
+//
     private final By shareZalo =
-            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Zalo')]");
+            By.xpath("//android.widget.TextView[@text='Zalo']");
+    private final By shareMessenger =
+            By.xpath("//android.widget.TextView[@text='Messenger']");
 
     private final By shareGmail =
-            By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Gmail')]");
+            By.xpath("//android.widget.TextView[@text='Gmail']");
 
     // ===== SHARE Messenger (Facebook) =====
     private final By fbSearchBtn =
@@ -99,12 +106,17 @@ public class RecipeDetailScreen extends BaseScreen {
 
     private final By fbSearchInput =
             By.xpath("//android.widget.AutoCompleteTextView");
+    private final By gmailInputBtn = By.xpath("//android.widget.EditText");
 
     private final By fbResultUser =
             By.xpath("//android.widget.AutoCompleteTextView[@text='Tưởng Duyên']");
+    private final By ZLResultUser =
+            By.xpath("//android.widget.TextView[@text='C Duyên']");
+    private final By ZLSendBtn =
+            By.id("com.zing.zalo:id/floating_btn_send");
 
     private final By fbSendBtn =
-            By.xpath("(//android.view.ViewGroup[@content-desc='GỬI'])[1]");
+            By.xpath("//android.view.ViewGroup[@content-desc='GỬI']");
 
     private final By fbSentStatus =
             By.xpath("//android.view.ViewGroup[@content-desc='Đã gửi']");
@@ -553,7 +565,7 @@ public class RecipeDetailScreen extends BaseScreen {
         logStep("Back về Home bằng UI button");
 
         clickBack(); // Detail -> Search
-        clickBack(); // Search -> Home
+//        clickBack(); // Search -> Home
 
     }
     public void clickLike(){
@@ -637,19 +649,6 @@ public class RecipeDetailScreen extends BaseScreen {
             click(shareMessenger);
             WaitingHelper.sleepSeconds(3);
 
-            // 👉 click search
-            click(fbSearchBtn);
-            WaitingHelper.sleepSeconds(1);
-
-            // 👉 nhập tên
-            WebElement input = getDriver().findElement(fbSearchInput);
-            input.sendKeys("Tưởng Duyên");
-            WaitingHelper.sleepSeconds(2);
-
-            // 👉 chọn user
-            click(fbResultUser);
-            WaitingHelper.sleepSeconds(1);
-
             // 👉 click gửi
             click(fbSendBtn);
 
@@ -674,9 +673,23 @@ public class RecipeDetailScreen extends BaseScreen {
     public boolean shareViaZaloQuick() {
         try {
             click(shareZalo);
+//            // 👉 click search
+//            click(fbSearchBtn);
+//            WaitingHelper.sleepSeconds(1);
+
+//            // 👉 nhập tên
+//            WebElement input = getDriver().findElement(fbSearchInput);
+//            input.sendKeys("C Duyên");
+
+            // 👉 chọn user
+            click(ZLResultUser);
+            WaitingHelper.sleepSeconds(1);
+            // 👉 click gửi
+            click(ZLSendBtn);
             // 👉 Zalo auto gửi → bắt toast
             getDriver().findElement(toastShared);
             logger.info("Toast success displayed");
+            WaitingHelper.sleepSeconds(2);
             AllureHelper.attachScreenshot("ZALO SHARE SUCCESS");
             return true;
 
@@ -693,6 +706,14 @@ public class RecipeDetailScreen extends BaseScreen {
             click(shareGmail);
             WaitingHelper.sleepSeconds(2);
 
+////             👉 click ô nhập
+//            click(gmailInputBtn);
+//            WaitingHelper.sleepSeconds(1);
+
+            // 👉 nhập tên
+            WebElement input = getDriver().findElement(gmailInputBtn);
+            input.sendKeys("dd16102004@gmail.com");
+
             // 👉 verify vào compose
             if (!isDisplayed(gmailSendBtn)) {
                 return false;
@@ -701,6 +722,7 @@ public class RecipeDetailScreen extends BaseScreen {
             AllureHelper.attachScreenshot("GMAIL COMPOSE SCREEN");
             // 👉 click gửi
             click(gmailSendBtn);
+            WaitingHelper.sleepSeconds(2);
 
             AllureHelper.attachScreenshot("GMAIL SEND SUCCESS");
 
