@@ -88,7 +88,7 @@
     </test>
 
     <!-- ════════════════════════════════════════════════
-         GROUP 4: LUỒNG LƯU / LIKE / SHARE / XÓA
+         GROUP 4: LUỒNG LƯU / LIKE / SHARE / XÓA / Share FB + ZALO + GMAIL
     ════════════════════════════════════════════════ -->
     <test name="Group 04" enabled="false">
         <classes>
@@ -98,7 +98,7 @@
                     <include name="RecipeSave_TC_02"/>
                     <include name="RecipeLike_TC_01"/>
                     <include name="RecipeComment_TC_01"/>
-                    <include name="RecipeShare_TC_01"/>
+                    <include name="RecipeShare_TC_05"/>
                 </methods>
             </class>
         </classes>
