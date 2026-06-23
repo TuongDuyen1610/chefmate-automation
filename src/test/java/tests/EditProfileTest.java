@@ -23,7 +23,7 @@ public class EditProfileTest extends BaseTest {
     String emailOrSDT = loginData.login;
     String password = loginData.password;
 
-//     ================= TC01 =================
+    //     ================= TC01 =================
     @Test(priority = 1, description = "Edit_TC_01 - Update Full Name Successfully")
     public void Edit_TC_01() {
 
@@ -36,7 +36,7 @@ public class EditProfileTest extends BaseTest {
                 "Loi hien thi toast cap nhat thanh cong");
 
     }
-//     ================= TC02 =================
+    //     ================= TC02 =================
     @Test(priority = 2, description = "Edit_TC_02 - Update Email Successfully")
     public void Edit_TC_02() {
 
@@ -58,7 +58,7 @@ public class EditProfileTest extends BaseTest {
         System.out.println("\n===== TC03 UPDATE PHONE =====");
         String newEmail = "duyentest2@gmail.com";
         authFlow.loginFromProfileTab(newEmail, password);
-        String newPhone = "0900009998";
+        String newPhone = "0912".repeat(3);;
 
         authFlow.updatePhone(newPhone);
 
@@ -138,7 +138,7 @@ public class EditProfileTest extends BaseTest {
         System.out.println("✅ TC06 PASS");
     }
 
-// ================= TC7 ================= -->  Error : Emulator ko hiển thị, looix phia Backend
+    // ================= TC7 ================= -->  Error : Emulator ko hiển thị, looix phia Backend
     @Test(priority = 7, description = "Edit_TC_07 - Verify error when updating existing email")
     public void Edit_TC_07() {
 
@@ -185,7 +185,7 @@ public class EditProfileTest extends BaseTest {
         String existingPhone = "0987654321"; // ← SĐT của user: test1@gmail.com / 123456
 
         authFlow.loginFromProfileTab(emailOrSDT, password);
-    //        WaitingHelper.sleepSeconds(2);
+        //        WaitingHelper.sleepSeconds(2);
 
         // ✅ Try update với SĐT đã tồn tại
         authFlow.checkDisplayErrorMsgSDT(currentName, currentEmail, existingPhone);
@@ -208,9 +208,9 @@ public class EditProfileTest extends BaseTest {
                 "",
                 "duyentest@gmail.com",
                 "0900009999");
-            Assert.assertTrue(
-                    authFlow.isToastUpdateInfoDisplayed(),
-                    "Loi hien thi toast cap nhat thanh cong");
+        Assert.assertTrue(
+                authFlow.isToastUpdateInfoDisplayed(),
+                "Loi hien thi toast cap nhat thanh cong");
         System.out.println("✅ TC09 PASS");
     }
 
@@ -235,7 +235,7 @@ public class EditProfileTest extends BaseTest {
                 "Back không về Profile");
         authFlow.loginFromFridgeTab("", password);
         AllureHelper.attachScreenshot("Đăng nhập lại với email vừa update");
-        Assert.assertTrue(authFlow.isLoggedInSuccessfully(), "Error: Khong vao đuoc Home!");
+        Assert.assertTrue(authFlow.isToastUpdateInfoDisplayed_TC0607(), "Lỗi: Để trống Email Vẫn đăng nhập thành công");
         System.out.println("✅ TC10 PASS");
     }
 
