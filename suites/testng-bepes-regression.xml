@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="E2E Integration Suite" verbose="1" parallel="none">
+<suite name="Chefmate Regression Suite" verbose="1" parallel="none">
     <!--
             testng-e2e-integration.xml
             Suite Regression Testing (Kiểm thử hồi quy) — ChefMate Android
@@ -64,7 +64,7 @@
     <!-- ════════════════════════════════════════════════
         GROUP 2: LUỒNG XEM + THÊM + SỬA + XÓA CÔNG THỨC
    ════════════════════════════════════════════════ -->
-    <test name="Group 02" enabled="false">
+    <test name="Group 02" enabled="true">
         <classes>
             <class name="tests.RecipeDisplayTest">
                 <methods>
@@ -95,7 +95,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 6: LUỒNG BEPES AI
     ════════════════════════════════════════════════ -->
-    <test name="Group 06" enabled="false">
+    <test name="Group 06" enabled="true">
         <classes>
             <class name="tests.BepesAITest">
                 <methods>
@@ -112,7 +112,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 7: LUỒNG SHOPPING
     ════════════════════════════════════════════════ -->
-    <test name="Group 07" enabled="false">
+    <test name="Group 07" enabled="true">
         <classes>
             <class name="tests.ShoppingBuilderTest">
                 <methods>
