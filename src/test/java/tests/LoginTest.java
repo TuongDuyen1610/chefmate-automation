@@ -89,7 +89,7 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(authFlow.isLoginScreenStillDisplayed(), "Error: Phai o lai man Login!");
         logger.info("✅ DangNhap_TC_07 PASSED\n");
     }
-//
+
     @Test(priority = 8, description = "DangNhap_TC_08- Để trống Email")
     public void DangNhap_TC_08() {
         String password = "000000";
