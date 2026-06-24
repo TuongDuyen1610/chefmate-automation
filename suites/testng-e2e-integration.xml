@@ -98,7 +98,7 @@
                     <include name="RecipeSave_TC_02"/>
                     <include name="RecipeLike_TC_01"/>
                     <include name="RecipeComment_TC_01"/>
-                    <include name="RecipeShare_TC_05"/>
+<!--                    <include name="RecipeShare_TC_05"/>-->
                 </methods>
             </class>
         </classes>

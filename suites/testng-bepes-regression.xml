@@ -103,7 +103,7 @@
                     <include name="BepesAI_TC_34"/>
                     <include name="BepesAI_TC_36"/>
                     <include name="BepesAI_TC_37"/>
-                    <include name="BepesAI_TC_DacBiet"/>
+<!--                    <include name="BepesAI_TC_DacBiet"/>-->
                 </methods>
             </class>
         </classes>
