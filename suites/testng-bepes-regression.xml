@@ -26,38 +26,38 @@
                     <include name="DangNhap_TC_07"/>
                     <include name="DangNhap_TC_08"/>
                     <include name="DangNhap_TC_09"/>
-<!--                    <include name="DangNhap_TC_11"/>-->
-<!--                    <include name="DangNhap_TC_12"/>-->
-<!--                    <include name="DangNhap_TC_13"/>-->
-<!--                    <include name="DangNhap_TC_14"/>-->
+                    <include name="DangNhap_TC_11"/>
+                    <include name="DangNhap_TC_12"/>
+                    <include name="DangNhap_TC_13"/>
+                    <include name="DangNhap_TC_14"/>
                 </methods>
             </class>
-<!--&lt;!&ndash;            Validation Đăng ký:&ndash;&gt;-->
-<!--            <class name="tests.RegistrationTest">-->
-<!--                <methods>-->
-<!--                    <include name="DangKy_TC_08"/>-->
-<!--                    <include name="DangKy_TC_09"/>-->
-<!--                    <include name="DangKy_TC_10"/>-->
-<!--                    <include name="DangKy_TC_11"/>-->
-<!--                    <include name="DangKy_TC_12"/>-->
-<!--                    <include name="DangKy_TC_18"/>-->
-<!--                    <include name="DangKy_TC_20"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--            &lt;!&ndash;            Validation Đăng xuat:&ndash;&gt;-->
-<!--            <class name="tests.LogoutTest">-->
-<!--                <methods>-->
-<!--                    <include name="DangXuat_TC_01"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--            &lt;!&ndash;Quản lý Tài khoản & Đổi mật khẩu &:&ndash;&gt;-->
-<!--            <class name="tests.EditProfileTest">-->
-<!--                <methods>-->
-<!--                    <include name="Edit_TC_06"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--            <class name="tests.ChangePasswordTest">-->
-<!--            </class>-->
+<!--            Validation Đăng ký:-->
+            <class name="tests.RegistrationTest">
+                <methods>
+                    <include name="DangKy_TC_08"/>
+                    <include name="DangKy_TC_09"/>
+                    <include name="DangKy_TC_10"/>
+                    <include name="DangKy_TC_11"/>
+                    <include name="DangKy_TC_12"/>
+                    <include name="DangKy_TC_18"/>
+                    <include name="DangKy_TC_20"/>
+                </methods>
+            </class>
+            <!--            Validation Đăng xuat:-->
+            <class name="tests.LogoutTest">
+                <methods>
+                    <include name="DangXuat_TC_01"/>
+                </methods>
+            </class>
+            <!--Quản lý Tài khoản & Đổi mật khẩu &:-->
+            <class name="tests.EditProfileTest">
+                <methods>
+                    <include name="Edit_TC_06"/>
+                </methods>
+            </class>
+            <class name="tests.ChangePasswordTest">
+            </class>
         </classes>
     </test>
 
