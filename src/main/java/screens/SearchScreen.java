@@ -18,7 +18,8 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 /**
  * SearchScreen.java
  * - Dùng chung cho luồng search (Home -> SearchScreen).
@@ -120,8 +121,9 @@ public class SearchScreen extends BaseScreen {
             // focus field trước khi submit để IME action ăn chắc
             click(searchField);
 
-            getDriver().executeScript("mobile: performEditorAction", Map.of("action", "search"));
-
+//            getDriver().executeScript("mobile: performEditorAction", Map.of("action", "search"));
+            getDriver()
+                    .pressKey(new KeyEvent(AndroidKey.ENTER));
             logger.info("✅ Submitted search via performEditorAction(search)");
         } catch (Exception e) {
             logger.error("❌ Cannot submit search via IME search", e);
@@ -133,7 +135,7 @@ public class SearchScreen extends BaseScreen {
 
         click(searchField);
 
-        ((io.appium.java_client.android.AndroidDriver) getDriver())
+        getDriver()
                 .pressKey(new KeyEvent(AndroidKey.ENTER));
     }
     @Step("Wait for result list OR no-result message (fast & robust)")

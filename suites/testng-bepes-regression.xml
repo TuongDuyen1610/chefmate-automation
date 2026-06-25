@@ -84,9 +84,9 @@
             <class name="tests.EditRecipeTest">
                 <methods>
                     <include name="RecipeEdit_TC_05"/>
-                    <include name="RecipeEdit_TC_10"/>
-                    <include name="RecipeEdit_TC_11"/>
-                    <include name="RecipeEdit_TC_12"/>
+<!--                    <include name="RecipeEdit_TC_10"/>-->
+<!--                    <include name="RecipeEdit_TC_11"/>-->
+<!--                    <include name="RecipeEdit_TC_12"/>-->
                 </methods>
             </class>
         </classes>

@@ -186,7 +186,7 @@ public class EditRecipeTest extends BaseTest {
     public void RecipeEdit_TC_05() {
 
         // ===== DATA =====
-        List<String> keywords = Arrays.asList("cháo", "xúc xích");
+        List<String> keywords = Arrays.asList("gà", "xúc xích");
 
         // ===== LOGIN =====
         authFlow.loginFromFridgeTab("duyentest@gmail.com", "123456");
