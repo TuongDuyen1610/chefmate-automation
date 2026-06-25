@@ -9,6 +9,7 @@
                    allure open target/allure-report ==> hay dùng mở thủ công
               Chu thich hay dung : Ctrl + Shift + / or Ctrl + /
     -->
+<!--Bắt đầu tiến hành chạy trên Github Actions với bộ Regression Test-->
     <!-- ✅ LISTENERS PHẢI CÓ -->
     <listeners>
         <listener class-name="core.listener.AllureTestListener"/>
