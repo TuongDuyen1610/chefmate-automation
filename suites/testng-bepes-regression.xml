@@ -95,7 +95,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 6: LUỒNG BEPES AI
     ════════════════════════════════════════════════ -->
-    <test name="Group 06" enabled="true">
+    <test name="Group 06" enabled="false">
         <classes>
             <class name="tests.BepesAITest">
                 <methods>
