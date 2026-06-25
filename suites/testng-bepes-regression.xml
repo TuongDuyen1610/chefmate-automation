@@ -9,7 +9,6 @@
                    allure open target/allure-report ==> hay dùng mở thủ công
               Chu thich hay dung : Ctrl + Shift + / or Ctrl + /
     -->
-<!--Bắt đầu tiến hành chạy trên Github Actions với bộ Regression Test-->
     <!-- ✅ LISTENERS PHẢI CÓ -->
     <listeners>
         <listener class-name="core.listener.AllureTestListener"/>
@@ -18,7 +17,7 @@
     <!-- ════════════════════════════════════════════════
              GROUP 1: LUỒNG CỐT LÕI (SMOKE TRƯỚC KHI E2E)
         ════════════════════════════════════════════════ -->
-    <test name="Group 01" enabled="false">
+    <test name="Group 01" enabled="true">
         <classes>
 <!--            Validation Đăng nhập:-->
             <class name="tests.LoginTest">
@@ -66,27 +65,27 @@
    ════════════════════════════════════════════════ -->
     <test name="Group 02" enabled="true">
         <classes>
-<!--            <class name="tests.RecipeDisplayTest">-->
-<!--                <methods>-->
-<!--                    <include name="RecipeDisplay_TC_01"/>-->
-<!--                    <include name="RecipeDisplay_TC_02"/>-->
-<!--                    <include name="RecipeDisplay_TC_03"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--            <class name="tests.AddRecipeTest">-->
-<!--                <methods>-->
-<!--                    <include name="RecipeCreate_TC_03"/>-->
-<!--                    <include name="RecipeCreate_TC_04"/>-->
-<!--                    <include name="RecipeCreate_TC_05"/>-->
-<!--                    <include name="RecipeCreate_TC_06"/>-->
-<!--                </methods>-->
-<!--            </class>-->
+            <class name="tests.RecipeDisplayTest">
+                <methods>
+                    <include name="RecipeDisplay_TC_01"/>
+                    <include name="RecipeDisplay_TC_02"/>
+                    <include name="RecipeDisplay_TC_03"/>
+                </methods>
+            </class>
+            <class name="tests.AddRecipeTest">
+                <methods>
+                    <include name="RecipeCreate_TC_03"/>
+                    <include name="RecipeCreate_TC_04"/>
+                    <include name="RecipeCreate_TC_05"/>
+                    <include name="RecipeCreate_TC_06"/>
+                </methods>
+            </class>
             <class name="tests.EditRecipeTest">
                 <methods>
                     <include name="RecipeEdit_TC_05"/>
-<!--                    <include name="RecipeEdit_TC_10"/>-->
-<!--                    <include name="RecipeEdit_TC_11"/>-->
-<!--                    <include name="RecipeEdit_TC_12"/>-->
+                    <include name="RecipeEdit_TC_10"/>
+                    <include name="RecipeEdit_TC_11"/>
+                    <include name="RecipeEdit_TC_12"/>
                 </methods>
             </class>
         </classes>
@@ -95,7 +94,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 6: LUỒNG BEPES AI
     ════════════════════════════════════════════════ -->
-    <test name="Group 06" enabled="false">
+    <test name="Group 06" enabled="true">
         <classes>
             <class name="tests.BepesAITest">
                 <methods>
@@ -111,7 +110,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 7: LUỒNG SHOPPING
     ════════════════════════════════════════════════ -->
-    <test name="Group 07" enabled="false">
+    <test name="Group 07" enabled="true">
         <classes>
             <class name="tests.ShoppingBuilderTest">
                 <methods>
