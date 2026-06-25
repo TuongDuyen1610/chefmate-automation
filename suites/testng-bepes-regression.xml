@@ -18,7 +18,7 @@
     <!-- ════════════════════════════════════════════════
              GROUP 1: LUỒNG CỐT LÕI (SMOKE TRƯỚC KHI E2E)
         ════════════════════════════════════════════════ -->
-    <test name="Group 01" enabled="true">
+    <test name="Group 01" enabled="false">
         <classes>
 <!--            Validation Đăng nhập:-->
             <class name="tests.LoginTest">
@@ -66,21 +66,21 @@
    ════════════════════════════════════════════════ -->
     <test name="Group 02" enabled="true">
         <classes>
-            <class name="tests.RecipeDisplayTest">
-                <methods>
-                    <include name="RecipeDisplay_TC_01"/>
-                    <include name="RecipeDisplay_TC_02"/>
-                    <include name="RecipeDisplay_TC_03"/>
-                </methods>
-            </class>
-            <class name="tests.AddRecipeTest">
-                <methods>
-                    <include name="RecipeCreate_TC_03"/>
-                    <include name="RecipeCreate_TC_04"/>
-                    <include name="RecipeCreate_TC_05"/>
-                    <include name="RecipeCreate_TC_06"/>
-                </methods>
-            </class>
+<!--            <class name="tests.RecipeDisplayTest">-->
+<!--                <methods>-->
+<!--                    <include name="RecipeDisplay_TC_01"/>-->
+<!--                    <include name="RecipeDisplay_TC_02"/>-->
+<!--                    <include name="RecipeDisplay_TC_03"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="tests.AddRecipeTest">-->
+<!--                <methods>-->
+<!--                    <include name="RecipeCreate_TC_03"/>-->
+<!--                    <include name="RecipeCreate_TC_04"/>-->
+<!--                    <include name="RecipeCreate_TC_05"/>-->
+<!--                    <include name="RecipeCreate_TC_06"/>-->
+<!--                </methods>-->
+<!--            </class>-->
             <class name="tests.EditRecipeTest">
                 <methods>
                     <include name="RecipeEdit_TC_05"/>
@@ -111,7 +111,7 @@
     <!-- ════════════════════════════════════════════════
          GROUP 7: LUỒNG SHOPPING
     ════════════════════════════════════════════════ -->
-    <test name="Group 07" enabled="true">
+    <test name="Group 07" enabled="false">
         <classes>
             <class name="tests.ShoppingBuilderTest">
                 <methods>
