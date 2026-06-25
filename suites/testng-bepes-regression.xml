@@ -44,7 +44,7 @@
                     <include name="DangKy_TC_20"/>
                 </methods>
             </class>
-            <!--            Validation Đăng xuat:-->
+            <!--Validation Đăng xuat:-->
             <class name="tests.LogoutTest">
                 <methods>
                     <include name="DangXuat_TC_01"/>
