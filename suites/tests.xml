@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ChefMate Tests" parallel="false" thread-count="1">
+<suite name="ChefMate System Testing" parallel="false" thread-count="1">
     <!--
     tests.xml
     Suite Kiểm thử tự động tất cả bộ testcase — ChefMate Android
@@ -14,24 +14,24 @@
         <listener class-name="core.listener.AllureTestListener"/>
     </listeners>
 
-    <test name="Tests">
+    <test name="System Testing">
         <classes>
-<!--                <class name="tests.LoginTest"/>-->
-<!--                <class name="tests.RegistrationTest"/>-->
-<!--                <class name="tests.LogoutTest"/>-->
-<!--                <class name="tests.EditProfileTest"/>-->
-<!--                <class name="tests.ChangePasswordTest"/>-->
-<!--                <class name="tests.RecipeDisplayTest"/>-->
-<!--                <class name="tests.SearchTest"/>-->
-<!--                <class name="tests.SaveRecipeTest"/>-->
-<!--                <class name="tests.FridgeTest"/>-->
-<!--                <class name="tests.EditRecipeTest"/>-->
-<!--                <class name="tests.ShoppingBuilderTest"/>-->
-<!--                <class name="tests.ShoppingListTest"/>-->
-<!--                <class name="tests.ShoppingHistoryTest"/>-->
-<!--                <class name="tests.AddRecipeTest"/>-->
-<!--                <class name="tests.BepesAITest"/>-->
-<!--                <class name="e2e.E2EIntegrationTest"/>-->
+                <class name="tests.LoginTest"/>
+                <class name="tests.RegistrationTest"/>
+                <class name="tests.LogoutTest"/>
+                <class name="tests.EditProfileTest"/>
+                <class name="tests.ChangePasswordTest"/>
+                <class name="tests.RecipeDisplayTest"/>
+                <class name="tests.SearchTest"/>
+                <class name="tests.SaveRecipeTest"/>
+                <class name="tests.FridgeTest"/>
+                <class name="tests.EditRecipeTest"/>
+                <class name="tests.ShoppingBuilderTest"/>
+                <class name="tests.ShoppingListTest"/>
+                <class name="tests.ShoppingHistoryTest"/>
+                <class name="tests.AddRecipeTest"/>
+                <class name="tests.BepesAITest"/>
+                <class name="e2e.E2EIntegrationTest"/>
         </classes>
     </test>
 </suite>
