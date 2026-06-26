@@ -290,11 +290,11 @@ public class RegistrationTest extends BaseTest {
 //    }
         @Test(priority = 1, enabled = true, description = "DangKy_TC_01 - Đăng ký thành công")
             public void DangKy_TC_01() {
-
-                String fullName = "Tuong Thi Duyen02";
-                String phone = "0900008888";
-                String email = "duyen@gmail.com";
-                String password = "123456";
+                String ts = String.valueOf(System.currentTimeMillis()).substring(2);
+                String fullName = "Tuong Thi Duyen" + ts;
+                String phone = "09000088" + ts;
+                String email = "duyentest" + ts + "@gmail.com";
+                String password = "123456" + ts;
 
                 authFlow.registerNewAccount(fullName, phone, email, password, password);
                 Assert.assertTrue(
