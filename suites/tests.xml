@@ -8,7 +8,7 @@
         allure serve target/allure-results ==> cũ
         allure open target/allure-report ==> hay dùng open manual report thay cho auto report
     -->
-
+<!---->
     <!-- ✅ LISTENERS PHẢI CÓ -->
     <listeners>
         <listener class-name="core.listener.AllureTestListener"/>
