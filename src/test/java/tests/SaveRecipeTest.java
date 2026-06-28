@@ -1093,7 +1093,7 @@ public class SaveRecipeTest extends BaseTest {
         // ❌ KHÔNG login ở đầu
 
         searchFlow.searchByTag("gà");
-
+        WaitingHelper.sleepSeconds(4);
         // 👉 Click 1 item
         search.clickResultAt(0);
 

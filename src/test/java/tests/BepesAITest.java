@@ -297,7 +297,7 @@ public class BepesAITest extends BaseTest {
         bepes.openNotesSheet();
         String before = bepes.getNotesCounterText();
 
-        createNote("Dị ứng", "Test_ON", true);
+        createNote("Dị ứng", "Test_ON", false);
 
         String after = bepes.getNotesCounterText();
         AllureHelper.attachScreenshot("Counter before=" + before + " after=" + after);
