@@ -7,6 +7,7 @@
     Chạy: mvn clean test
         allure serve target/allure-results ==> cũ
         allure open target/allure-report ==> hay dùng open manual report thay cho auto report
+    leenhj caif apk vaof emulator : adb install C:\APK\BepTroLy-Bepes_v2.2.0.apk
     -->
     <!-- ✅ LISTENERS PHẢI CÓ -->
     <listeners>

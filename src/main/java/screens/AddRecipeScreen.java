@@ -362,6 +362,7 @@ public class AddRecipeScreen extends BaseScreen {
 
         // 👉 Bước 2: chọn ảnh ưu tiên
         try {
+            WaitingHelper.sleepSeconds(2);
             click(image1);
             logger.info("Chọn ảnh 1");
             return;
@@ -370,6 +371,7 @@ public class AddRecipeScreen extends BaseScreen {
         }
 
         try {
+            WaitingHelper.sleepSeconds(2);
             click(image2);
             logger.info("Chọn ảnh 2");
             return;

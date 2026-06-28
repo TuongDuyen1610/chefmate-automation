@@ -1131,8 +1131,8 @@ public class SaveRecipeTest extends BaseTest {
         login();
 
         homeScreen.waitForRecipeListLoad();
-//          Scroll xuống 13 lần để load thêm recipes
-        for (int j = 0; j < 14; j++) {
+//          Scroll xuống 9 lần để load thêm recipes
+        for (int j = 0; j < 9; j++) {
             homeScreen.scrollDownToLoadMore();
         }
 
