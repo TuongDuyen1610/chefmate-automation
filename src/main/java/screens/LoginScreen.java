@@ -41,6 +41,7 @@ public class LoginScreen extends BaseScreen {
         click(loginButton);
 
     }
+    @Step("📍 Click Show/Hide Password")
     public void clickShowHidePassword(){
         logStep("Click icon show/hide password");
         AllureHelper.attachScreenshot("Click icon show/hide password");
