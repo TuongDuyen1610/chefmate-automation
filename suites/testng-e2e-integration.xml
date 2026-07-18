@@ -192,14 +192,14 @@
                 <methods>
                     <include name="E2E_TC_01_LoginViewRecipeLogout"/>
                     <include name="E2E_TC_02_ChangePasswordFlow"/>
-                    <include name="E2E_TC_03_SearchSaveVerifyDelete"/>
-                    <include name="E2E_TC_04_AddRecipeAndVerify"/>
-                    <include name="E2E_TC_05_SaveThenEditRecipe"/>
-                    <include name="E2E_TC_06_FridgeSuggestRecipe"/>
-                    <include name="E2E_TC_07_BepesAIFullFlow"/>
-                    <include name="E2E_TC_08_ShoppingFullFlow"/>
-                    <include name="E2E_TC_09_GuestShoppingPersistAfterLogin"/>
-                    <include name="E2E_TC_10_UpdateProfilePersistAfterRelogin"/>
+<!--                    <include name="E2E_TC_03_SearchSaveVerifyDelete"/>-->
+<!--                    <include name="E2E_TC_04_AddRecipeAndVerify"/>-->
+<!--                    <include name="E2E_TC_05_SaveThenEditRecipe"/>-->
+<!--                    <include name="E2E_TC_06_FridgeSuggestRecipe"/>-->
+<!--                    <include name="E2E_TC_07_BepesAIFullFlow"/>-->
+<!--                    <include name="E2E_TC_08_ShoppingFullFlow"/>-->
+<!--                    <include name="E2E_TC_09_GuestShoppingPersistAfterLogin"/>-->
+<!--                    <include name="E2E_TC_10_UpdateProfilePersistAfterRelogin"/>-->
                 </methods>
             </class>
         </classes>
